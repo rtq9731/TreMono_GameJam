@@ -19,10 +19,16 @@ public class HPBar : MonoBehaviour
 
     int hp = 4;
 
+    private void Start()
+    {
+        hpIcons[0].sprite = null;
+    }
+
     public void ChangeHP(int currentHP)
     {
         if (currentHP < hp) // hp가 내려갔을 때
         {
+            Debug.Log("HP 감소");
             switch (currentHP)
             {
                 case 0:
@@ -30,18 +36,15 @@ public class HPBar : MonoBehaviour
                     break;
 
                 case 1:
-                    ChangeIcons(currentHP);
-                    hpIcons[hpIcons.Length - 4].GetComponent<Animator>().SetTrigger(hp2to1Hash);
+                    GetComponent<Animator>().SetTrigger(hp2to1Hash);
                     break;
 
                 case 2:
-                    ChangeIcons(currentHP);
-                    hpIcons[hpIcons.Length - 3].GetComponent<Animator>().SetTrigger(hp3to2Hash);
+                    GetComponent<Animator>().SetTrigger(hp3to2Hash);
                     break;
 
                 case 3:
-                    ChangeIcons(currentHP);
-                    hpIcons[hpIcons.Length - 2].GetComponent<Animator>().SetTrigger(hp4to3Hash);
+                    GetComponent<Animator>().SetTrigger(hp4to3Hash);
                     break;
 
                 default:
@@ -53,36 +56,28 @@ public class HPBar : MonoBehaviour
             switch (currentHP)
             {
                 case 2:
-                    ChangeIcons(currentHP);
-                    hpIcons[hpIcons.Length - 3].GetComponent<Animator>().SetTrigger(hp1to2Hash);
-                    hpIcons[hpIcons.Length - 2].sprite = hpIconSprites[currentHP];
+                    GetComponent<Animator>().SetTrigger(hp1to2Hash);
                     break;
 
                 case 3:
-                    ChangeIcons(currentHP);
-                    hpIcons[hpIcons.Length - 2].GetComponent<Animator>().SetTrigger(hp2to3Hash);
-                    hpIcons[hpIcons.Length - 1].sprite = hpIconSprites[currentHP];
+                    GetComponent<Animator>().SetTrigger(hp2to3Hash);
                     break;
 
                 case 4:
-                    ChangeIcons(currentHP);
-                    hpIcons[hpIcons.Length - 2].GetComponent<Animator>().SetTrigger(hp3to4Hash);
-                    hpIcons[hpIcons.Length - 1].sprite = hpIconSprites[currentHP];
+                    GetComponent<Animator>().SetTrigger(hp3to4Hash);
                     break;
 
                 default:
                     break;
             }
         }
-
+        CancelInvoke();
+        Invoke("ActiveFalse", 1);
         hp = currentHP;
     }
 
-    private void ChangeIcons(int currentHP)
+    private void ActiveFalse()
     {
-        for (int i = 0; i < currentHP; i++)
-        {
-            hpIcons[i].sprite = hpIconSprites[currentHP];
-        }
+        gameObject.SetActive(false);
     }
 }

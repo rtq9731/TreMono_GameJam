@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e4cd765768a89469502bfb5adb162b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 0}
+  hpBar: {fileID: 1900112206}
 --- !u!1 &252994773
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +310,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1900112205}
     m_Modifications:
+    - target: {fileID: 7415322336056223824, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5815936150587294371, guid: 3e515bb6c7bdd1a4f88314d65e1ea1b0, type: 3}
     - target: {fileID: 7415322336056223838, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
       propertyPath: m_Name
       value: Image1
@@ -490,9 +494,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1900112205}
     m_Modifications:
+    - target: {fileID: 7415322336056223824, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5815936150587294371, guid: 3e515bb6c7bdd1a4f88314d65e1ea1b0, type: 3}
     - target: {fileID: 7415322336056223838, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
       propertyPath: m_Name
       value: Image4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415322336056223838, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7415322336056223839, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
       propertyPath: m_Pivot.x
@@ -819,9 +831,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1900112205}
     m_Modifications:
+    - target: {fileID: 7415322336056223824, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5815936150587294371, guid: 3e515bb6c7bdd1a4f88314d65e1ea1b0, type: 3}
     - target: {fileID: 7415322336056223838, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
       propertyPath: m_Name
       value: Image3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415322336056223838, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7415322336056223839, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
       propertyPath: m_Pivot.x
@@ -960,7 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ad36ec99941264db342bc2f765d19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 3
+  _hp: 4
   _ap: 3
   _speed: 2.5
   _jumpSpeed: 5
@@ -1221,9 +1241,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1900112205}
     m_Modifications:
+    - target: {fileID: 7415322336056223824, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5815936150587294371, guid: 3e515bb6c7bdd1a4f88314d65e1ea1b0, type: 3}
     - target: {fileID: 7415322336056223838, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
       propertyPath: m_Name
       value: Image2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415322336056223838, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7415322336056223839, guid: 748c6d045044b5f469a46069e10dae7a, type: 3}
       propertyPath: m_Pivot.x
@@ -1499,13 +1527,14 @@ GameObject:
   - component: {fileID: 1900112205}
   - component: {fileID: 1900112207}
   - component: {fileID: 1900112206}
+  - component: {fileID: 1900112209}
   m_Layer: 5
   m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1900112205
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1541,7 +1570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dba00694eb08ab4d94acb79875bf052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStat: {fileID: 0}
+  playerStat: {fileID: 904808572}
   hpIcons:
   - {fileID: 363834395}
   - {fileID: 1304077675}
@@ -1560,6 +1589,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900112204}
   m_CullTransparentMesh: 1
+--- !u!95 &1900112209
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900112204}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 394f689267d429240900c7b56cbebcb0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1974558941
 GameObject:
   m_ObjectHideFlags: 0

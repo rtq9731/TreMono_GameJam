@@ -10,7 +10,10 @@ public class PlayerStat : MonoBehaviour
     public int hp
     {
         get { return _hp; }
-        set { _hp = value; }
+        set { 
+            _hp = value;
+            UIManager.Instance.HPChange(value);
+        }
     }
     [SerializeField]
     private int _ap = 3;
@@ -40,10 +43,6 @@ public class PlayerStat : MonoBehaviour
         get { return _dashRange; }
     }
 
-    void Start()
-    {
-
-    }
     public void Dead()
     {
         Debug.Log("Dead -.-");
