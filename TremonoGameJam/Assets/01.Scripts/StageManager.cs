@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
+    public static StageManager Instance = null;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+    
     [Header("현재 소환되어있는 Enemy들의 부모오브젝트")]
     [SerializeField]
     private Transform _enemys = null;
