@@ -10,7 +10,18 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rigid = null;
     private SpriteRenderer spriteRenderer = null;
 
+    [SerializeField]
+    private Transform groundChecker = null;
+
+    [SerializeField]
+    private LayerMask WhatIsGround;
+
+    [SerializeField]
+    private float groundCheckDistance = 1f;
+
     private float XMove = 0f;
+
+    private bool isGround = false;
 
     private bool isJump = false;
     private bool isAttack = false;
@@ -42,8 +53,14 @@ public class PlayerMove : MonoBehaviour
         XMove = playerInput.XMove;
 
         LRCheck();
+        GroundCheck();
         Move();
         Jump();
+    }
+    private void GroundCheck()
+    {
+        bool a = Physics2D.OverlapCircle(groundChecker.position, groundCheckDistance, WhatIsGround);
+        isGround = a;
     }
     private void Move()
     {

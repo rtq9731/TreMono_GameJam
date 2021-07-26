@@ -10,6 +10,7 @@ public class MyGizmos : MonoBehaviour
 
     [SerializeField]
     private float radius = 1f;
+
     [SerializeField]
     private Color color;
 
