@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
         Instance = null;
     }
 
+#if UNITY_EDITOR
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))
@@ -27,6 +28,7 @@ public class UIManager : MonoBehaviour
             FindObjectOfType<PlayerStat>().hp++;
         }
     }
+#endif
 
     [SerializeField] HPBar hpBar;
 
