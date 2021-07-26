@@ -218,7 +218,10 @@ public class PlayerMove : MonoBehaviour
     }
     private void Move()
     {
-        rigid.velocity = new Vector2(XMove * playerStat.speed, rigid.velocity.y);
+        if (!dashMoving)
+        {
+            rigid.velocity = new Vector2(XMove * playerStat.speed, rigid.velocity.y);
+        }
     }
     private void Jump()
     {
