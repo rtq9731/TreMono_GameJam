@@ -50,6 +50,7 @@ public class PlayerMove : MonoBehaviour
     private bool attacking = false;
 
     private bool whenDashStopMove = false; // 대쉬가 멈췄을 때 이동하는 것에 관한 변수
+    private bool whenDashStopMoveSetStarted = false;
 
     private Vector2 dashPosition = Vector2.zero;
     public Vector2 currentPosition { get; private set; }
@@ -215,6 +216,7 @@ public class PlayerMove : MonoBehaviour
         if (dashMoving && distance <= dashStopRange)
         {
             dashMoving = false;
+            whenDashStopMoveSetStarted = false;
             whenDashStopMove = true;
 
             CanDashSet();
@@ -233,7 +235,11 @@ public class PlayerMove : MonoBehaviour
                 rigid.velocity = new Vector2(1f * playerStat.speed, rigid.velocity.y);
             }
 
-            Invoke("WhenDashStopMoveSet", 2f);
+            if (!whenDashStopMoveSetStarted)
+            {
+                Invoke("WhenDashStopMoveSet", 2f);
+                whenDashStopMoveSetStarted = true;
+            }
         }
     }
     private void WhenDashStopMoveSet()
