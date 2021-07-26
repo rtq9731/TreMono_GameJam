@@ -41,6 +41,8 @@ public class PlayerMove : MonoBehaviour
     private bool isJump = false;
     private bool isAttack = false;
 
+    private bool canAttack = true;
+    private bool canAttackReStarted = false;
     private bool canDoubleJump = false;
     private bool canSpawnAfterImage = true;
 
@@ -74,8 +76,9 @@ public class PlayerMove : MonoBehaviour
             isJump = true;
         }
 
-        if (playerInput.isAttack)
+        if (playerInput.isAttack && canAttack)
         {
+            canAttackReStarted = false;
             isAttack = true;
         }
 
@@ -99,7 +102,7 @@ public class PlayerMove : MonoBehaviour
 
         transform.position = currentPosition;
     }
-    
+
     private void SpawnAfterImage()
     {
         if (dashMoving && canSpawnAfterImage)
@@ -129,15 +132,27 @@ public class PlayerMove : MonoBehaviour
     }
     private void Attack()
     {
-        if (isAttack)
+        if (isAttack && canAttack)
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             isAttack = false;
+            canAttack = false;
             attacking = true;
+
             anim.Play("Attack");
             Dash();
+
+            if (!canAttackReStarted)
+            {
+                Invoke("CanAttackReStarted", attackDelay);
+                canAttackReStarted = true;
+            }
         }
+    }
+    private void CanAttackReStarted()
+    {
+        canAttack = true;
     }
     public void ReAttacking()
     {
@@ -145,7 +160,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void Dash()
     {
-        if(mousePosition.x >= currentPosition.x)
+        if (mousePosition.x >= currentPosition.x)
         {
             spriteRenderer.flipX = false;
         }
@@ -153,7 +168,7 @@ public class PlayerMove : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
-        
+
         if (inAirDashCount > 0)
         {
             if (!isGround)
@@ -164,8 +179,6 @@ public class PlayerMove : MonoBehaviour
             float _dashRange = playerStat.dashRange;
             dashPosition = currentPosition;
             Vector2 endPosition = currentPosition;
-
-            attacking = false;
 
             if (spriteRenderer.flipX)
             {
@@ -283,7 +296,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void LRCheck()
     {
-        if (XMove != 0f)
+        if (XMove != 0f && !attacking)
         {
             if (XMove < 0f)
             {
