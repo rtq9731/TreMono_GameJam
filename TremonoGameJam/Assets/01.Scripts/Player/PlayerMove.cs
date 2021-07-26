@@ -12,6 +12,10 @@ public class PlayerMove : MonoBehaviour
 
     private float XMove = 0f;
 
+    private bool isJump = false;
+    private bool isAttack = false;
+
+
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -23,7 +27,15 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (playerInput.isJump)
+        {
+            isJump = true;
+        }
 
+        if (playerInput.isAttack)
+        {
+            isAttack = true;
+        }
     }
     void FixedUpdate()
     {
@@ -31,10 +43,19 @@ public class PlayerMove : MonoBehaviour
 
         LRCheck();
         Move();
+        Jump();
     }
     private void Move()
     {
         rigid.velocity = new Vector2(XMove * playerStat.speed, rigid.velocity.y);
+    }
+    private void Jump()
+    {
+        if (isJump)
+        {
+            isJump = false;
+            rigid.AddForce(Vector2.up * playerStat.jumpSpeed, ForceMode2D.Impulse);
+        }
     }
     private void LRCheck()
     {

@@ -33,6 +33,12 @@ public class PlayerStat : MonoBehaviour
         get { return _speed; }
         set { _speed = value; }
     }
+    [SerializeField]
+    private float _jumpSpeed = 10f;
+    public float jumpSpeed
+    {
+        get { return _jumpSpeed; }
+    }
 
     void Start()
     {
