@@ -18,4 +18,6 @@ public class StageManager : MonoBehaviour
     {
         get { return _playerTrm; }
     }
+
+    [SerializeField] GameObject[] brokeObjsPrefab;
 }
