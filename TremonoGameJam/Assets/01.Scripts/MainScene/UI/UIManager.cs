@@ -16,72 +16,14 @@ public class UIManager : MonoBehaviour
         Instance = null;
     }
 
-    [SerializeField] PlayerStat playerStat;
-    [SerializeField] Image[] hpIcons;
+    [SerializeField] HPBar hpBar;
 
-    int hp4to3Hash = Animator.StringToHash("4to3");
-    int hp3to2Hash = Animator.StringToHash("3to2");
-    int hp2to1Hash = Animator.StringToHash("2to1");
-
-    int hp = 4;
-
-    public void ChangeHP(int currentHP)
+    public void HPChange(int currentHP)
     {
-        if( currentHP < hp) // hp가 내려갔을 때
-        {
-            switch (currentHP)
-            {
-                case 0:
-                    // 죽었을 때 취할 행동
-                    break;
-                case 1:
-                    hpIcons[hpIcons.Length - 3].GetComponent<Animator>().SetTrigger(hp2to1Hash);
-                    break;
-
-                case 2:
-                    hpIcons[hpIcons.Length - 2].GetComponent<Animator>().SetTrigger(hp3to2Hash);
-                    break;
-
-                case 3:
-                    hpIcons[hpIcons.Length - 1].GetComponent<Animator>().SetTrigger(hp4to3Hash);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-        else
-        {
-            switch (currentHP)
-            {
-                case 0:
-                    // 죽었을 때 취할 행동
-                    break;
-
-                case 1:
-                    hpIcons[hpIcons.Length - 3].GetComponent<Animator>().SetTrigger(hp2to1Hash);
-                    break;
-
-                case 2:
-                    hpIcons[hpIcons.Length - 2].GetComponent<Animator>().SetTrigger(hp3to2Hash);
-                    break;
-
-                case 3:
-                    hpIcons[hpIcons.Length - 1].GetComponent<Animator>().SetTrigger(hp4to3Hash);
-                    hpIcons[hpIcons.Length - 2].sprite = null;
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        hp = currentHP;
+        hpBar.gameObject.SetActive(true);
+        Vector3 playerPos = Camera.main.WorldToScreenPoint(new Vector2(FindObjectOfType<PlayerStat>().transform.position.x, FindObjectOfType<PlayerStat>().transform.position.y + 1));
+        playerPos.z = 0;
+        hpBar.gameObject.transform.position = playerPos;
+        hpBar.ChangeHP(currentHP);
     }
-
-    private void ActiveIcons()
-    {
-
-    }
-
 }
