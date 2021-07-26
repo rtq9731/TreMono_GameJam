@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class EnemyStat : MonoBehaviour, IHitable
 {
+    [Header("공중유닛인가?")]
+    [SerializeField]
+    private bool _isAirUnit = false;
+    public bool isAirUnit
+    {
+        get { return _isAirUnit; }
+    }
     [Header("적유닛 스탯관련")]
     [SerializeField]
     private int hp;

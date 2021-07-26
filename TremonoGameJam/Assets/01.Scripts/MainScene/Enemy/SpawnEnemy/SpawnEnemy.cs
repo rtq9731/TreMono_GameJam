@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    private GameManager gameManager = null;
+    private StageManager stageManager = null;
 
     [Header("이 오브젝트와 플레이어의 거리가 이 변수의 값보다 작으면 Enemy가 스폰됨")]
     [SerializeField]
@@ -22,7 +22,7 @@ public class SpawnEnemy : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        stageManager = FindObjectOfType<StageManager>();
     }
     void FixedUpdate()
     {
@@ -34,7 +34,7 @@ public class SpawnEnemy : MonoBehaviour
     }
     private void Spawn()
     {
-        float distance = Vector2.Distance(gameManager.playerTrm.transform.position, currentPosition);
+        float distance = Vector2.Distance(stageManager.playerTrm.transform.position, currentPosition);
 
         if(distance <= enemySpawnRange && !enemySpawned)
         {
@@ -42,7 +42,7 @@ public class SpawnEnemy : MonoBehaviour
             spawnThis.SetActive(true);
             spawnThis.transform.position = enemySpawnPosition.position;
 
-            spawnThis.transform.SetParent(gameManager.enemys);
+            spawnThis.transform.SetParent(stageManager.enemys);
             gameObject.SetActive(false);
         }
     }
