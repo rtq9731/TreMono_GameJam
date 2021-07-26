@@ -24,6 +24,16 @@ public class HPBar : MonoBehaviour
         hpIcons[0].sprite = null;
     }
 
+    private void Update()
+    {
+        if(gameObject.activeSelf)
+        {
+            Vector3 playerPos = Camera.main.WorldToScreenPoint(new Vector2(FindObjectOfType<PlayerStat>().transform.position.x, FindObjectOfType<PlayerStat>().transform.position.y + 0.75f));
+            playerPos.z = 0;
+            this.transform.position = playerPos;
+        }
+    }
+
     public void ChangeHP(int currentHP)
     {
         if (currentHP < hp) // hp가 내려갔을 때
