@@ -16,6 +16,18 @@ public class UIManager : MonoBehaviour
         Instance = null;
     }
 
+    private void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            FindObjectOfType<PlayerStat>().hp--;
+        }
+        else if(Input.GetMouseButtonDown(1))
+        {
+            FindObjectOfType<PlayerStat>().hp++;
+        }
+    }
+
     [SerializeField] HPBar hpBar;
 
     public void HPChange(int currentHP)

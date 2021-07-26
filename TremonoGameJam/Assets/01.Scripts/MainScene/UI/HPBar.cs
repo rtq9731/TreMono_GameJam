@@ -81,6 +81,7 @@ public class HPBar : MonoBehaviour
                     break;
             }
         }
+
         CancelInvoke();
         Invoke("ActiveFalse", 1);
         hp = currentHP;
