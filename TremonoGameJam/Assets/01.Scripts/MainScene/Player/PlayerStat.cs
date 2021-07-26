@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStat : MonoBehaviour
+public class PlayerStat : MonoBehaviour, IHitable
 {
     [Header("Player스탯 관련")]
     [SerializeField]
@@ -10,7 +10,8 @@ public class PlayerStat : MonoBehaviour
     public int hp
     {
         get { return _hp; }
-        set { 
+        set
+        {
             _hp = value;
             UIManager.Instance.HPChange(value);
         }
@@ -43,9 +44,30 @@ public class PlayerStat : MonoBehaviour
         get { return _dashRange; }
     }
 
+    [SerializeField]
+    private bool _isDead = false;
+    public bool isDead
+    {
+        get { return _isDead; }
+    }
+
+    private void FixedUpdate()
+    {
+        Dead();
+    }
+    public void Hit(int damage)
+    {
+        hp -= damage;
+    }
+
     public void Dead()
     {
-        Debug.Log("Dead -.-");
+        if(hp <= 0)
+        {
+            Debug.Log("Dead -.-");
+            _isDead = true;
+            // 죽음애니메이션
+        }
     }
 
 }

@@ -90,15 +90,19 @@ public class PlayerMove : MonoBehaviour
 
         XMove = playerInput.XMove;
 
-        LRCheck();
+        if (!playerStat.isDead)
+        {
 
-        Move();
-        Attack();
-        Jump();
+            LRCheck();
 
-        DashMove();
-        WhenDashStopMove();
-        SpawnAfterImage();
+            Move();
+            Attack();
+            Jump();
+
+            DashMove();
+            WhenDashStopMove();
+            SpawnAfterImage();
+        }
 
         transform.position = currentPosition;
     }
