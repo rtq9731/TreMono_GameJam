@@ -35,6 +35,11 @@ public class SpawnAfterImage : MonoBehaviour
 
     public void SetAfterImage()
     {
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = myMoveScript.spriteRenderer;
+        }
+
         if (afterImageList.Count <= 0)
         {
             AfterImage afterImage = Instantiate(afterImageObj, afterImageSpawnPosition).GetComponent<AfterImage>();

@@ -166,7 +166,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheckDistance: 0.1
-  attackDelay: 1
+  attackDelay: 0.25
   dashDoTime: 0.05
   dashStopRange: 0.5
   inAirDashCount: 3
@@ -187,6 +187,7 @@ MonoBehaviour:
   _speed: 2.5
   _jumpSpeed: 5
   _dashRange: 5
+  _isDead: 0
 --- !u!114 &7998851172791728613
 MonoBehaviour:
   m_ObjectHideFlags: 0
