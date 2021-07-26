@@ -53,6 +53,7 @@ public class PlayerMove : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         playerStat = GetComponent<PlayerStat>();
+        spawnAfterImage = GetComponent<SpawnAfterImage>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
@@ -86,10 +87,13 @@ public class PlayerMove : MonoBehaviour
 
         LRCheck();
         GroundCheck();
+
         Move();
         Jump();
         Dash();
+
         DashMove();
+        SpawnAfterImage();
 
         transform.position = currentPosition;
     }
