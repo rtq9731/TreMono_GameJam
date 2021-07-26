@@ -41,6 +41,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool canDash = true;
     private bool canAttack = true;
+    private bool canDoubleJump = false;
     private bool canSpawnAfterImage = true;
 
     private bool dashMoving = false;
@@ -208,10 +209,20 @@ public class PlayerMove : MonoBehaviour
     }
     private void Jump()
     {
-        if (isJump && isGround)
+        if (isJump && isGround || isJump && canDoubleJump)
         {
             isJump = false;
             rigid.AddForce(Vector2.up * playerStat.jumpSpeed, ForceMode2D.Impulse);
+
+            if(canDoubleJump)
+            {
+                canDoubleJump = false;
+            }
+            
+            if(isGround)
+            {
+                canDoubleJump = true;
+            }
         }
     }
     private void LRCheck()
