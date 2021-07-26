@@ -245,6 +245,7 @@ MonoBehaviour:
   _dp: 3
   _speed: 1
   _jumpSpeed: 5
+  _dashRange: 1
 --- !u!114 &904808573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +263,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheckDistance: 0.1
+  dashDelay: 1
+  attackDelay: 1
+  dashDoTime: 0.1
+  dashStopRange: 0.5
 --- !u!114 &904808574
 MonoBehaviour:
   m_ObjectHideFlags: 0

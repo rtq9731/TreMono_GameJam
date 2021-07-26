@@ -39,6 +39,12 @@ public class PlayerStat : MonoBehaviour
     {
         get { return _jumpSpeed; }
     }
+    [SerializeField]
+    private float _dashRange = 10f;
+    public float dashRange
+    {
+        get { return _dashRange; }
+    }
 
     void Start()
     {
