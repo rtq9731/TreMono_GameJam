@@ -19,6 +19,7 @@ public class GameManager : MonoSingleton<GameManager>
         get { return _playerTrm; }
     }
     public int stageTopScore = 0;
+
     public void SaveGame()
     {
         PlayerPrefs.SetInt("stageTopScore", stageTopScore);
