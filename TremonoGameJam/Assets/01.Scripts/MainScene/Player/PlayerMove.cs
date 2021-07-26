@@ -56,6 +56,9 @@ public class PlayerMove : MonoBehaviour
     private Vector2 mousePosition = Vector2.zero;
     public Vector2 currentPosition { get; private set; }
 
+    [SerializeField]
+    private LayerMask whatIsAttackable;
+
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -100,6 +103,7 @@ public class PlayerMove : MonoBehaviour
             Attack();
             Jump();
 
+            AttackCheck();
             DashMove();
             WhenDashStopMove();
             SpawnAfterImage();
@@ -109,7 +113,27 @@ public class PlayerMove : MonoBehaviour
     }
     private void AttackCheck()
     {
-        
+        if (attacking)
+        {
+            if (spriteRenderer.flipX)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left, 1, whatIsAttackable);
+                if (hit)
+                {
+                    hit.transform.GetComponent<EnemyStat>().Hit(1);
+                }
+            }
+            else
+            {
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1, whatIsAttackable);
+                if (hit)
+                {
+                    Debug.Log(hit.transform.gameObject.name);
+
+                    hit.transform.GetComponent<EnemyStat>().Hit(1);
+                }
+            }
+        }
     }
     private void SpawnAfterImage()
     {

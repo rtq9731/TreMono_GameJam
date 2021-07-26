@@ -11,12 +11,21 @@ public class EnemyStat : EnemyStatus, IHitable
         get { return _searchPlayer; }
     }
 
+    private Animator anim = null;
+
     [Header("공중유닛인가?")]
     [SerializeField]
     private bool _isAirEnemy = false;
     public bool isAirEnemy
     {
         get { return _isAirEnemy; }
+    }
+    [SerializeField]
+    private bool _isHurt = false;
+    public bool isHurt
+    {
+        get { return _isHurt; }
+        set { _isHurt = value; }
     }
     [Header("적유닛 스탯관련")]
     [SerializeField]
@@ -97,5 +106,7 @@ public class EnemyStat : EnemyStatus, IHitable
     public void Hit(int damage)
     {
         _hp -= damage;
+
+        _isHurt = true;
     }
 }

@@ -34,13 +34,13 @@ TextureImporter:
     second: Piskel_Attack3
   - first:
       213: -5322555593590098132
-    second: Piskel_Dead0
+    second: Piskel_Hurt0
   - first:
       213: 1758663348309895279
-    second: Piskel_Dead1
+    second: Piskel_Hurt1
   - first:
       213: -1792569098566480247
-    second: Piskel_Dead2
+    second: Piskel_Dead
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -352,7 +352,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Piskel_Dead0
+      name: Piskel_Hurt0
       rect:
         serializedVersion: 2
         x: 64
@@ -373,7 +373,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Piskel_Dead1
+      name: Piskel_Hurt1
       rect:
         serializedVersion: 2
         x: 96
@@ -394,7 +394,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Piskel_Dead2
+      name: Piskel_Dead
       rect:
         serializedVersion: 2
         x: 0

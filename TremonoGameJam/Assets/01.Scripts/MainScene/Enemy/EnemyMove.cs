@@ -14,6 +14,7 @@ public class EnemyMove : EnemyStatus
     private bool searchMove = true;
 
     private bool isDead = false;
+    private bool isHurt = false;
     private bool isAttack = false;
     private bool isPursue = false;
     private bool isSearching = false;
@@ -43,7 +44,9 @@ public class EnemyMove : EnemyStatus
     }
     void Update()
     {
-        if (!isDead)
+        isHurt = enemyStat.isHurt;
+
+        if (!isDead && !isHurt)
         {
             if (enemyStat.currentStatus == Status.Attack)
             {
@@ -74,15 +77,26 @@ public class EnemyMove : EnemyStatus
                 Dead();
             }
         }
+        else if (isHurt)
+        {
+            anim.Play("Hurt");
+        }
+    }
+    private void IsHurtReset()
+    {
+        enemyStat.isHurt = false;
     }
     private void FixedUpdate()
     {
         currentPosition = transform.position;
         playerPosition = stagemanager.playerTrm.position;
 
-        Pursue();
-        Attack();
-        Searching();
+        if (!isDead && !isHurt)
+        {
+            Pursue();
+            Attack();
+            Searching();
+        }
 
         transform.position = currentPosition;
     }
