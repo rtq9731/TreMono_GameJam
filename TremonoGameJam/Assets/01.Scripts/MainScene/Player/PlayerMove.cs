@@ -83,6 +83,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         GroundCheck();
+
     }
     void FixedUpdate()
     {
@@ -106,7 +107,10 @@ public class PlayerMove : MonoBehaviour
 
         transform.position = currentPosition;
     }
-
+    private void AttackCheck()
+    {
+        
+    }
     private void SpawnAfterImage()
     {
         if (dashMoving && canSpawnAfterImage)
@@ -277,7 +281,14 @@ public class PlayerMove : MonoBehaviour
         if (!dashMoving && !attacking)
         {
             rigid.velocity = new Vector2(XMove * playerStat.speed, rigid.velocity.y);
-            anim.Play("Move");
+            if (XMove == 0f)
+            {
+                anim.Play("Idle");
+            }
+            else
+            {
+                anim.Play("Move");
+            }
         }
     }
     private void Jump()
