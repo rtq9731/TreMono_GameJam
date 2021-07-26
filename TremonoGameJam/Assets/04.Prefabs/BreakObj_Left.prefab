@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2485210783838642410}
   - component: {fileID: 2485210783838642411}
   - component: {fileID: 2485210783838642389}
-  m_Layer: 0
-  m_Name: Broke_Left
+  m_Layer: 8
+  m_Name: BreakObj_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
