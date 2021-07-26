@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     private SpawnAfterImage spawnAfterImage = null;
 
     private Rigidbody2D rigid = null;
+    private Animator anim = null;
     public SpriteRenderer spriteRenderer { get; private set; }
 
     [SerializeField]
@@ -38,11 +39,8 @@ public class PlayerMove : MonoBehaviour
     private bool isGround = false;
 
     private bool isJump = false;
-    private bool isDash = false;
     private bool isAttack = false;
 
-    private bool canDash = true;
-    private bool canAttack = true;
     private bool canDoubleJump = false;
     private bool canSpawnAfterImage = true;
 
@@ -62,6 +60,7 @@ public class PlayerMove : MonoBehaviour
         spawnAfterImage = GetComponent<SpawnAfterImage>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
 
         firstInAirDashCount = inAirDashCount;
@@ -72,14 +71,6 @@ public class PlayerMove : MonoBehaviour
         if (playerInput.isJump)
         {
             isJump = true;
-        }
-
-        if (playerInput.isDash)
-        {
-            if (canDash)
-            {
-                isDash = true;
-            }
         }
 
         if (playerInput.isAttack)
@@ -98,8 +89,8 @@ public class PlayerMove : MonoBehaviour
         LRCheck();
 
         Move();
+        Attack();
         Jump();
-        Dash();
 
         DashMove();
         WhenDashStopMove();
@@ -136,19 +127,26 @@ public class PlayerMove : MonoBehaviour
     }
     private void Attack()
     {
-        attacking = true;
+        if (isAttack)
+        {
+            isAttack = false;
+            attacking = true;
+            anim.Play("Attack");
+            Dash();
+        }
+    }
+    public void ReAttacking()
+    {
+        attacking = false;
     }
     private void Dash()
     {
-        if (XMove != 0 && isDash && canDash && inAirDashCount > 0)
+        if (XMove != 0 && inAirDashCount > 0)
         {
             if (!isGround)
             {
                 inAirDashCount--;
             }
-
-            isDash = false;
-            canDash = false;
 
             float _dashRange = playerStat.dashRange;
             dashPosition = currentPosition;
@@ -218,8 +216,6 @@ public class PlayerMove : MonoBehaviour
             dashMoving = false;
             whenDashStopMoveSetStarted = false;
             whenDashStopMove = true;
-
-            CanDashSet();
         }
     }
     private void WhenDashStopMove()
@@ -246,15 +242,12 @@ public class PlayerMove : MonoBehaviour
     {
         whenDashStopMove = false;
     }
-    private void CanDashSet()
-    {
-        canDash = true;
-    }
     private void Move()
     {
-        if (!dashMoving)
+        if (!dashMoving && !attacking)
         {
             rigid.velocity = new Vector2(XMove * playerStat.speed, rigid.velocity.y);
+            anim.Play("Move");
         }
     }
     private void Jump()
