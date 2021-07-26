@@ -49,6 +49,8 @@ public class PlayerMove : MonoBehaviour
     private bool dashMoving = false;
     private bool attacking = false;
 
+    private bool whenDashStopMove = false; // 대쉬가 멈췄을 때 이동하는 것에 관한 변수
+
     private Vector2 dashPosition = Vector2.zero;
     public Vector2 currentPosition { get; private set; }
 
@@ -99,6 +101,7 @@ public class PlayerMove : MonoBehaviour
         Dash();
 
         DashMove();
+        WhenDashStopMove();
         SpawnAfterImage();
 
         transform.position = currentPosition;
@@ -122,10 +125,13 @@ public class PlayerMove : MonoBehaviour
     {
         bool a = Physics2D.OverlapCircle(groundChecker.position, groundCheckDistance, WhatIsGround);
         isGround = a;
+
         if (a)
         {
             inAirDashCount = firstInAirDashCount;
+            WhenDashStopMoveSet();
         }
+
     }
     private void Attack()
     {
@@ -206,11 +212,33 @@ public class PlayerMove : MonoBehaviour
 
         float distance = Vector2.Distance(_dashPosition, _currentPosition);
 
-        if (distance <= dashStopRange)
+        if (dashMoving && distance <= dashStopRange)
         {
             dashMoving = false;
+            whenDashStopMove = true;
+
             CanDashSet();
         }
+    }
+    private void WhenDashStopMove()
+    {
+        if (whenDashStopMove)
+        {
+            if (spriteRenderer.flipX)
+            {
+                rigid.velocity = new Vector2(-1f * playerStat.speed, rigid.velocity.y);
+            }
+            else
+            {
+                rigid.velocity = new Vector2(1f * playerStat.speed, rigid.velocity.y);
+            }
+
+            Invoke("WhenDashStopMoveSet", 2f);
+        }
+    }
+    private void WhenDashStopMoveSet()
+    {
+        whenDashStopMove = false;
     }
     private void CanDashSet()
     {
@@ -243,13 +271,16 @@ public class PlayerMove : MonoBehaviour
     }
     private void LRCheck()
     {
-        if (XMove < 0f)
+        if (XMove != 0f)
         {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
+            if (XMove < 0f)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
         }
     }
 }

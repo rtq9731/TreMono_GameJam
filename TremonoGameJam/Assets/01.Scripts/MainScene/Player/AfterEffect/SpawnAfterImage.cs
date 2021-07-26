@@ -21,11 +21,9 @@ public class SpawnAfterImage : MonoBehaviour
         get { return _spawnAfterImageDelayMaximum; }
     }
 
-
     private PlayerMove myMoveScript = null;
     SpriteRenderer spriteRenderer;
     public List<AfterImage> afterImageList { get; private set; }
-
 
     private void Start()
     {
