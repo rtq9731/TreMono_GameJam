@@ -40,6 +40,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool isJump = false;
     private bool isAttack = false;
+    private bool isAttacked = false; // 이미 공격 했는지
 
     private bool canAttack = true;
     private bool canAttackReStarted = false;
@@ -117,7 +118,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void AttackCheck()
     {
-        if (attacking)
+        if (attacking && !isAttacked)
         {
             if (spriteRenderer.flipX)
             {
@@ -125,6 +126,7 @@ public class PlayerMove : MonoBehaviour
                 if (hit)
                 {
                     hit.transform.GetComponent<EnemyStat>().Hit(1);
+                    isAttacked = true;
                 }
             }
             else
@@ -132,8 +134,7 @@ public class PlayerMove : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1, whatIsAttackable);
                 if (hit)
                 {
-                    Debug.Log(hit.transform.gameObject.name);
-
+                    isAttacked = true;
                     hit.transform.GetComponent<EnemyStat>().Hit(1);
                 }
             }
@@ -189,6 +190,7 @@ public class PlayerMove : MonoBehaviour
     private void CanAttackReStarted()
     {
         canAttack = true;
+        isAttacked = false;
     }
     public void ReAttacking()
     {
