@@ -97,4 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whereItis: 2
   linkedObjs: []
-  isBroke: 0
+  isBreak: 0
