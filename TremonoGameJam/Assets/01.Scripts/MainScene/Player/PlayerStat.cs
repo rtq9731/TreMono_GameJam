@@ -64,7 +64,6 @@ public class PlayerStat : MonoBehaviour, IHitable
     {
         if(hp <= 0)
         {
-            Debug.Log("Dead -.-");
             _isDead = true;
             // 죽음애니메이션
         }

@@ -13,9 +13,24 @@ public class EnemyMove : EnemyStatus
     private bool canAttack = true;
     private bool searchMove = true;
 
+    [Header("발사체를 사용하는가")]
+    [SerializeField]
+    private bool isUseProjectTile = false;
+
+    [Header("발사체")]
+    [SerializeField]
+    private GameObject projectTile = null;
+
+    [Header("발사체들의 부모오브젝트")]
+    [SerializeField]
+    private Transform projectSpawnPosition = null;
+    [SerializeField]
+    private List<GameObject> projectTiles;
+
     private bool isDead = false;
     private bool isHurt = false;
     private bool isAttack = false;
+    private bool attacking = false;
     private bool isPursue = false;
     private bool isSearching = false;
 
@@ -28,6 +43,9 @@ public class EnemyMove : EnemyStatus
     private float searchResetDelay = 1f;
     [SerializeField]
     private float searchResetDistance = 0.5f;
+
+    [SerializeField]
+    private LayerMask whatIsAttackable;
 
     private Vector2 currentPosition = Vector2.zero;
     private Vector2 playerPosition = Vector2.zero;
@@ -82,10 +100,7 @@ public class EnemyMove : EnemyStatus
             anim.Play("Hurt");
         }
     }
-    private void IsHurtReset()
-    {
-        enemyStat.isHurt = false;
-    }
+
     private void FixedUpdate()
     {
         currentPosition = transform.position;
@@ -95,10 +110,59 @@ public class EnemyMove : EnemyStatus
         {
             Pursue();
             Attack();
+            AttackCheck();
             Searching();
         }
 
         transform.position = currentPosition;
+    }
+    private void AttackCheck()
+    {
+        if (attacking)
+        {
+            attacking = false;
+            if (spriteRenderer.flipX)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left, enemyStat.attackRange, whatIsAttackable);
+
+                if (isUseProjectTile)
+                {
+                    if(hit)
+                    {
+                        if(projectTiles.Count <= 0f)
+                        {
+                            Instantiate(projectTile, projectSpawnPosition);
+                        }
+                        else
+                        {
+                            GameObject shootIt = projectTiles[0];
+
+                            shootIt.SetActive(true);
+                            projectTiles.Remove(shootIt);
+                        }
+                    }
+                }
+                else
+                {
+                    if (hit)
+                    {
+                        hit.transform.GetComponent<PlayerStat>().Hit(1);
+                    }
+                }
+            }
+            else
+            {
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, enemyStat.attackRange, whatIsAttackable);
+                if (hit)
+                {
+                    hit.transform.GetComponent<PlayerStat>().Hit(1);
+                }
+            }
+        }
+    }
+    private void IsHurtReset()
+    {
+        enemyStat.isHurt = false;
     }
     private void FlipCheck(Vector2 targetPosition)
     {
@@ -118,6 +182,7 @@ public class EnemyMove : EnemyStatus
         if (canAttack && isAttack)
         {
             canAttack = false;
+            attacking = true;
             anim.Play("Attack");
             FlipCheck(playerPosition);
             Invoke("AttackRe", enemyStat.attackDelay);

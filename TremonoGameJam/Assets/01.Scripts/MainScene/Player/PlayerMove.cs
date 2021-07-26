@@ -108,6 +108,10 @@ public class PlayerMove : MonoBehaviour
             WhenDashStopMove();
             SpawnAfterImage();
         }
+        else
+        {
+            anim.Play("Dead");
+        }
 
         transform.position = currentPosition;
     }
