@@ -13,25 +13,41 @@ public class BrokeObj : MonoBehaviour
 
     [SerializeField] brokeObjPos whereItis;
     [SerializeField] BrokeObj[] linkedObjs;
+    [SerializeField] bool isBroke;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        Debug.Log(whereItis.GetType());
+        if (isBroke)
+            Break();
     }
 
     public void Break()
     {
+        GameObject temp = null;
         switch (whereItis)
         {
             case brokeObjPos.Right:
+                temp = Instantiate(StageManager.Instance.brokeObjsPrefab[0], gameObject.transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+                Destroy(temp, 2f);
                 break;
             case brokeObjPos.Center:
+                temp = Instantiate(StageManager.Instance.brokeObjsPrefab[0], gameObject.transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+                Destroy(temp, 2f);
                 break;
             case brokeObjPos.Left:
+                temp = Instantiate(StageManager.Instance.brokeObjsPrefab[0], gameObject.transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+                Destroy(temp, 2f);
                 break;
             default:
                 break;
+        }
+
+        for (int i = 0; i < linkedObjs.Length; i++)
+        {
+            linkedObjs[i].Break();
         }
     }
 
