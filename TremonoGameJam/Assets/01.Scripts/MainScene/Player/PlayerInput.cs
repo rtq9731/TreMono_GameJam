@@ -13,7 +13,7 @@ public class PlayerInput : MonoBehaviour
     {
         XMove = Input.GetAxisRaw("Horizontal");
         isJump = Input.GetButtonDown("Jump");
-        isAttack = Input.GetButtonDown("Attack");
+        isAttack = Input.GetMouseButtonDown(0);
         breakWallSkill = Input.GetButtonDown("skill1");
     }
 }

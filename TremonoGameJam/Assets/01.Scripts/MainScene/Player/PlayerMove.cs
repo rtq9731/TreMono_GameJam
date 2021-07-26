@@ -51,6 +51,7 @@ public class PlayerMove : MonoBehaviour
     private bool whenDashStopMoveSetStarted = false;
 
     private Vector2 dashPosition = Vector2.zero;
+    private Vector2 mousePosition = Vector2.zero;
     public Vector2 currentPosition { get; private set; }
 
     void Start()
@@ -98,6 +99,7 @@ public class PlayerMove : MonoBehaviour
 
         transform.position = currentPosition;
     }
+    
     private void SpawnAfterImage()
     {
         if (dashMoving && canSpawnAfterImage)
@@ -129,6 +131,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (isAttack)
         {
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
             isAttack = false;
             attacking = true;
             anim.Play("Attack");
@@ -141,7 +145,16 @@ public class PlayerMove : MonoBehaviour
     }
     private void Dash()
     {
-        if (XMove != 0 && inAirDashCount > 0)
+        if(mousePosition.x >= currentPosition.x)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else
+        {
+            spriteRenderer.flipX = true;
+        }
+        
+        if (inAirDashCount > 0)
         {
             if (!isGround)
             {
