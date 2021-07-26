@@ -22,14 +22,16 @@ public class PlayerMove : MonoBehaviour
     private float groundCheckDistance = 1f;
 
     [SerializeField]
-    private float dashDelay = 1f;
-    [SerializeField]
     private float attackDelay = 1f;
     [SerializeField]
     private float dashDoTime = 1f;
 
     [SerializeField]
     private float dashStopRange = 0.5f;
+
+    [SerializeField]
+    private int inAirDashCount = 1;
+    private int firstInAirDashCount = 0;
 
     private float XMove = 0f;
 
@@ -58,6 +60,8 @@ public class PlayerMove : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
+
+        firstInAirDashCount = inAirDashCount;
     }
 
     void Update()
@@ -79,6 +83,8 @@ public class PlayerMove : MonoBehaviour
         {
             isAttack = true;
         }
+
+        GroundCheck();
     }
     void FixedUpdate()
     {
@@ -87,7 +93,6 @@ public class PlayerMove : MonoBehaviour
         XMove = playerInput.XMove;
 
         LRCheck();
-        GroundCheck();
 
         Move();
         Jump();
@@ -117,6 +122,10 @@ public class PlayerMove : MonoBehaviour
     {
         bool a = Physics2D.OverlapCircle(groundChecker.position, groundCheckDistance, WhatIsGround);
         isGround = a;
+        if (a)
+        {
+            inAirDashCount = firstInAirDashCount;
+        }
     }
     private void Attack()
     {
@@ -124,8 +133,13 @@ public class PlayerMove : MonoBehaviour
     }
     private void Dash()
     {
-        if (XMove != 0 && isDash && canDash)
+        if (XMove != 0 && isDash && canDash && inAirDashCount > 0)
         {
+            if (!isGround)
+            {
+                inAirDashCount--;
+            }
+
             isDash = false;
             canDash = false;
 
@@ -176,13 +190,7 @@ public class PlayerMove : MonoBehaviour
             } while (!a && !b);
 
             dashMoving = true;
-
-            Invoke("CanDashSet", dashDelay);
         }
-    }
-    private void CanDashSet()
-    {
-        canDash = true;
     }
     private void DashMove()
     {
@@ -201,7 +209,12 @@ public class PlayerMove : MonoBehaviour
         if (distance <= dashStopRange)
         {
             dashMoving = false;
+            CanDashSet();
         }
+    }
+    private void CanDashSet()
+    {
+        canDash = true;
     }
     private void Move()
     {
@@ -214,12 +227,12 @@ public class PlayerMove : MonoBehaviour
             isJump = false;
             rigid.AddForce(Vector2.up * playerStat.jumpSpeed, ForceMode2D.Impulse);
 
-            if(canDoubleJump)
+            if (canDoubleJump)
             {
                 canDoubleJump = false;
             }
-            
-            if(isGround)
+
+            if (isGround)
             {
                 canDoubleJump = true;
             }
