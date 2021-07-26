@@ -25,7 +25,12 @@ public class EnemyMove : EnemyStatus
     [SerializeField]
     private Transform projectSpawnPosition = null;
     [SerializeField]
-    private List<GameObject> projectTiles;
+    private List<GameObject> _projectTiles;
+    public List<GameObject> projectTiles
+    {
+        get { return _projectTiles; }
+        set { _projectTiles = value; }
+    }
 
     private bool isDead = false;
     private bool isHurt = false;
@@ -127,19 +132,30 @@ public class EnemyMove : EnemyStatus
 
                 if (isUseProjectTile)
                 {
-                    if(hit)
+                    if (hit)
                     {
-                        if(projectTiles.Count <= 0f)
+                        if (projectTiles.Count <= 0f)
                         {
-                            Instantiate(projectTile, projectSpawnPosition);
+                            GameObject shootIt = projectTile;
+                            
+                            ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();                    
+                            projectileScript.enemyMove = this;
+                            projectileScript.flipX = spriteRenderer.flipX;
+                            projectileScript.SetSpawn(projectSpawnPosition.position);
+
                         }
                         else
                         {
                             GameObject shootIt = projectTiles[0];
+                            ProjectileScript projectileScript = shootIt.GetComponent<ProjectileScript>();
+                            projectileScript.flipX = spriteRenderer.flipX;
+                            projectileScript.SetSpawn(projectSpawnPosition.position);
 
                             shootIt.SetActive(true);
                             projectTiles.Remove(shootIt);
                         }
+
+                        Debug.Log("aaa");
                     }
                 }
                 else
@@ -153,10 +169,42 @@ public class EnemyMove : EnemyStatus
             else
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, enemyStat.attackRange, whatIsAttackable);
+
                 if (hit)
                 {
-                    hit.transform.GetComponent<PlayerStat>().Hit(1);
+                    {
+                        if (projectTiles.Count <= 0f)
+                        {
+                            GameObject shootIt = projectTile;
+                            
+                            ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();                    
+                            projectileScript.enemyMove = this;
+                            projectileScript.flipX = spriteRenderer.flipX;
+                            projectileScript.SetSpawn(projectSpawnPosition.position);
+
+                        }
+                        else
+                        {
+                            GameObject shootIt = projectTiles[0];
+                            ProjectileScript projectileScript = shootIt.GetComponent<ProjectileScript>();
+                            projectileScript.flipX = spriteRenderer.flipX;
+                            projectileScript.SetSpawn(projectSpawnPosition.position);
+
+                            shootIt.SetActive(true);
+                            projectTiles.Remove(shootIt);
+                        }
+
+                        Debug.Log("aaa");
+                    }
                 }
+                else
+                {
+                    if (hit)
+                    {
+                        hit.transform.GetComponent<PlayerStat>().Hit(1);
+                    }
+                }
+        
             }
         }
     }
