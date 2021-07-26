@@ -44,5 +44,9 @@ public class PlayerStat : MonoBehaviour
     {
 
     }
+    public void Dead()
+    {
+        Debug.Log("Dead -.-");
+    }
 
 }
