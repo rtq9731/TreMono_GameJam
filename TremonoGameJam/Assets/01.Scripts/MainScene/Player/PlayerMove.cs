@@ -7,9 +7,10 @@ public class PlayerMove : MonoBehaviour
 {
     private PlayerInput playerInput = null;
     private PlayerStat playerStat = null;
+    private SpawnAfterImage spawnAfterImage = null;
 
     private Rigidbody2D rigid = null;
-    private SpriteRenderer spriteRenderer = null;
+    public SpriteRenderer spriteRenderer { get; private set; }
 
     [SerializeField]
     private Transform groundChecker = null;
@@ -40,12 +41,13 @@ public class PlayerMove : MonoBehaviour
 
     private bool canDash = true;
     private bool canAttack = true;
+    private bool canSpawnAfterImage = true;
 
     private bool dashMoving = false;
     private bool attacking = false;
 
     private Vector2 dashPosition = Vector2.zero;
-    private Vector2 currentPosition = Vector2.zero;
+    public Vector2 currentPosition { get; private set; }
 
     void Start()
     {
@@ -90,6 +92,21 @@ public class PlayerMove : MonoBehaviour
         DashMove();
 
         transform.position = currentPosition;
+    }
+    private void SpawnAfterImage()
+    {
+        if (dashMoving && canSpawnAfterImage)
+        {
+            float spawnAfterImageDelay = Random.Range(spawnAfterImage.spawnAfterImageDelayMinimum, spawnAfterImage.spawnAfterImageDelayMaximum);
+            spawnAfterImage.SetAfterImage();
+            canSpawnAfterImage = false;
+
+            Invoke("SpawnAfterImageRe", spawnAfterImageDelay);
+        }
+    }
+    private void SpawnAfterImageRe()
+    {
+        canSpawnAfterImage = true;
     }
     private void GroundCheck()
     {

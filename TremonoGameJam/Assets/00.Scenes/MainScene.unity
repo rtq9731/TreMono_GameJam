@@ -206,36 +206,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &523889315
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 523889316}
-  m_Layer: 0
-  m_Name: "\uC751\uC560"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &523889316
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523889315}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.35888892, y: -0.7529492, z: -0.12512971}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904808571
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,6 +221,7 @@ GameObject:
   - component: {fileID: 904808574}
   - component: {fileID: 904808573}
   - component: {fileID: 904808572}
+  - component: {fileID: 904808579}
   m_Layer: 6
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -422,6 +393,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &904808579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904808571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7dae7234addbc4daad7bb99a91c6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  afterImageObj: {fileID: 0}
+  afterImageSpawnPosition: {fileID: 0}
+  _spawnAfterImageDelayMinimum: 0.1
+  _spawnAfterImageDelayMaximum: 0.1
 --- !u!1 &1974558941
 GameObject:
   m_ObjectHideFlags: 0
