@@ -19,11 +19,11 @@ public class UIManager : MonoBehaviour
 #if UNITY_EDITOR
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.Delete))
         {
             FindObjectOfType<PlayerStat>().hp--;
         }
-        else if(Input.GetMouseButtonDown(1))
+        else if(Input.GetKeyDown(KeyCode.Insert))
         {
             FindObjectOfType<PlayerStat>().hp++;
         }
