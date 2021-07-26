@@ -270,7 +270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 226754462320654306}
   m_Layer: 0
-  m_Name: Broke_Right
+  m_Name: Broken_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

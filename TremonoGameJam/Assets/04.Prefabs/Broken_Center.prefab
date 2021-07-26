@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7691139339516008474}
   m_Layer: 0
-  m_Name: Broke_Center
+  m_Name: Broken_Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
