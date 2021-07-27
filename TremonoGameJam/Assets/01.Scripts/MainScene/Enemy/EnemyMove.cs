@@ -102,12 +102,14 @@ public class EnemyMove : EnemyStatus
                 isAttack = false;
                 isPursue = true;
                 isSearching = false;
+                attackAnimIsPlaying = false;
             }
             else if (enemyStat.currentStatus == Status.Searching)
             {
                 isAttack = false;
                 isPursue = false;
                 isSearching = true;
+                attackAnimIsPlaying = false;
             }
         }
         else if (isHurt && enemyStat.hp > 0f && !attackAnimIsPlaying)
@@ -133,7 +135,7 @@ public class EnemyMove : EnemyStatus
 
         if (!isDead && !isHurt)
         {
-            if (!moveBYPlayerSkill)
+            if (!moveBYPlayerSkill && !attackAnimIsPlaying)
             {
                 Pursue();
                 Attack();
