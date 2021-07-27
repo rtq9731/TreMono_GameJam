@@ -198,7 +198,7 @@ public class EnemyMove : EnemyStatus
                     {
                         GameObject shootIt = projectTile;
 
-                        ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();
+                        ProjectileScript projectileScript = Instantiate(shootIt, stagemanager.enemys).GetComponent<ProjectileScript>();
                         projectileScript.enemyMove = this;
                         projectileScript.flipX = spriteRenderer.flipX;
                         projectileScript.SetSpawn(this, projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
@@ -290,6 +290,7 @@ public class EnemyMove : EnemyStatus
     {
         if (_moveByPlayerSkill)
         {
+            moveByPlayerPosition.y = Mathf.Clamp(moveByPlayerPosition.y, currentPosition.y, currentPosition.y + 0.4f);
             currentPosition = Vector2.MoveTowards(currentPosition, moveByPlayerPosition, 10f * Time.fixedDeltaTime);
 
             float distance = Vector2.Distance(currentPosition, moveByPlayerPosition);
