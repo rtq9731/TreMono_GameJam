@@ -132,56 +132,13 @@ public class EnemyMove : EnemyStatus
     }
     private void AttackCheck()
     {
-        Vector2 dir = (playerPosition - (Vector2)transform.position).normalized;
-        Debug.Log(dir);
-        Debug.DrawRay(transform.position, dir);
-
         if (attacking)
         {
             attacking = false;
-            if (spriteRenderer.flipX)
+            Vector2 dir = (playerPosition - (Vector2)transform.position).normalized;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, enemyStat.attackRange, whatIsAttackable);
+            if (isUseProjectTile)
             {
-
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, enemyStat.attackRange, whatIsAttackable);
-
-                if (isUseProjectTile)
-                {
-                    if (hit)
-                    {
-                        if (projectTiles.Count <= 0f)
-                        {
-                            GameObject shootIt = projectTile;
-
-                            ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();
-                            projectileScript.enemyMove = this;
-                            projectileScript.flipX = spriteRenderer.flipX;
-                            projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
-
-                        }
-                        else
-                        {
-                            GameObject shootIt = projectTiles[0];
-                            ProjectileScript projectileScript = shootIt.GetComponent<ProjectileScript>();
-                            projectileScript.flipX = spriteRenderer.flipX;
-                            projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
-
-                            shootIt.SetActive(true);
-                            projectTiles.Remove(shootIt);
-                        }
-                    }
-                }
-                else
-                {
-                    if (hit)
-                    {
-                        hit.transform.GetComponent<PlayerStat>().Hit(enemyStat.ap);
-                    }
-                }
-            }
-            else
-            {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, enemyStat.attackRange, whatIsAttackable);
-
                 if (hit)
                 {
                     if (projectTiles.Count <= 0f)
@@ -205,17 +162,17 @@ public class EnemyMove : EnemyStatus
                         projectTiles.Remove(shootIt);
                     }
                 }
-                else
+            }
+            else
+            {
+                if (hit)
                 {
-                    if (hit)
-                    {
-                        hit.transform.GetComponent<PlayerStat>().Hit(enemyStat.ap);
-                    }
+                    hit.transform.GetComponent<PlayerStat>().Hit(enemyStat.ap);
                 }
-
             }
         }
     }
+
     private void IsHurtReset()
     {
         enemyStat.isHurt = false;
