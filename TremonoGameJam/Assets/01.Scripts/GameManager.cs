@@ -21,7 +21,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void LoadScene(int stageNum)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
-        UnityEngine.SceneManagement.SceneManager.LoadScene($"Stage {stageNum}", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        UnityEngine.SceneManagement.SceneManager.LoadScene($"Stage {stageNum}");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
 }
