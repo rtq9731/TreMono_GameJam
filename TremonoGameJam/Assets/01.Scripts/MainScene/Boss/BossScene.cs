@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BossScene : MonoBehaviour, IHitable
 {
+    [Header("프리팹들")]
+    [SerializeField] GameObject breakableObjForAttack;
+    [SerializeField] GameObject brokenObjForAttack;
+
     [Header("애니메이터")]
     [SerializeField] Animator animator;
     [SerializeField] Animator rightArm;
@@ -12,6 +17,10 @@ public class BossScene : MonoBehaviour, IHitable
     [Header("각종 위치 데이터")]
     [SerializeField] GameObject point_LeftDash;
     [SerializeField] GameObject point_RightDash;
+    [SerializeField] GameObject point_RightGrap;
+    [SerializeField] GameObject point_LeftGrap;
+    [SerializeField] GameObject Point_LeftTop;
+    [SerializeField] GameObject Point_RightTop;
 
     [Header("각종 속도들")]
     [SerializeField] float dashSpeed;
@@ -29,31 +38,31 @@ public class BossScene : MonoBehaviour, IHitable
     ParticleSystem myParticle = null;
     float playerDirX = 0;
 
-    bool isDash = false;
-    bool isDashAttack = false;
-
+    bool isWallAttack = false;
+       
     bool isKnockdown = false;
 
     enum Dir
     {
+        none,
         right,
         left
     };
 
-    Dir mydir = Dir.right;
+    Dir mydir = Dir.none;
 
     private void Start()
     {
         playerTr = FindObjectOfType<PlayerStat>().transform;
         myParticle = GetComponentInChildren<ParticleSystem>();
-        DashToPlayer();
+        WallAttack();
     }
 
     private void Update()
     {
         if(!isKnockdown)
         {
-            if (isDash)
+            if (isWallAttack)
             {
                 transform.Translate(new Vector2(playerDirX, 0) * dashSpeed * Time.deltaTime);
                 if(mydir == Dir.right)
@@ -74,10 +83,16 @@ public class BossScene : MonoBehaviour, IHitable
         }
     }
 
+    public void WallAttack()
+    {
+        DashToPlayer();
+        isWallAttack = true;
+    }
+
     public IEnumerator HitWall()
     {
         playerBlock.enabled = true;
-        isDash = false;
+        isWallAttack = false;
         wallHitCount++;
         Animator temp = null;
         switch (mydir)
@@ -94,6 +109,11 @@ public class BossScene : MonoBehaviour, IHitable
                 break;
         }
 
+        makeDamagableObj();
+        makeDamagableObj();
+        makeDamagableObj();
+        makeDamagableObj();
+
         yield return new WaitForSeconds(wallShakeAttackInterval);
 
         if(wallHitCount < wallShakeAttackCount)
@@ -103,11 +123,19 @@ public class BossScene : MonoBehaviour, IHitable
         else
         {
             StartCoroutine(Knockdown());
+            mydir = Dir.none;
             wallHitCount = 0;
             playerBlock.enabled = false;
         }
 
         yield return null;
+    }
+
+    void makeDamagableObj()
+    {
+        Vector2 makePos = new Vector2(0, Point_LeftTop.transform.position.y);
+        makePos.x = Random.Range(Point_LeftTop.transform.position.x, Point_RightTop.transform.position.x);
+        GameObject temp = Instantiate(breakableObjForAttack, makePos, Quaternion.identity).GetComponent<BreakObjForAttack>().brokenObj = brokenObjForAttack;
     }
 
     public void DashToPlayer()
@@ -121,9 +149,8 @@ public class BossScene : MonoBehaviour, IHitable
             playerDirX = 1;
         }
         Debug.Log(GetPlayerDir());
-        isDash = true;
-        if(playerDirX > 0) { animator.SetTrigger("LookRight"); mydir = Dir.right; }
-        else { animator.SetTrigger("LookLeft"); mydir = Dir.left;  }
+        if(playerDirX > 0) { animator.SetTrigger("LookLeft"); mydir = Dir.right; } // 플레이어가 진행방향 반대에 있으니 반대쪽 쳐다보기
+        else { animator.SetTrigger("LookRight"); mydir = Dir.left;  }
     }
 
     public IEnumerator Knockdown()
@@ -132,8 +159,10 @@ public class BossScene : MonoBehaviour, IHitable
         yield return new WaitForSeconds(knockdownTime);
         rightArm.SetTrigger("Idle");
         leftArm.SetTrigger("Idle");
-        isKnockdown = false;
-        DashToPlayer();
+        isKnockdown = false; 
+        
+        // 임시 반복용 코드
+        WallAttack();
     }
 
     public float GetPlayerDir()
