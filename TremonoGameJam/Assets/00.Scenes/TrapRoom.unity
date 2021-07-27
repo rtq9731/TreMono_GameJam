@@ -519,6 +519,10 @@ PrefabInstance:
       propertyPath: point_RightDash
       value: 
       objectReference: {fileID: 1639881231}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: wallShakeAttackInterval
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2273047900937642605, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -895,6 +899,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5866348251377345061, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866348251377345061, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.55
+      objectReference: {fileID: 0}
     - target: {fileID: 7998851173098773130, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
       propertyPath: m_RootOrder
       value: 9

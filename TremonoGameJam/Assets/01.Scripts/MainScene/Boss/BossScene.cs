@@ -19,6 +19,11 @@ public class BossScene : MonoBehaviour, IHitable
     [Header("³ì´Ù¿î È¸º¹¿¡ °É¸®´Â ½Ã°£")]
     [SerializeField] float knockdownTime;
 
+    [Header("±âÅ¸")]
+    [SerializeField] short wallShakeAttackCount = 2;
+    [SerializeField] float wallShakeAttackInterval = 2f;
+    short wallHitCount = 0;
+
     Transform playerTr = null;
     ParticleSystem myParticle = null;
     float playerDirX = 0;
@@ -49,48 +54,83 @@ public class BossScene : MonoBehaviour, IHitable
         {
             if (isDash)
             {
-                Debug.Log("µ¹Áø½ÃÀÛ");
                 transform.Translate(new Vector2(playerDirX, 0) * dashSpeed * Time.deltaTime);
-
-                if (transform.position.x < point_LeftDash.transform.position.x || transform.position.x > point_RightDash.transform.position.x)
+                if(mydir == Dir.right)
                 {
-                    isDash = false;
-                    switch (mydir)
+                    if (transform.position.x > point_RightDash.transform.position.x)
                     {
-                        case Dir.right:
-                            rightArm.SetTrigger("Sto_"); // Âß »¸¾î¼­ º®¿¡ ¹ÚÈû
-                            break;
-                        case Dir.left:
-                            leftArm.SetTrigger("Sto_"); // Âß »¸¾î¼­ º®¿¡ ¹ÚÈû
-                            break;
-                        default:
-                            break;
+                        StartCoroutine(HitWall());
                     }
-                    StartCoroutine(Knockdown());
+                }
+                else
+                {
+                    if(transform.position.x < point_LeftDash.transform.position.x)
+                    {
+                        StartCoroutine(HitWall());
+                    }
                 }
             }
         }
     }
 
+    public IEnumerator HitWall()
+    {
+        isDash = false;
+        wallHitCount++;
+        Animator temp = null;
+        switch (mydir)
+        {
+            case Dir.right:
+                temp = rightArm; // Âß »¸¾î¼­ º®¿¡ ¹ÚÈû
+                rightArm.SetTrigger("Sto_");
+                break;
+            case Dir.left:
+                temp = leftArm;
+                leftArm.SetTrigger("Sto_"); // Âß »¸¾î¼­ º®¿¡ ¹ÚÈû
+                break;
+            default:
+                break;
+        }
+
+        yield return new WaitForSeconds(wallShakeAttackInterval);
+
+        if(wallHitCount < wallShakeAttackCount)
+        {
+            StartCoroutine(HitWall());
+        }
+        else
+        {
+            StartCoroutine(Knockdown());
+            wallHitCount = 0;
+        }
+
+        yield return null;
+    }
+
     public void DashToPlayer()
     {
-        playerDirX = GetPlayerDir();
+        if(GetPlayerDir() != 0)
+        {
+            playerDirX = GetPlayerDir();
+        }
+        else
+        {
+            playerDirX = 1;
+        }
         Debug.Log(GetPlayerDir());
         isDash = true;
         if(playerDirX > 0) { animator.SetTrigger("LookRight"); mydir = Dir.right; }
         else { animator.SetTrigger("LookLeft"); mydir = Dir.left;  }
-        Debug.Log("µ¹Áø");
     }
 
     public IEnumerator Knockdown()
     {
         isKnockdown = true;
-        Debug.Log("µ¹Áø Å¸°Ý");
         yield return new WaitForSeconds(knockdownTime);
         rightArm.SetTrigger("Idle");
         leftArm.SetTrigger("Idle");
-        Debug.Log("µ¹Áø Á¾·á");
         isKnockdown = false;
+        DashToPlayer();
     }
 
     public float GetPlayerDir()
