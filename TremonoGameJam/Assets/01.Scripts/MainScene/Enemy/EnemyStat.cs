@@ -12,6 +12,9 @@ public class EnemyStat : EnemyStatus, IHitable
         get { return _searchPlayer; }
     }
 
+    [SerializeField]
+    private LayerMask whatIsGround;
+
     private Animator anim = null;
 
     [Header("공중유닛인가?")]
@@ -126,27 +129,76 @@ public class EnemyStat : EnemyStatus, IHitable
     }
     private void HitMove()
     {
-        if (isHurt && isHurtMove)
+        bool a = Physics2D.OverlapCircle(currentPosition, 1f, whatIsGround);
+
+        if (!a)
         {
-            transform.DOMoveX(targetPosition.x, 0.1f).SetEase(Ease.InQuad);
+            if (isHurt && isHurtMove)
+            {
+                transform.DOMoveX(targetPosition.x, 0.1f).SetEase(Ease.InQuad);
+            }
+            else if (!isHurt)
+            {
+                isHurtMove = false;
+            }
         }
-        else if (!isHurt)
+        else
         {
             isHurtMove = false;
         }
     }
     public void SetTargetPosition(Vector2 attackerPosition)
     {
+        bool moveLeft = false;
+        targetPosition = currentPosition;
+        
+        Vector2 endPosition = currentPosition;
         targetPosition = currentPosition;
 
         if (currentPosition.x >= attackerPosition.x)
         {
-            targetPosition.x += hitMoveRange;
+            endPosition.x += hitMoveRange;
+            moveLeft = false;
         }
         else
         {
-            targetPosition.x -= hitMoveRange;
+            endPosition.x -= hitMoveRange;
+            moveLeft = true;
         }
+
+        bool a = false;
+        bool b = false;
+
+        do
+        {
+            a = Physics2D.OverlapCircle(targetPosition, 0.1f, whatIsGround);
+            if (!a)
+            {
+                if (moveLeft)
+                {
+                    targetPosition.x -= 0.1f;
+                }
+                else
+                {
+                    targetPosition.x += 0.1f;
+                }
+            }
+
+            if (moveLeft)
+            {
+                if (targetPosition.x <= endPosition.x)
+                {
+                    b = true;
+                }
+            }
+            else
+            {
+                if (targetPosition.x >= endPosition.x)
+                {
+                    b = true;
+                }
+            }
+        } while (!a && !b);
 
         isHurtMove = true;
     }

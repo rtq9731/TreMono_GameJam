@@ -7,6 +7,9 @@ public class PlayerStat : MonoBehaviour, IHitable
 {
     private PlayerMove playerMove = null;
 
+    [SerializeField]
+    private LayerMask whatIsGround;
+
     [Header("Player스탯 관련")]
     [SerializeField]
     private int _hp = 3;
@@ -81,8 +84,10 @@ public class PlayerStat : MonoBehaviour, IHitable
 
         transform.position = currentPosition;
     }
+
     private void HitMove()
     {
+
         if (isHurt && isHurtMove)
         {
             transform.DOMoveX(targetPosition.x, 0.1f).SetEase(Ease.InQuad);
@@ -91,19 +96,60 @@ public class PlayerStat : MonoBehaviour, IHitable
         {
             isHurtMove = false;
         }
+
     }
     public void SetTargetPosition(Vector2 attackerPosition)
     {
+        bool moveLeft = false;
+        targetPosition = currentPosition;
+        
+        Vector2 endPosition = currentPosition;
         targetPosition = currentPosition;
 
         if (currentPosition.x >= attackerPosition.x)
         {
-            targetPosition.x += hitMoveRange;
+            endPosition.x += hitMoveRange;
+            moveLeft = false;
         }
         else
         {
-            targetPosition.x -= hitMoveRange;
+            endPosition.x -= hitMoveRange;
+            moveLeft = true;
         }
+
+        bool a = false;
+        bool b = false;
+
+        do
+        {
+            a = Physics2D.OverlapCircle(targetPosition, 0.1f, whatIsGround);
+            if (!a)
+            {
+                if (moveLeft)
+                {
+                    targetPosition.x -= 0.1f;
+                }
+                else
+                {
+                    targetPosition.x += 0.1f;
+                }
+            }
+
+            if (moveLeft)
+            {
+                if (targetPosition.x <= endPosition.x)
+                {
+                    b = true;
+                }
+            }
+            else
+            {
+                if (targetPosition.x >= endPosition.x)
+                {
+                    b = true;
+                }
+            }
+        } while (!a && !b);
 
         isHurtMove = true;
     }

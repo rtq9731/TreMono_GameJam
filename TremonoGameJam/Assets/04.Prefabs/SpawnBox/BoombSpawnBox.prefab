@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0822b348460c10d428dfce1efa2d5c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
   _isAirEnemy: 1
   _isHurt: 0
   _hp: 1
