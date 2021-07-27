@@ -12,6 +12,7 @@ public class EnemyMove : EnemyStatus
 
     private bool canAttack = true;
     private bool canAttackStart = false;
+    private bool attackDone = false;
     private bool searchMove = true;
 
     [Header("발사체를 사용하는가")]
@@ -225,7 +226,18 @@ public class EnemyMove : EnemyStatus
     }
     private void Attack()
     {
-        if (canAttackStart && canAttack && attackNum < enemyStat.attackNum)
+        if (!isAttack)
+        {
+            attackDone = false;
+            attackNum = 0;
+        }
+
+        if(isAttack && attackNum >= enemyStat.attackNum)
+        {
+            attackDone = true;
+        }
+
+        if (canAttackStart && canAttack && !attackDone)
         {
             attacking = true;
             canAttack = false;
@@ -233,16 +245,19 @@ public class EnemyMove : EnemyStatus
             anim.Play("Attack");
             FlipCheck(playerPosition);
             Invoke("AttackRe", enemyStat.attackDelay);
-            attackNum++;
         }
-        else if(attackNum >= enemyStat.attackNum)
+        else if (attackDone)
         {
-            canAttackStart = false;
-            Invoke("AttackNumSet", enemyStat.attackTum);
+            if (isAttack && canAttackStart)
+            {
+                canAttackStart = false;
+                Invoke("AttackNumSet", enemyStat.attackTum);
+            }
         }
     }
     private void AttackRe()
     {
+        attackNum++;
         canAttack = true;
     }
     private void AttackNumSet()
