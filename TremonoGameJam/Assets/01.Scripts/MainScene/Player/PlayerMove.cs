@@ -8,6 +8,8 @@ public class PlayerMove : MonoBehaviour
     private PlayerInput playerInput = null;
     private PlayerStat playerStat = null;
     private SpawnAfterImage spawnAfterImage = null;
+    [SerializeField]
+    private GameObject skill1Object = null;
 
     private Rigidbody2D rigid = null;
     private Animator anim = null;
@@ -42,6 +44,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool isJump = false;
     private bool isAttack = false;
+    private bool skill1 = false;
     private bool isAttacked = false; // 이미 공격 했는지
 
     private bool canAttack = true;
@@ -86,6 +89,11 @@ public class PlayerMove : MonoBehaviour
             canAttackReStarted = false;
             isAttack = true;
         }
+        
+        if(playerInput.isSkill1)
+        {
+            skill1 = true;
+        }
 
         GroundCheck();
 
@@ -104,6 +112,7 @@ public class PlayerMove : MonoBehaviour
             Move();
             Attack();
             Jump();
+            Skill1();
 
             AttackCheck();
             DashMove();
@@ -120,6 +129,15 @@ public class PlayerMove : MonoBehaviour
     private void Destroye()
     {
         transform.parent.gameObject.SetActive(false);
+    }
+    private void Skill1()
+    {
+        if(skill1)
+        {
+            skill1Object.SetActive(true);
+            skill1Object.GetComponent<Skill1Script>().SetSpawn(currentPosition);
+            skill1 = false;
+        }
     }
     private void AttackCheck()
     {

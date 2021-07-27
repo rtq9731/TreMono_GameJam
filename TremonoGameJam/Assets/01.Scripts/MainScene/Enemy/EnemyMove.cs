@@ -40,6 +40,11 @@ public class EnemyMove : EnemyStatus
     private bool attacking = false;
     private bool isPursue = false;
     private bool isSearching = false;
+    private bool _moveByPlayerSkill = false;
+    public bool moveBYPlayerSkill
+    {
+        get { return _moveByPlayerSkill; }
+    }
 
     [SerializeField]
     private float searchRangeX = 1f;
@@ -61,6 +66,7 @@ public class EnemyMove : EnemyStatus
     private Vector2 currentPosition = Vector2.zero;
     private Vector2 playerPosition = Vector2.zero;
     private Vector2 searchTargetPosition = Vector2.zero;
+    private Vector2 moveByPlayerPosition = Vector2.zero;
 
     private int attackNum = 0;
 
@@ -99,7 +105,7 @@ public class EnemyMove : EnemyStatus
                 isSearching = true;
             }
 
-            
+
         }
         else if (isHurt && enemyStat.hp > 0f)
         {
@@ -107,14 +113,14 @@ public class EnemyMove : EnemyStatus
         }
 
         if (enemyStat.hp <= 0f)
-            {
-                isAttack = false;
-                isPursue = false;
-                isSearching = false;
-                isDead = true;
+        {
+            isAttack = false;
+            isPursue = false;
+            isSearching = false;
+            isDead = true;
 
-                Dead();
-            }
+            Dead();
+        }
     }
 
     private void FixedUpdate()
@@ -124,10 +130,15 @@ public class EnemyMove : EnemyStatus
 
         if (!isDead && !isHurt)
         {
-            Pursue();
-            Attack();
-            AttackCheck();
-            Searching();
+            if (!moveBYPlayerSkill)
+            {
+                Pursue();
+                Attack();
+                AttackCheck();
+                Searching();
+            }
+
+            MoveBYPlayerSkill1();
         }
 
         transform.position = currentPosition;
@@ -222,6 +233,25 @@ public class EnemyMove : EnemyStatus
             {
                 canAttackStart = false;
                 Invoke("AttackNumSet", enemyStat.attackTum);
+            }
+        }
+    }
+    public void SetMoveByPlayerSkill(Vector2 targetPosition)
+    {
+        _moveByPlayerSkill = true;
+        moveByPlayerPosition = targetPosition;
+    }
+    private void MoveBYPlayerSkill1()
+    {
+        if (_moveByPlayerSkill)
+        {
+            currentPosition = Vector2.MoveTowards(currentPosition, moveByPlayerPosition, 10f * Time.fixedDeltaTime);
+
+            float distance = Vector2.Distance(currentPosition, moveByPlayerPosition);
+
+            if (distance <= 0.5f)
+            {
+                _moveByPlayerSkill = false;
             }
         }
     }

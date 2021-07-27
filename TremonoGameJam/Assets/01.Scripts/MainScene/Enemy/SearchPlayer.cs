@@ -17,9 +17,7 @@ public class SearchPlayer : EnemyStatus
     {
         distance = Vector2.Distance(transform.position, playerPosition);
 
-        Vector2 _playerPosition = playerPosition;
         Vector2 currentPosition = transform.position;
-        _playerPosition.x = -playerPosition.x;
 
 
         Vector2 position = playerPosition - currentPosition;
