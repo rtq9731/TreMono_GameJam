@@ -8,6 +8,8 @@ public class BossScene : MonoBehaviour, IHitable
     [Header("프리팹들")]
     [SerializeField] GameObject breakableObjForAttack;
     [SerializeField] GameObject brokenObjForAttack;
+    [SerializeField] GameObject breakWallEffect;
+    private GameObject breakWallEffectInstance = null;
 
     [Header("애니메이터")]
     [SerializeField] Animator animator;
@@ -77,7 +79,7 @@ public class BossScene : MonoBehaviour, IHitable
     {
         playerTr = FindObjectOfType<PlayerStat>().transform;
         myParticle = GetComponentInChildren<ParticleSystem>();
-        TentacleAttack();
+        SnortAttack();
     }
 
     private void Update()
@@ -196,6 +198,17 @@ public class BossScene : MonoBehaviour, IHitable
                 yield return null;
             }
             leftArm.SetTrigger("Grab");
+
+            bool isAnimOver = false;
+            float timer = 0f;
+            while (!isAnimOver)
+            {
+                timer += Time.deltaTime;
+                if (timer > leftArm.GetCurrentAnimatorStateInfo(0).length)
+                    isAnimOver = true;
+            }
+            PlayStoneBreakAnim(leftArm.transform);
+
             while (!isSnortAttackHit)
             {
                 Lookat(playerTr, rightTentacleLast.transform, 0);
@@ -228,6 +241,18 @@ public class BossScene : MonoBehaviour, IHitable
                 yield return null;
             }
             rightArm.SetTrigger("Grab");
+
+            bool isAnimOver = false;
+            float timer = 0f;
+            Debug.Log(rightArm.GetCurrentAnimatorStateInfo(0).length);
+            while (!isAnimOver)
+            {
+                timer += Time.deltaTime;
+                if (timer > rightArm.GetCurrentAnimatorStateInfo(0).length)
+                    isAnimOver = true;
+            }
+            PlayStoneBreakAnim(rightTentacleLast.transform);
+
             while (!isSnortAttackHit)
             {
                 Lookat(playerTr, leftTentacleLast.transform, 180);
@@ -242,7 +267,6 @@ public class BossScene : MonoBehaviour, IHitable
                     else
                     {
                         playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal * (50 + playerHit.distance * 5));
-                        Debug.Log(300 % playerHit.distance);
                     }
                 }
                 yield return null;
@@ -363,7 +387,6 @@ public class BossScene : MonoBehaviour, IHitable
     public void Hit(int damage)
     {
         hp--;
-        Debug.Log(hp);
         animator.SetTrigger("Hit");
 
         if (isSnortAttack)
@@ -385,6 +408,16 @@ public class BossScene : MonoBehaviour, IHitable
         targetPos.y = targetPos.y - thisPos.y;
         float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
         thisObj.rotation = Quaternion.Euler(new Vector3(0, 0, angle + offset));
+    }
+
+    void PlayStoneBreakAnim(Transform target)
+    {
+        if (breakWallEffectInstance == null)
+            breakWallEffectInstance = Instantiate(breakWallEffect);
+
+        Debug.LogError(transform.position);
+        breakWallEffect.transform.position = target.position;
+        breakWallEffect.GetComponentInChildren<ParticleSystem>().Play();
     }
 
     void Die()
