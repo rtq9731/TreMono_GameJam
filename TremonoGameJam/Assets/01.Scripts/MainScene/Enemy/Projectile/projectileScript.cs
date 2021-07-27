@@ -32,6 +32,7 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField]
     private Vector2 firstPosition = Vector2.zero;
     private float moveRange = 0;
+    private int ap = 0;
     void Start()
     {
         stageManager = FindObjectOfType<StageManager>();
@@ -50,11 +51,12 @@ public class ProjectileScript : MonoBehaviour
         CheckDistance();
         CheckMove();
     }
-    public void SetSpawn(Vector2 spawnPosition, float atttackRange)
+    public void SetSpawn(Vector2 spawnPosition, float atttackRange, int damage)
     {
         transform.position = spawnPosition;
         firstPosition = spawnPosition;
         moveRange = atttackRange * 2;
+        ap = damage;
     }
     private void Move()
     {
@@ -99,7 +101,7 @@ public class ProjectileScript : MonoBehaviour
         {
             PlayerStat playerStat = playerPosition.GetComponent<PlayerStat>();
 
-            playerStat.Hit(1);
+            playerStat.Hit(ap);
 
             Destroye();
         }

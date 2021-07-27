@@ -1410,6 +1410,10 @@ PrefabInstance:
       propertyPath: whatIsAttackable.m_Bits
       value: 384
       objectReference: {fileID: 0}
+    - target: {fileID: 7998851172791728614, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7529492
+      objectReference: {fileID: 0}
     - target: {fileID: 7998851173098773130, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
       propertyPath: m_RootOrder
       value: 7

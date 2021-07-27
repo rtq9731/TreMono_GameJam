@@ -146,7 +146,7 @@ public class EnemyMove : EnemyStatus
                             ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();
                             projectileScript.enemyMove = this;
                             projectileScript.flipX = spriteRenderer.flipX;
-                            projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange);
+                            projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
 
                         }
                         else
@@ -154,7 +154,7 @@ public class EnemyMove : EnemyStatus
                             GameObject shootIt = projectTiles[0];
                             ProjectileScript projectileScript = shootIt.GetComponent<ProjectileScript>();
                             projectileScript.flipX = spriteRenderer.flipX;
-                            projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange);
+                            projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
 
                             shootIt.SetActive(true);
                             projectTiles.Remove(shootIt);
@@ -165,7 +165,7 @@ public class EnemyMove : EnemyStatus
                 {
                     if (hit)
                     {
-                        hit.transform.GetComponent<PlayerStat>().Hit(1);
+                        hit.transform.GetComponent<PlayerStat>().Hit(enemyStat.ap);
                     }
                 }
             }
@@ -182,7 +182,7 @@ public class EnemyMove : EnemyStatus
                         ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();
                         projectileScript.enemyMove = this;
                         projectileScript.flipX = spriteRenderer.flipX;
-                        projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange);
+                        projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
 
                     }
                     else
@@ -190,7 +190,7 @@ public class EnemyMove : EnemyStatus
                         GameObject shootIt = projectTiles[0];
                         ProjectileScript projectileScript = shootIt.GetComponent<ProjectileScript>();
                         projectileScript.flipX = spriteRenderer.flipX;
-                        projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange);
+                        projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
 
                         shootIt.SetActive(true);
                         projectTiles.Remove(shootIt);
@@ -200,7 +200,7 @@ public class EnemyMove : EnemyStatus
                 {
                     if (hit)
                     {
-                        hit.transform.GetComponent<PlayerStat>().Hit(1);
+                        hit.transform.GetComponent<PlayerStat>().Hit(enemyStat.ap);
                     }
                 }
 
