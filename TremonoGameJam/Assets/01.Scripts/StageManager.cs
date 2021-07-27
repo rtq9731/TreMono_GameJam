@@ -31,8 +31,37 @@ public class StageManager : MonoBehaviour
         get { return _playerTrm; }
     }
 
+    [SerializeField]
+    private bool _stopPlayer = false;
+    public bool stopPlayer
+    {
+        get{return _stopPlayer;}
+    } 
+    private float playerStopTimer = 0f;
+
+    private void Update()
+    {
+        CheckStop();
+    }
+
+    private void CheckStop()
+    {
+        if (stopPlayer)
+        {
+            playerStopTimer -= Time.deltaTime;
+            if (playerStopTimer <= 0f)
+            {
+                _stopPlayer = false;
+            }
+        }
+    }
 
     [SerializeField] public GameObject[] brokeObjsPrefab;
+    public void StopPlayer(float stopTime)
+    {
+        _stopPlayer = true;
+        playerStopTimer = stopTime;
+    }
 
 
 
