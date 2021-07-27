@@ -32,6 +32,8 @@ public class StageManager : MonoBehaviour
     }
 
     private float shakeTimer = 0f; // 시네머신을 이용하여 카메라를 흔들 때 사용되는 변수
+    
+    [SerializeField]
     private CinemachineVirtualCamera cinemachineVirtualCamera = null;
 
 
@@ -43,6 +45,10 @@ public class StageManager : MonoBehaviour
 
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
         shakeTimer = time;
+    }
+    private void Start()
+    {
+        ShakeCamera(10f, 3f);
     }
 
     private void Update()

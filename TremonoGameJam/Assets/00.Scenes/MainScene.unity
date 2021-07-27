@@ -546,7 +546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463897330}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.981194, y: -1.8188815, z: -6.5062466}
+  m_LocalPosition: {x: -21.981483, y: -1.8188815, z: -6.5062466}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 909865185}
@@ -619,6 +619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemys: {fileID: 1448760341}
   _playerTrm: {fileID: 7998851174644515146}
+  cinemachineVirtualCamera: {fileID: 463897332}
   brokeObjsPrefab: []
 --- !u!4 &468724016
 Transform:
@@ -867,7 +868,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.981194, y: -1.8188815, z: -6.5062466}
+  m_LocalPosition: {x: -21.981483, y: -1.8188815, z: -6.5062466}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2021151492}
@@ -1160,9 +1161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NoiseProfile: {fileID: 11400000, guid: b241f91b9ccf8ff489abf204b30d3112, type: 2}
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 1
+  m_AmplitudeGain: 0
   m_FrequencyGain: 1
   mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &946997008
