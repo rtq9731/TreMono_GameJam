@@ -8,6 +8,8 @@ public class PlayerMove : MonoBehaviour
     private PlayerInput playerInput = null;
     private PlayerStat playerStat = null;
     private SpawnAfterImage spawnAfterImage = null;
+    private ParticleSpawn particleSpawn = null;
+
     [SerializeField]
     private GameObject skill1Object = null;
 
@@ -15,12 +17,14 @@ public class PlayerMove : MonoBehaviour
     private Animator anim = null;
     public SpriteRenderer spriteRenderer { get; private set; }
 
+
     [SerializeField]
     private Transform groundChecker = null;
+
     [SerializeField]
     private LayerMask whatIsAttackable;
     [SerializeField]
-    private ParticleSystem particleSystem;
+    private GameObject onHitParticle;
 
     [SerializeField]
     private LayerMask WhatIsGround;
@@ -85,6 +89,7 @@ public class PlayerMove : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerStat = GetComponent<PlayerStat>();
         spawnAfterImage = GetComponent<SpawnAfterImage>();
+        particleSpawn = GetComponent<ParticleSpawn>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -202,6 +207,8 @@ public class PlayerMove : MonoBehaviour
 
                 if (hit)
                 {
+                    particleSpawn.CallParticle(onHitParticle, hit.point);
+
                     if (hit.transform.GetComponent<EnemyStat>() != null)
                     {
                         hit.transform.GetComponent<EnemyStat>().Hit(1);
@@ -228,6 +235,8 @@ public class PlayerMove : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1, whatIsAttackable);
                 if (hit)
                 {
+                    particleSpawn.CallParticle(onHitParticle, hit.point);
+                    
                     if (hit.transform.GetComponent<EnemyStat>() != null)
                     {
                         hit.transform.GetComponent<EnemyStat>().Hit(1);

@@ -148,12 +148,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isAirEnemy: 1
   _isHurt: 0
-  _hp: 5
+  _hp: 1
   _ap: 1
   _attackDelay: 1
   _attackNum: 1
-  _searchSpeed: 1
-  _pursueSpeed: 3
+  _searchSpeed: 2
+  _pursueSpeed: 7
   _foundRange: 10
   _attackRange: 1
   _currentStatus: 0
