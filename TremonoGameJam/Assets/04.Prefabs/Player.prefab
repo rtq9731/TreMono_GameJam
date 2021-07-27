@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 5866348251688976821}
   - component: {fileID: 5866348251688976714}
   - component: {fileID: 5866348251688976717}
+  - component: {fileID: 3371381663794353405}
   m_Layer: 6
   m_Name: Player_Body
   m_TagString: Untagged
@@ -348,6 +349,10 @@ MonoBehaviour:
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  WhatIsDamagable:
+    serializedVersion: 2
+    m_Bits: 2048
+  damagableRange: 0.7
   groundCheckDistance: 0.1
   attackDelay: 0.25
   dashDoTime: 0.05
@@ -406,6 +411,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3371381663794353405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5866348251688976818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f827f1a5a1cda340a14079e8fb38783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  what: DamagableRange
+  radius: 0.7
+  color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &5866348251992552930
 GameObject:
   m_ObjectHideFlags: 0

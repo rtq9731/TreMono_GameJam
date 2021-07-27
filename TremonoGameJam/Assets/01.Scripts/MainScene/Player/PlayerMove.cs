@@ -17,11 +17,18 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     private Transform groundChecker = null;
-     [SerializeField]
+    [SerializeField]
     private LayerMask whatIsAttackable;
 
     [SerializeField]
     private LayerMask WhatIsGround;
+
+    [Header("플레이어가 닿으면 데미지받는 오브젝트")]
+    [SerializeField]
+    private LayerMask WhatIsDamagable;
+    [SerializeField]
+    private float damagableRange = 1f;
+    private bool canHurtByDamagable = true;
 
     [SerializeField]
     private float groundCheckDistance = 1f;
@@ -47,6 +54,7 @@ public class PlayerMove : MonoBehaviour
     private bool skill1 = false;
     private bool isAttacked = false; // 이미 공격 했는지
 
+    private bool jumpAnimIsPlaying = false;
     private bool canAttack = true;
     private bool canAttackReStarted = false;
     private bool canDoubleJump = false;
@@ -62,7 +70,7 @@ public class PlayerMove : MonoBehaviour
     private Vector2 mousePosition = Vector2.zero;
     public Vector2 currentPosition { get; private set; }
 
-   
+
 
     void Start()
     {
@@ -89,8 +97,8 @@ public class PlayerMove : MonoBehaviour
             canAttackReStarted = false;
             isAttack = true;
         }
-        
-        if(playerInput.isSkill1)
+
+        if (playerInput.isSkill1)
         {
             skill1 = true;
         }
@@ -118,6 +126,7 @@ public class PlayerMove : MonoBehaviour
             DashMove();
             WhenDashStopMove();
             SpawnAfterImage();
+            DamagableCheck();
         }
         else
         {
@@ -126,13 +135,39 @@ public class PlayerMove : MonoBehaviour
 
         transform.position = currentPosition;
     }
+    private void DamagableCheck()
+    {
+        if (canHurtByDamagable)
+        {
+            bool a = Physics2D.OverlapCircle(currentPosition, damagableRange, WhatIsDamagable);
+
+            if (a)
+            {
+                canHurtByDamagable = false;
+                playerStat.Hit(1);
+                Invoke("CanHurtByDamagableReset", 1f);
+            }
+        }
+    }
+    private void CanHurtByDamagableReset()
+    {
+        canHurtByDamagable = true;
+    }
     private void Destroye()
     {
         transform.parent.gameObject.SetActive(false);
     }
+    private void SetTrueJumpAnimIsPlaying()
+    {
+        jumpAnimIsPlaying = true;
+    }
+    private void SetFlaseJumpAnimIsPlaying()
+    {
+        jumpAnimIsPlaying = false;
+    }
     private void Skill1()
     {
-        if(skill1)
+        if (skill1)
         {
             skill1Object.SetActive(true);
             skill1Object.GetComponent<Skill1Script>().SetSpawn(currentPosition);
@@ -201,6 +236,7 @@ public class PlayerMove : MonoBehaviour
             attacking = true;
 
             anim.Play("Attack");
+            SetFlaseJumpAnimIsPlaying();
             Dash();
 
             if (!canAttackReStarted)
@@ -334,11 +370,15 @@ public class PlayerMove : MonoBehaviour
         if (!dashMoving && !attacking)
         {
             rigid.velocity = new Vector2(XMove * playerStat.speed, rigid.velocity.y);
-            if (XMove == 0f)
+            if (XMove == 0f && isGround)
             {
                 anim.Play("Idle");
             }
-            else
+            else if (XMove == 0f && !isGround && !jumpAnimIsPlaying)
+            {
+                anim.Play("InAir");
+            }
+            else if (!jumpAnimIsPlaying)
             {
                 anim.Play("Move");
             }
@@ -353,11 +393,13 @@ public class PlayerMove : MonoBehaviour
 
             if (canDoubleJump)
             {
+                anim.Play("DoubleJump");
                 canDoubleJump = false;
             }
 
             if (isGround)
             {
+                anim.Play("Jump");
                 canDoubleJump = true;
             }
         }
