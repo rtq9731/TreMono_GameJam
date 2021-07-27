@@ -349,7 +349,7 @@ MonoBehaviour:
   particleSystem: {fileID: 0}
   WhatIsGround:
     serializedVersion: 2
-    m_Bits: 2056
+    m_Bits: 3848
   WhatIsDamagable:
     serializedVersion: 2
     m_Bits: 2048
