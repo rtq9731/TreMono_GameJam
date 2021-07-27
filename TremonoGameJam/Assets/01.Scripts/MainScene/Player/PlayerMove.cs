@@ -19,6 +19,8 @@ public class PlayerMove : MonoBehaviour
     private Transform groundChecker = null;
     [SerializeField]
     private LayerMask whatIsAttackable;
+    [SerializeField]
+    private ParticleSystem particleSystem;
 
     [SerializeField]
     private LayerMask WhatIsGround;
@@ -26,6 +28,7 @@ public class PlayerMove : MonoBehaviour
     [Header("플레이어가 닿으면 데미지받는 오브젝트")]
     [SerializeField]
     private LayerMask WhatIsDamagable;
+
     [SerializeField]
     private float damagableRange = 1f;
     private bool canHurtByDamagable = true;
@@ -161,6 +164,7 @@ public class PlayerMove : MonoBehaviour
     {
         jumpAnimIsPlaying = true;
     }
+    
     private void SetFlaseJumpAnimIsPlaying()
     {
         jumpAnimIsPlaying = false;
