@@ -78,7 +78,7 @@ public class BossScene : MonoBehaviour, IHitable
 
     bool isKnockdown = false;
 
-    short hp = 40;
+    short hp = 5;
 
     enum Dir
     {
@@ -232,7 +232,7 @@ public class BossScene : MonoBehaviour, IHitable
                 playerHit = Physics2D.Raycast(rightTentacleLast.transform.position, rightTentacleLast.transform.right, 100, whatIsPlayer);
                 if(playerHit)
                 {
-                    if (playerHit.distance < 1)
+                    if (playerHit.distance < 2)
                     {
                         playerTr.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                         isSnortAttackHit = true;
@@ -324,6 +324,8 @@ public class BossScene : MonoBehaviour, IHitable
                 break;
         }
 
+        makeDamagableObj();
+        makeDamagableObj();
         makeDamagableObj();
         makeDamagableObj();
         makeDamagableObj();
@@ -465,7 +467,7 @@ public class BossScene : MonoBehaviour, IHitable
 
     void Die()
     {
-        Debug.Log("º¸½º µÚÁü");
+
         gameObject.SetActive(false);
     }
 }

@@ -17,6 +17,7 @@ public class BossRoomManager : MonoBehaviour
 
     public void CallBoss()
     {
+        Debug.Log(UIManager.Instance.gameObject.name);
         UIManager.Instance.CallBossIntro(boss.gameObject);
         vcamBig.SetActive(true);
         vcamSmall.SetActive(false);
