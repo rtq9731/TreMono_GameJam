@@ -169,7 +169,6 @@ public class EnemyMove : EnemyStatus
                     Attack();
                     Searching();
                 }
-
             }
 
             MoveBYPlayerSkill1();

@@ -12,6 +12,8 @@ public class Skill1Script : MonoBehaviour
     private LayerMask whatIsAttackable;
 
     private Vector2 currentScale = Vector2.zero;
+    [SerializeField]
+    private float moveBackRange = 5f;
 
     void Start()
     {
@@ -39,7 +41,7 @@ public class Skill1Script : MonoBehaviour
     public void SetSpawn(Vector2 spawnPosition)
     {
         transform.position = spawnPosition;
-        
+
         currentScale.x = 0f;
         currentScale.y = 0f;
 
@@ -63,6 +65,7 @@ public class Skill1Script : MonoBehaviour
             attackedTrm[i] = attackedObj[i].transform;
         }
 
+        bool left = false;
         foreach (var item in attackedTrm)
         {
             enemyMove = item.GetComponent<EnemyMove>();
@@ -70,9 +73,23 @@ public class Skill1Script : MonoBehaviour
 
             if (!enemyMove.moveBYPlayerSkill)
             {
-                movePosition = item.position - transform.position;
+                if (item.position.x <= transform.position.x)
+                {
+                    left = true;
+                }
+                else
+                {
+                    left = false;
+                }
 
-                movePosition *= 2f;
+                if(left)
+                {
+                    movePosition.x = item.position.x - moveBackRange;
+                }
+                else
+                {
+                    movePosition.x = item.position.x + moveBackRange;
+                }
 
                 enemyMove.SetMoveByPlayerSkill(movePosition);
                 enemyStat.Hit(1);
@@ -84,10 +101,10 @@ public class Skill1Script : MonoBehaviour
         currentScale.x = Mathf.Lerp(currentScale.x, maxScale, scaleSetSpeed * Time.fixedDeltaTime);
         currentScale.y = Mathf.Lerp(currentScale.y, maxScale, scaleSetSpeed * Time.fixedDeltaTime);
 
-        float x  = maxScale - currentScale.x;
+        float x = maxScale - currentScale.x;
         float y = maxScale - currentScale.y;
 
-        if(x <= 0.5f && y <= 0.5f)
+        if (x <= 0.5f && y <= 0.5f)
         {
             gameObject.SetActive(false);
         }
