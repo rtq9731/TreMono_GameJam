@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f386b2e8a8c7d8a4f9bcbb0305ceb399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 2
   hitDistance: 0.3
   hitWallDistance: 0.1
   whatIsGround:

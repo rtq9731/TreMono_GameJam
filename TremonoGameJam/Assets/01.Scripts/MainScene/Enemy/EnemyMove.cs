@@ -11,6 +11,7 @@ public class EnemyMove : EnemyStatus
     private Animator anim = null;
 
     private bool canAttack = true;
+    private bool canAttackStart = false;
     private bool searchMove = true;
 
     [Header("발사체를 사용하는가")]
@@ -56,6 +57,8 @@ public class EnemyMove : EnemyStatus
     private Vector2 playerPosition = Vector2.zero;
     private Vector2 searchTargetPosition = Vector2.zero;
 
+    private int attackNum = 0;
+
     void Start()
     {
         stagemanager = FindObjectOfType<StageManager>();
@@ -74,6 +77,7 @@ public class EnemyMove : EnemyStatus
             if (enemyStat.currentStatus == Status.Attack)
             {
                 isAttack = true;
+                canAttackStart = true;
                 isPursue = false;
                 isSearching = false;
             }
@@ -137,11 +141,11 @@ public class EnemyMove : EnemyStatus
                         if (projectTiles.Count <= 0f)
                         {
                             GameObject shootIt = projectTile;
-                            
-                            ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();                    
+
+                            ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();
                             projectileScript.enemyMove = this;
                             projectileScript.flipX = spriteRenderer.flipX;
-                            projectileScript.SetSpawn(projectSpawnPosition.position);
+                            projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange);
 
                         }
                         else
@@ -149,13 +153,11 @@ public class EnemyMove : EnemyStatus
                             GameObject shootIt = projectTiles[0];
                             ProjectileScript projectileScript = shootIt.GetComponent<ProjectileScript>();
                             projectileScript.flipX = spriteRenderer.flipX;
-                            projectileScript.SetSpawn(projectSpawnPosition.position);
+                            projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange);
 
                             shootIt.SetActive(true);
                             projectTiles.Remove(shootIt);
                         }
-
-                        Debug.Log("aaa");
                     }
                 }
                 else
@@ -172,29 +174,25 @@ public class EnemyMove : EnemyStatus
 
                 if (hit)
                 {
+                    if (projectTiles.Count <= 0f)
                     {
-                        if (projectTiles.Count <= 0f)
-                        {
-                            GameObject shootIt = projectTile;
-                            
-                            ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();                    
-                            projectileScript.enemyMove = this;
-                            projectileScript.flipX = spriteRenderer.flipX;
-                            projectileScript.SetSpawn(projectSpawnPosition.position);
+                        GameObject shootIt = projectTile;
 
-                        }
-                        else
-                        {
-                            GameObject shootIt = projectTiles[0];
-                            ProjectileScript projectileScript = shootIt.GetComponent<ProjectileScript>();
-                            projectileScript.flipX = spriteRenderer.flipX;
-                            projectileScript.SetSpawn(projectSpawnPosition.position);
+                        ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();
+                        projectileScript.enemyMove = this;
+                        projectileScript.flipX = spriteRenderer.flipX;
+                        projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange);
 
-                            shootIt.SetActive(true);
-                            projectTiles.Remove(shootIt);
-                        }
+                    }
+                    else
+                    {
+                        GameObject shootIt = projectTiles[0];
+                        ProjectileScript projectileScript = shootIt.GetComponent<ProjectileScript>();
+                        projectileScript.flipX = spriteRenderer.flipX;
+                        projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange);
 
-                        Debug.Log("aaa");
+                        shootIt.SetActive(true);
+                        projectTiles.Remove(shootIt);
                     }
                 }
                 else
@@ -204,7 +202,7 @@ public class EnemyMove : EnemyStatus
                         hit.transform.GetComponent<PlayerStat>().Hit(1);
                     }
                 }
-        
+
             }
         }
     }
@@ -227,18 +225,29 @@ public class EnemyMove : EnemyStatus
     }
     private void Attack()
     {
-        if (canAttack && isAttack)
+        if (canAttackStart && canAttack && attackNum < enemyStat.attackNum)
         {
-            canAttack = false;
             attacking = true;
+            canAttack = false;
+
             anim.Play("Attack");
             FlipCheck(playerPosition);
             Invoke("AttackRe", enemyStat.attackDelay);
+            attackNum++;
+        }
+        else if(attackNum >= enemyStat.attackNum)
+        {
+            canAttackStart = false;
+            Invoke("AttackNumSet", enemyStat.attackTum);
         }
     }
     private void AttackRe()
     {
         canAttack = true;
+    }
+    private void AttackNumSet()
+    {
+        attackNum = 0;
     }
     private void Searching()
     {

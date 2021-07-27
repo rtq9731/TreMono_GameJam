@@ -30,7 +30,8 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsGround;
     [SerializeField]
-    private
+    private Vector2 firstPosition = Vector2.zero;
+    private float moveRange = 0;
     void Start()
     {
         stageManager = FindObjectOfType<StageManager>();
@@ -47,10 +48,13 @@ public class ProjectileScript : MonoBehaviour
         Move();
         CheckWall();
         CheckDistance();
+        CheckMove();
     }
-    public void SetSpawn(Vector2 spawnPosition)
+    public void SetSpawn(Vector2 spawnPosition, float atttackRange)
     {
         transform.position = spawnPosition;
+        firstPosition = spawnPosition;
+        moveRange = atttackRange * 2;
     }
     private void Move()
     {
@@ -68,6 +72,15 @@ public class ProjectileScript : MonoBehaviour
         enemyMove.projectTiles.Add(gameObject);
         
         gameObject.SetActive(false);
+    }
+    private void CheckMove()
+    {
+        float distance = Vector2.Distance(transform.position, firstPosition);
+
+        if(distance >= moveRange)
+        {
+            Destroye();
+        }
     }
     private void CheckWall()
     {

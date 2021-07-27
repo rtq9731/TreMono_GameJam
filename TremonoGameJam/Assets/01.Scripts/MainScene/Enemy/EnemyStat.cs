@@ -47,6 +47,18 @@ public class EnemyStat : EnemyStatus, IHitable
     {
         get { return _attackDelay; }
     }
+    [SerializeField]
+    private float _attackTum = 1f;
+    public float attackTum
+    {
+        get { return _attackTum; }
+    }
+    [SerializeField]
+    private int _attackNum = 6;
+    public int attackNum
+    {
+        get { return _attackNum; }
+    }
 
     [SerializeField]
     private float _searchSpeed = 1f;
