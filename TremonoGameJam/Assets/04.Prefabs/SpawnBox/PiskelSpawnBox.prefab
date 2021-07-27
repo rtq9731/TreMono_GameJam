@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 6366333273695130643}
   - component: {fileID: 6366333273695130642}
   - component: {fileID: 6366333273695130861}
+  - component: {fileID: 380212207392830052}
   m_Layer: 7
   m_Name: Piskel
   m_TagString: Untagged
@@ -269,6 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUseProjectTile: 1
   projectTile: {fileID: 2496341116982036306, guid: 07d161afbd72ed446b071f720446aa4c, type: 3}
+  _onhitParticle: {fileID: 2364552943875127684, guid: 60e17b99fdf5c4b4a96d6619d8924108, type: 3}
   projectSpawnPosition: {fileID: 6366333273695130646}
   _projectTiles: []
   searchRangeX: 1
@@ -331,3 +333,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &380212207392830052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6366333273695130650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be6b7d17eef11e4d87d4e034e475c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSpawnTrm: {fileID: 6366333273695130646}

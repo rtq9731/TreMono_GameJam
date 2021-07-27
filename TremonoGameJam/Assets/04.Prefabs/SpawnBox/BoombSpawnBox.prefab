@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1697507712596138697}
   - component: {fileID: 1697507712596138699}
   - component: {fileID: 1697507712596138698}
+  - component: {fileID: 2574957915706840455}
   m_Layer: 7
   m_Name: Bomb_0
   m_TagString: Untagged
@@ -103,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUseProjectTile: 0
   projectTile: {fileID: 0}
+  _onhitParticle: {fileID: 2364552943875127684, guid: 60e17b99fdf5c4b4a96d6619d8924108, type: 3}
   projectSpawnPosition: {fileID: 0}
   _projectTiles: []
   searchRangeX: 2.5
@@ -236,6 +238,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0180602, y: 0.9959941}
   m_EdgeRadius: 0
+--- !u!114 &2574957915706840455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697507712596138706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be6b7d17eef11e4d87d4e034e475c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSpawnTrm: {fileID: 1697507712596138700}
 --- !u!1 &7371905337352841498
 GameObject:
   m_ObjectHideFlags: 0

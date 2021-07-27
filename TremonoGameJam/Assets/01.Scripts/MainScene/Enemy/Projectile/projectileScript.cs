@@ -51,8 +51,9 @@ public class ProjectileScript : MonoBehaviour
         CheckDistance();
         CheckMove();
     }
-    public void SetSpawn(Vector2 spawnPosition, float atttackRange, int damage)
+    public void SetSpawn(EnemyMove a, Vector2 spawnPosition, float atttackRange, int damage)
     {
+        enemyMove = a;
         transform.position = spawnPosition;
         firstPosition = spawnPosition;
         moveRange = atttackRange * 2;
@@ -102,6 +103,8 @@ public class ProjectileScript : MonoBehaviour
             PlayerStat playerStat = playerPosition.GetComponent<PlayerStat>();
 
             Destroye();
+
+            enemyMove.particleSpawn.CallParticle(enemyMove.onhitParticle, transform.position);
 
             playerStat.Hit(ap);
             

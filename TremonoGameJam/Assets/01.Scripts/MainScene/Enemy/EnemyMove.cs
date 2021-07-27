@@ -6,6 +6,7 @@ public class EnemyMove : EnemyStatus
 {
     private StageManager stagemanager = null;
     private EnemyStat enemyStat = null;
+    public ParticleSpawn particleSpawn { get; private set; }
 
     private SpriteRenderer spriteRenderer = null;
     private Animator anim = null;
@@ -21,6 +22,12 @@ public class EnemyMove : EnemyStatus
     [Header("발사체")]
     [SerializeField]
     private GameObject projectTile = null;
+    [SerializeField]
+    private GameObject _onhitParticle = null;
+    public GameObject onhitParticle
+    {
+        get { return _onhitParticle; }
+    }
 
     [Header("발사체들의 부모오브젝트")]
     [SerializeField]
@@ -75,6 +82,7 @@ public class EnemyMove : EnemyStatus
     void Start()
     {
         stagemanager = FindObjectOfType<StageManager>();
+        particleSpawn = FindObjectOfType<ParticleSpawn>();
 
         enemyStat = GetComponent<EnemyStat>();
 
@@ -169,7 +177,7 @@ public class EnemyMove : EnemyStatus
                         ProjectileScript projectileScript = Instantiate(shootIt, projectSpawnPosition).GetComponent<ProjectileScript>();
                         projectileScript.enemyMove = this;
                         projectileScript.flipX = spriteRenderer.flipX;
-                        projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
+                        projectileScript.SetSpawn(this, projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
 
                     }
                     else
@@ -177,7 +185,7 @@ public class EnemyMove : EnemyStatus
                         GameObject shootIt = projectTiles[0];
                         ProjectileScript projectileScript = shootIt.GetComponent<ProjectileScript>();
                         projectileScript.flipX = spriteRenderer.flipX;
-                        projectileScript.SetSpawn(projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
+                        projectileScript.SetSpawn(this, projectSpawnPosition.position, enemyStat.attackRange, enemyStat.ap);
 
                         shootIt.SetActive(true);
                         projectTiles.Remove(shootIt);
@@ -188,6 +196,7 @@ public class EnemyMove : EnemyStatus
             {
                 if (hit && distance <= enemyStat.attackRange)
                 {
+                    particleSpawn.CallParticle(_onhitParticle, hit.point);
                     hit.transform.GetComponent<PlayerStat>().Hit(enemyStat.ap);
                 }
             }
