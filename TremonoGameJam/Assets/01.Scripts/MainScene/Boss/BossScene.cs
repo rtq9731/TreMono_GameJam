@@ -63,6 +63,7 @@ public class BossScene : MonoBehaviour, IHitable
 
     Transform playerTr = null;
     ParticleSystem myParticle = null;
+    CameraShake cameraShake = null;
     RaycastHit2D playerHit;
     float playerDirX = 0;
 
@@ -88,14 +89,11 @@ public class BossScene : MonoBehaviour, IHitable
 
     Dir mydir = Dir.none;
 
-    private void Start()
+    private void OnEnable()
     {
         playerTr = FindObjectOfType<PlayerStat>().transform;
         myParticle = GetComponentInChildren<ParticleSystem>();
-    }
-
-    public void StartAttack()
-    {
+        cameraShake = GetComponent<CameraShake>();
         PlayNextAttack();
     }
 
@@ -171,6 +169,7 @@ public class BossScene : MonoBehaviour, IHitable
             {
                 leftArm.SetTrigger("Cto_");
                 Lookat(playerTr, leftArm.transform, -180);
+                
             }
 
             yield return new WaitForSeconds(0.5f);
@@ -215,6 +214,7 @@ public class BossScene : MonoBehaviour, IHitable
                 yield return null;
             }
             leftArm.SetTrigger("Grab");
+            cameraShake.ShakeCamera(1.5f, 0.5f);
 
             bool isAnimOver = false;
             float timer = 0f;
@@ -239,7 +239,7 @@ public class BossScene : MonoBehaviour, IHitable
                     }
                     else
                     {
-                        playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal * (50 + playerHit.distance * 5));
+                        playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal * (20 + playerHit.distance * 5));
                         Debug.Log(50 + playerHit.distance * 5);
                     }
                 }
@@ -258,6 +258,7 @@ public class BossScene : MonoBehaviour, IHitable
                 yield return null;
             }
             rightArm.SetTrigger("Grab");
+            cameraShake.ShakeCamera(1.5f, 0.5f);
 
             bool isAnimOver = false;
             float timer = 0f;
@@ -283,7 +284,7 @@ public class BossScene : MonoBehaviour, IHitable
                     }
                     else
                     {
-                        playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal * (50 + playerHit.distance * 5));
+                        playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal * (20 + playerHit.distance * 5));
                     }
                 }
                 yield return null;
@@ -313,9 +314,11 @@ public class BossScene : MonoBehaviour, IHitable
         {
             case Dir.right:
                 rightArm.SetTrigger("Sto_"); // Âß »¸¾î¼­ º®¿¡ ¹ÚÈû
+                cameraShake.ShakeCamera(1.5f, 0.5f);
                 break;
             case Dir.left:
                 leftArm.SetTrigger("Sto_"); // Âß »¸¾î¼­ º®¿¡ ¹ÚÈû
+                cameraShake.ShakeCamera(1.5f, 0.5f);
                 break;
             default:
                 break;

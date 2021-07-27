@@ -11,8 +11,9 @@ public class DoorScript : MonoBehaviour
     {
         if(collision.transform.position.x > this.transform.position.x) // 오른쪽으로 지나갔음
         {
-            doorObj.transform.DOMoveY(0, 0.3f);
+            doorObj.transform.DOMoveY(-8.25f, 0.3f);
             FindObjectOfType<BossRoomManager>().CallBoss();
+            this.GetComponent<Collider2D>().enabled = false;
         }
     }
 }

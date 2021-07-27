@@ -5,6 +5,8 @@ using UnityEngine;
 public class BossRoomManager : MonoBehaviour
 {
     [SerializeField] BossScene boss;
+    [SerializeField] GameObject vcamBig;
+    [SerializeField] GameObject vcamSmall;
 
     GameObject player = null;
 
@@ -15,8 +17,10 @@ public class BossRoomManager : MonoBehaviour
 
     public void CallBoss()
     {
-
-        boss.gameObject.SetActive(true);
+        UIManager.Instance.CallBossIntro(boss.gameObject);
+        vcamBig.SetActive(true);
+        vcamSmall.SetActive(false);
+        StageManager.Instance.StopPlayer(2.5f);
     }
 
 }

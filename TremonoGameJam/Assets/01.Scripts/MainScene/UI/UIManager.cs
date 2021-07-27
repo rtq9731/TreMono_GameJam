@@ -26,11 +26,6 @@ public class UIManager : MonoBehaviour
         Instance = null;
     }
 
-    private void Start()
-    {
-        CallBossIntro();
-    }
-
 #if UNITY_EDITOR
     private void Update()
     {
@@ -56,7 +51,7 @@ public class UIManager : MonoBehaviour
         hpBar.ChangeHP(currentHP);
     }
 
-    public void CallBossIntro()
+    public void CallBossIntro(GameObject boss)
     {
         bossPanel.SetActive(true);
 
@@ -83,7 +78,7 @@ public class UIManager : MonoBehaviour
             seq1.OnComplete(() =>
             {
                 bossPanel.SetActive(false);
-
+                boss.SetActive(true);
                 });
         });
     }
