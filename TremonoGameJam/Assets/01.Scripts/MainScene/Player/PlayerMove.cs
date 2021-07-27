@@ -39,6 +39,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float attackDelay = 1f;
     [SerializeField]
+    private float skill1Delay = 5f;
+    [SerializeField]
     private float dashDoTime = 1f;
 
     [SerializeField]
@@ -59,6 +61,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool jumpAnimIsPlaying = false;
     private bool canAttack = true;
+    private bool canSkill1 = true;
     private bool canAttackReStarted = false;
     private bool canDoubleJump = false;
     private bool canSpawnAfterImage = true;
@@ -72,8 +75,6 @@ public class PlayerMove : MonoBehaviour
     private Vector2 dashPosition = Vector2.zero;
     private Vector2 mousePosition = Vector2.zero;
     public Vector2 currentPosition { get; private set; }
-
-
 
     void Start()
     {
@@ -103,7 +104,10 @@ public class PlayerMove : MonoBehaviour
 
         if (playerInput.isSkill1)
         {
-            skill1 = true;
+            if (canSkill1)
+            {
+                skill1 = true;
+            }
         }
 
         GroundCheck();
@@ -164,19 +168,25 @@ public class PlayerMove : MonoBehaviour
     {
         jumpAnimIsPlaying = true;
     }
-    
+
     private void SetFlaseJumpAnimIsPlaying()
     {
         jumpAnimIsPlaying = false;
     }
     private void Skill1()
     {
-        if (skill1)
+        if (skill1 && canSkill1)
         {
+            canSkill1 = false;
             skill1Object.SetActive(true);
             skill1Object.GetComponent<Skill1Script>().SetSpawn(currentPosition);
             skill1 = false;
+            Invoke("CanSkill1Set", skill1Delay);
         }
+    }
+    private void CanSkill1Set()
+    {
+        canSkill1 = true;
     }
     private void AttackCheck()
     {
@@ -225,6 +235,7 @@ public class PlayerMove : MonoBehaviour
         if (a)
         {
             inAirDashCount = firstInAirDashCount;
+            SetFlaseJumpAnimIsPlaying();
             WhenDashStopMoveSet();
         }
 
@@ -240,7 +251,6 @@ public class PlayerMove : MonoBehaviour
             attacking = true;
 
             anim.Play("Attack");
-            SetFlaseJumpAnimIsPlaying();
             Dash();
 
             if (!canAttackReStarted)
