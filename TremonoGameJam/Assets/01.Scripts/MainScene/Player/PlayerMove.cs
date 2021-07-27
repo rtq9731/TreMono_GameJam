@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class PlayerMove : MonoBehaviour
 {
+    private StageManager stageManager = null;
     private PlayerInput playerInput = null;
     private PlayerStat playerStat = null;
     private SpawnAfterImage spawnAfterImage = null;
@@ -88,6 +89,8 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
+        stageManager = FindObjectOfType<StageManager>();
+
         playerInput = GetComponent<PlayerInput>();
         playerStat = GetComponent<PlayerStat>();
         spawnAfterImage = GetComponent<SpawnAfterImage>();
