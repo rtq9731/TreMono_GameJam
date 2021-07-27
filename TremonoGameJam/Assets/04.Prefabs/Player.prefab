@@ -381,6 +381,8 @@ MonoBehaviour:
   _jumpSpeed: 15
   _dashRange: 5
   _isDead: 0
+  _isHurt: 0
+  hitMoveRange: 3
 --- !u!114 &5866348251688976714
 MonoBehaviour:
   m_ObjectHideFlags: 0

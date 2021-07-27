@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyStat : EnemyStatus, IHitable
 {
@@ -96,6 +97,13 @@ public class EnemyStat : EnemyStatus, IHitable
     {
         get { return _playerPosition; }
     }
+
+    [SerializeField]
+    private float hitMoveRange = 0.5f;
+    private bool isHurtMove = false;
+    private Vector2 currentPosition = Vector2.zero;
+    private Vector2 targetPosition = Vector2.zero;
+
     private void Start()
     {
         _searchPlayer = GetComponent<SearchPlayer>();
@@ -106,6 +114,41 @@ public class EnemyStat : EnemyStatus, IHitable
     void Update()
     {
         currentStatus = searchPlayer.CheckStatus(playerPosition.position, foundRange, attackRange);
+
+    }
+    private void FixedUpdate()
+    {
+        currentPosition = transform.position;
+
+        HitMove();
+
+        transform.position = currentPosition;
+    }
+    private void HitMove()
+    {
+        if (isHurt && isHurtMove)
+        {
+            transform.DOMoveX(targetPosition.x, 0.1f).SetEase(Ease.InQuad);
+        }
+        else if (!isHurt)
+        {
+            isHurtMove = false;
+        }
+    }
+    public void SetTargetPosition(Vector2 attackerPosition)
+    {
+        targetPosition = currentPosition;
+
+        if (currentPosition.x >= attackerPosition.x)
+        {
+            targetPosition.x += hitMoveRange;
+        }
+        else
+        {
+            targetPosition.x -= hitMoveRange;
+        }
+
+        isHurtMove = true;
     }
 
 

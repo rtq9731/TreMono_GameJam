@@ -107,7 +107,7 @@ public class ProjectileScript : MonoBehaviour
             enemyMove.particleSpawn.CallParticle(enemyMove.onhitParticle, transform.position);
 
             playerStat.Hit(ap);
-            
+            playerStat.SetTargetPosition(transform.position);
         }
     }
 }

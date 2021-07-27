@@ -196,8 +196,11 @@ public class EnemyMove : EnemyStatus
             {
                 if (hit && distance <= enemyStat.attackRange)
                 {
+                    PlayerStat playerStat = hit.transform.GetComponent<PlayerStat>();
                     particleSpawn.CallParticle(_onhitParticle, hit.point);
-                    hit.transform.GetComponent<PlayerStat>().Hit(enemyStat.ap);
+
+                    playerStat.Hit(enemyStat.ap);
+                    playerStat.SetTargetPosition(currentPosition);
                 }
             }
         }

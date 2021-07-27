@@ -134,39 +134,52 @@ public class PlayerMove : MonoBehaviour
 
         XMove = playerInput.XMove;
 
-        if (!playerStat.isDead && !skill1AnimIsPlaying)
+        if (!playerStat.isHurt)
         {
+            if (!playerStat.isDead && !skill1AnimIsPlaying)
+            {
 
-            LRCheck();
+                LRCheck();
 
-            Move();
-            Attack();
-            Jump();
-            Skill1();
+                Move();
+                Attack();
+                Jump();
+                Skill1();
 
-            AttackCheck();
-            DashMove();
-            WhenDashStopMove();
-            SpawnAfterImage();
-            DamagableCheck();
+                AttackCheck();
+                DashMove();
+                WhenDashStopMove();
+                SpawnAfterImage();
+                DamagableCheck();
+            }
+            else if (playerStat.isDead)
+            {
+                anim.Play("Dead");
+            }
         }
-        else if(playerStat.isDead)
+        else
         {
-            anim.Play("Dead");
+            anim.Play("Hurt");
+            skill1AnimIsPlaying = false;
         }
 
         transform.position = currentPosition;
+    }
+    private void IsHurtReset()
+    {
+        playerStat.isHurt = false;
     }
     private void DamagableCheck()
     {
         if (canHurtByDamagable)
         {
-            bool a = Physics2D.OverlapCircle(currentPosition, damagableRange, WhatIsDamagable);
-
+            Collider2D a = Physics2D.OverlapCircle(currentPosition, damagableRange, WhatIsDamagable);
+            
             if (a)
             {
                 canHurtByDamagable = false;
                 playerStat.Hit(1);
+                playerStat.SetTargetPosition(a.transform.position);
                 Invoke("CanHurtByDamagableReset", 1f);
             }
         }
@@ -224,7 +237,10 @@ public class PlayerMove : MonoBehaviour
                 {
                     if (hit.transform.GetComponent<EnemyStat>() != null)
                     {
-                        hit.transform.GetComponent<EnemyStat>().Hit(1);
+                        EnemyStat enemyStat = hit.transform.GetComponent<EnemyStat>();
+                        enemyStat.Hit(1);
+                        enemyStat.SetTargetPosition(currentPosition);
+
                         particleSpawn.CallParticle(onHitParticle, hit.point);
                     }
                     else
@@ -252,7 +268,10 @@ public class PlayerMove : MonoBehaviour
                 {
                     if (hit.transform.GetComponent<EnemyStat>() != null)
                     {
-                        hit.transform.GetComponent<EnemyStat>().Hit(1);
+                        EnemyStat enemyStat = hit.transform.GetComponent<EnemyStat>();
+                        enemyStat.Hit(1);
+                        enemyStat.SetTargetPosition(currentPosition);
+
                         particleSpawn.CallParticle(onHitParticle, hit.point);
 
                     }

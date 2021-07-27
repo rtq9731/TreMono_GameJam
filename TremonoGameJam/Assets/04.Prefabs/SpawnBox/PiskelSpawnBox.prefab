@@ -226,6 +226,7 @@ MonoBehaviour:
   _attackRange: 5
   _currentStatus: 0
   _playerPosition: {fileID: 0}
+  hitMoveRange: 3
 --- !u!114 &6366333273695130641
 MonoBehaviour:
   m_ObjectHideFlags: 0
