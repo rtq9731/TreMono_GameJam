@@ -348,7 +348,8 @@ MonoBehaviour:
   whatIsAttackable:
     serializedVersion: 2
     m_Bits: 384
-  onHitParticle: {fileID: 0}
+  onHitParticle: {fileID: 2364552943875127684, guid: 60e17b99fdf5c4b4a96d6619d8924108, type: 3}
+  wallDestroyParticle: {fileID: 4861268050361574253, guid: 863d2f289572b4042b085dcf2a53c096, type: 3}
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 3848

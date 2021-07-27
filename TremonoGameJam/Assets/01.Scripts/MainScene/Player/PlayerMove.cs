@@ -25,6 +25,8 @@ public class PlayerMove : MonoBehaviour
     private LayerMask whatIsAttackable;
     [SerializeField]
     private GameObject onHitParticle;
+    [SerializeField]
+    private GameObject wallDestroyParticle;
 
     [SerializeField]
     private LayerMask WhatIsGround;
@@ -207,17 +209,17 @@ public class PlayerMove : MonoBehaviour
 
                 if (hit)
                 {
-                    particleSpawn.CallParticle(onHitParticle, hit.point);
-
                     if (hit.transform.GetComponent<EnemyStat>() != null)
                     {
                         hit.transform.GetComponent<EnemyStat>().Hit(1);
+                        particleSpawn.CallParticle(onHitParticle, hit.point);
                     }
                     else
                     {
                         if (hit.transform.GetComponent<BrokeObj>() != null)
                         {
                             hit.transform.GetComponent<BrokeObj>().Hit(1);
+                            particleSpawn.CallParticle(wallDestroyParticle, hit.point);
                         }
                         else
                         {
@@ -235,17 +237,19 @@ public class PlayerMove : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1, whatIsAttackable);
                 if (hit)
                 {
-                    particleSpawn.CallParticle(onHitParticle, hit.point);
-                    
                     if (hit.transform.GetComponent<EnemyStat>() != null)
                     {
                         hit.transform.GetComponent<EnemyStat>().Hit(1);
+                        particleSpawn.CallParticle(onHitParticle, hit.point);
+
                     }
                     else
                     {
                         if (hit.transform.GetComponent<BrokeObj>() != null)
                         {
                             hit.transform.GetComponent<BrokeObj>().Hit(1);
+                            particleSpawn.CallParticle(wallDestroyParticle, hit.point);
+
                         }
                         else
                         {
@@ -260,6 +264,26 @@ public class PlayerMove : MonoBehaviour
                 }
             }
         }
+    }
+    private int GetLayer(LayerMask a)
+    {
+        int b = a;
+        int result = 0;
+
+        while (true)
+        {
+            if (b >= 2)
+            {
+                result++;
+                b = b / 2;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return result;
     }
     private void SpawnAfterImage()
     {
