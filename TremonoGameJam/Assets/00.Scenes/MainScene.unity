@@ -2129,6 +2129,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5866348251688976818, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5866348251688976820, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
       propertyPath: whatIsAttackable.m_Bits
       value: 8576

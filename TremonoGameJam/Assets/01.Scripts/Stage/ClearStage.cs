@@ -7,10 +7,16 @@ public class ClearStage : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        string name = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        int num = name[name.Length - 1] - '0';
+        if (collision.CompareTag("Player"))
+        {
+            string name = SceneManager.GetActiveScene().name;
+            int num = name[name.Length - 1] - '0';
 
-        GameManager.Instance.stageTopScore = num + 1;
-        SceneManager.LoadScene("StartScene");
+            Debug.Log(GameManager.Instance.stageTopScore);
+            Debug.Log(num + 1);
+
+            GameManager.Instance.stageTopScore = num + 1;
+            SceneManager.LoadScene("StartScene");
+        }
     }
 }
