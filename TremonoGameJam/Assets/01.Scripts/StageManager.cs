@@ -31,39 +31,10 @@ public class StageManager : MonoBehaviour
         get { return _playerTrm; }
     }
 
-    private float shakeTimer = 0f; // 시네머신을 이용하여 카메라를 흔들 때 사용되는 변수
-    
-    [SerializeField]
-    private CinemachineVirtualCamera cinemachineVirtualCamera = null;
-
 
     [SerializeField] public GameObject[] brokeObjsPrefab;
 
-    public void ShakeCamera(float intensity, float time)
-    {
-        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-        cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
-        shakeTimer = time;
-    }
 
-    private void Update()
-    {
-        TimerCheck();
-    }
-
-    private void TimerCheck()
-    {
-        if (shakeTimer > 0f)
-        {
-            shakeTimer -= Time.deltaTime;
-
-            if (shakeTimer <= 0f)
-            {
-                CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-
-                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0f;
-            }
-        }
-    }
+    
 }
