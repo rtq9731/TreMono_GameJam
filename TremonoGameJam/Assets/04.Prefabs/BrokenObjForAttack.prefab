@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7877090738365004490}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BrokenObjForAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

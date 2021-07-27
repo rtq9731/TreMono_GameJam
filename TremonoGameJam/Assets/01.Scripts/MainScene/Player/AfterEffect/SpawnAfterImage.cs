@@ -35,6 +35,7 @@ public class SpawnAfterImage : MonoBehaviour
 
     public void SetAfterImage()
     {
+
         if (spriteRenderer == null)
         {
             spriteRenderer = myMoveScript.spriteRenderer;

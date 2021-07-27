@@ -335,6 +335,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &388323564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2273047899515938442, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+  m_PrefabInstance: {fileID: 665515195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &503822834
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +483,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: snortPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: Point_LeftTop
       value: 
       objectReference: {fileID: 1980122893}
@@ -496,15 +505,31 @@ PrefabInstance:
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: point_LeftGrap
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2048145925}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: point_RightDash
       value: 
       objectReference: {fileID: 1639881231}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: point_RightGrap
+      value: 
+      objectReference: {fileID: 799749344}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: leftTentacleFirst
+      value: 
+      objectReference: {fileID: 388323564}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: brokenObjForAttack
       value: 
       objectReference: {fileID: 7877090738365004489, guid: f1440ce67b3ac6444a97ffe48eee507c, type: 3}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: rightTentacleFirst
+      value: 
+      objectReference: {fileID: 1592856796}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: whatIsPlayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: breakableObjForAttack
       value: 
@@ -1094,6 +1119,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &799749344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 799749345}
+  m_Layer: 0
+  m_Name: Point_RightGrab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &799749345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799749344}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13, y: 13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1664445334}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &878908291
 GameObject:
   m_ObjectHideFlags: 3
@@ -1558,6 +1613,11 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1592856796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9062198936972626703, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+  m_PrefabInstance: {fileID: 665515195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1639881231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,6 +1764,8 @@ Transform:
   - {fileID: 1639881232}
   - {fileID: 2114103601}
   - {fileID: 1980122894}
+  - {fileID: 799749345}
+  - {fileID: 2048145926}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1867,6 +1929,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1664445334}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2048145925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048145926}
+  m_Layer: 0
+  m_Name: Point_LeftGrab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2048145926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048145925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13, y: 13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1664445334}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2106829813
 GameObject:

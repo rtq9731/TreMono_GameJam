@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6574325692181878391}
   - component: {fileID: 6574325692181878384}
   - component: {fileID: 6574325692181878390}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: image_clone_3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6574325694003016030}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Broken_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 6574325694210789609}
   - component: {fileID: 6574325694210789610}
   - component: {fileID: 6574325694210789608}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: image_clone_3_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 6574325694269984956}
   - component: {fileID: 6574325694269984957}
   - component: {fileID: 6574325694269984947}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: image_clone_3_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
