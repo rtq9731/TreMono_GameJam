@@ -43,6 +43,7 @@ public class BossScene : MonoBehaviour, IHitable
 
     Transform playerTr = null;
     ParticleSystem myParticle = null;
+    RaycastHit2D playerHit;
     float playerDirX = 0;
 
     bool isWallAttack = false;
@@ -113,8 +114,8 @@ public class BossScene : MonoBehaviour, IHitable
 
     IEnumerator SnortPlayer()
     {
+        isSnortAttack = false;
         bool isMoveOver = false;
-        RaycastHit2D hit;
         if (mydir == Dir.left)
         {
             transform.DOMove(point_LeftGrap.transform.position, 2).OnComplete(() => isMoveOver = true);
@@ -123,11 +124,23 @@ public class BossScene : MonoBehaviour, IHitable
                 yield return null;
             }
             rightArm.Play("Strech");
-            rightArm.enabled = false;
-            Lookat(playerTr, rightTentacleFirst.transform, 0);
-            hit = Physics2D.Raycast(rightTentacleFirst.transform.position, rightTentacleFirst.transform.right, 100, whatIsPlayer);
+            bool hitPlayer = false;
+            while (!hitPlayer)
+            {
+                Debug.DrawRay(rightTentacleFirst.transform.position, rightTentacleFirst.transform.right, Color.cyan, 100);
+                playerHit = Physics2D.Raycast(rightTentacleFirst.transform.position, rightTentacleFirst.transform.right, 100, whatIsPlayer);
+                playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal);
+                Debug.Log(playerHit.distance);
+                Lookat(playerTr, rightTentacleFirst.transform, 0);
+                if (playerHit.distance < 3)
+                {
+                    StartCoroutine(Knockdown());
+                    transform.DOMove(Vector2.zero, 2).OnComplete(() => hitPlayer = true);
+                }
+                yield return null;
+            }
         }
-        else
+        else if(mydir == Dir.right)
         {
             transform.DOMove(point_RightGrap.transform.position, 2).OnComplete(() => isMoveOver = true);
             while (!isMoveOver)
@@ -136,14 +149,23 @@ public class BossScene : MonoBehaviour, IHitable
             }
             leftArm.Play("Strech");
             leftArm.enabled = false;
-            Lookat(playerTr, leftTentacleFirst.transform, 0);
-            hit = Physics2D.Raycast(leftTentacleFirst.transform.position, leftTentacleFirst.transform.right, 100, whatIsPlayer);
+            bool hitPlayer = false;
+            while (!hitPlayer)
+            {
+                playerHit = Physics2D.Raycast(leftTentacleFirst.transform.position, leftTentacleFirst.transform.right, 100, whatIsPlayer);
+                playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal);
+                Debug.Log(playerHit.distance);
+                Lookat(playerTr, leftTentacleFirst.transform, 0);
+                if(playerHit.distance < 3)
+                {
+                    StartCoroutine(Knockdown());
+                    transform.DOMove(Vector2.zero, 2).OnComplete(() => hitPlayer = true);
+                }
+                yield return null;
+            }
         }
 
-        while (!isSnortAttackHit)
-        {
-            hit.transform.GetComponent<Rigidbody2D>().AddForce(hit.normal * snortPower);
-        } 
+
         yield return null;
     }
 
