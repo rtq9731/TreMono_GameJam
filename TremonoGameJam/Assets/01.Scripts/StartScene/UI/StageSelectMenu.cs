@@ -25,7 +25,6 @@ public class StageSelectMenu : MonoBehaviour
         selectBtns[3].onClick.AddListener(() => ChangeScene(3));
         selectBtns[4].onClick.AddListener(() => ChangeScene(4));
         selectBtns[5].onClick.AddListener(() => ChangeScene(5));
-        selectBtns[6].onClick.AddListener(() => ChangeScene(6));
     }
 
     void ChangeScene(int stageNum)

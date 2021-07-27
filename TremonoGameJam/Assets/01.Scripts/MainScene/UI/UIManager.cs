@@ -80,6 +80,11 @@ public class UIManager : MonoBehaviour
                 bossPanel.SetActive(false);
                 boss.SetActive(true);
                 });
-        });
+             });
+        }
+
+    public void Clear()
+    {
+
     }
 }

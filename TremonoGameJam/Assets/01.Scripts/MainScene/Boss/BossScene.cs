@@ -467,7 +467,7 @@ public class BossScene : MonoBehaviour, IHitable
 
     void Die()
     {
-
-        gameObject.SetActive(false);
+        animator.SetTrigger("Die");
+        Destroy(this.gameObject, 2);
     }
 }

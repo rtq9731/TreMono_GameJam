@@ -2868,7 +2868,6 @@ MonoBehaviour:
   - {fileID: 32055592}
   - {fileID: 1650936041}
   - {fileID: 1275840305}
-  - {fileID: 0}
   inputPanel: {fileID: 262375446}
 --- !u!1 &2061627492
 GameObject:
