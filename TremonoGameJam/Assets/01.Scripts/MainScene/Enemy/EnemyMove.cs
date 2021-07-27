@@ -147,6 +147,7 @@ public class EnemyMove : EnemyStatus
     {
         if (attacking)
         {
+            attacking = false;
             Vector2 dir = (playerPosition - (Vector2)transform.position).normalized;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, enemyStat.attackRange, whatIsAttackable);
             if (isUseProjectTile)

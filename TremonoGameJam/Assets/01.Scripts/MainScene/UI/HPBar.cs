@@ -26,7 +26,7 @@ public class HPBar : MonoBehaviour
 
     private void Update()
     {
-        if(gameObject.activeSelf)
+        if(gameObject.activeSelf && !playerStat.isDead)
         {
             Vector3 playerPos = Camera.main.WorldToScreenPoint(new Vector2(FindObjectOfType<PlayerStat>().transform.position.x, FindObjectOfType<PlayerStat>().transform.position.y + 0.75f));
             playerPos.z = 0;
@@ -36,13 +36,13 @@ public class HPBar : MonoBehaviour
 
     public void ChangeHP(int currentHP)
     {
-        if (currentHP < hp) // hp°¡ ³»·Á°¬À» ¶§
+        if (currentHP < hp) // hpï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         {
-            Debug.Log("HP °¨¼Ò");
+            Debug.Log("HP ï¿½ï¿½ï¿½ï¿½");
             switch (currentHP)
             {
                 case 0:
-                    // Á×¾úÀ» ¶§ ÃëÇÒ Çàµ¿
+                    // ï¿½×¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿
                     gameObject.SetActive(false);
                     return;
                 case 1:
