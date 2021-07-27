@@ -66,7 +66,11 @@ public class PlayerMove : MonoBehaviour
     private bool canDoubleJump = false;
     private bool canSpawnAfterImage = true;
 
-    private bool dashMoving = false;
+    private bool _dashMoving = false;
+    public bool dashMoving
+    {
+        get { return _dashMoving; }
+    }
     private bool attacking = false;
 
     private bool whenDashStopMove = false; // 대쉬가 멈췄을 때 이동하는 것에 관한 변수
@@ -368,7 +372,7 @@ public class PlayerMove : MonoBehaviour
                 }
             } while (!a && !b);
 
-            dashMoving = true;
+            _dashMoving = true;
         }
     }
     private void DashMove()
@@ -387,7 +391,7 @@ public class PlayerMove : MonoBehaviour
 
         if (dashMoving && distance <= dashStopRange)
         {
-            dashMoving = false;
+            _dashMoving = false;
             whenDashStopMoveSetStarted = false;
             whenDashStopMove = true;
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerStat : MonoBehaviour, IHitable
 {
+    private PlayerMove playerMove = null;
     [Header("Player스탯 관련")]
     [SerializeField]
     private int _hp = 3;
@@ -50,6 +51,10 @@ public class PlayerStat : MonoBehaviour, IHitable
     {
         get { return _isDead; }
     }
+    private void Start()
+    {
+        playerMove = GetComponent<PlayerMove>();
+    }
 
     private void FixedUpdate()
     {
@@ -57,12 +62,15 @@ public class PlayerStat : MonoBehaviour, IHitable
     }
     public void Hit(int damage)
     {
-        hp -= damage;
+        if (!playerMove.dashMoving)
+        {
+            hp -= damage;
+        }
     }
 
     public void Dead()
     {
-        if(hp <= 0)
+        if (hp <= 0)
         {
             _isDead = true;
             // 죽음애니메이션
