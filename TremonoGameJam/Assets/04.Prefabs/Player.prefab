@@ -162,6 +162,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundChecker: {fileID: 7998851173860282808}
+  whatIsAttackable:
+    serializedVersion: 2
+    m_Bits: 384
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 8
