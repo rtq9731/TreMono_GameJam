@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUseProjectTile: 0
+  isBoomer: 1
   projectTile: {fileID: 0}
   _onhitParticle: {fileID: 2364552943875127684, guid: 60e17b99fdf5c4b4a96d6619d8924108, type: 3}
   projectSpawnPosition: {fileID: 0}

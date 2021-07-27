@@ -18,6 +18,9 @@ public class EnemyMove : EnemyStatus
     [Header("발사체를 사용하는가")]
     [SerializeField]
     private bool isUseProjectTile = false;
+    [Header("자폭형 유닛인가")]
+    [SerializeField]
+    private bool isBoomer = false;
 
     [Header("발사체")]
     [SerializeField]
@@ -46,6 +49,7 @@ public class EnemyMove : EnemyStatus
     private bool attacking = false;
     private bool isPursue = false;
     private bool isSearching = false;
+    private bool isBoom = false; // 자폭
     private bool _moveByPlayerSkill = false;
     public bool moveBYPlayerSkill
     {
@@ -143,18 +147,39 @@ public class EnemyMove : EnemyStatus
 
         if (!isDead && !isHurt)
         {
-            if (!moveBYPlayerSkill && !attackAnimIsPlaying)
+            if (!moveBYPlayerSkill)
             {
-                Pursue();
-                Attack();
-                AttackCheck();
-                Searching();
+                if (isBoomer)
+                {
+                    if (isBoom)
+                    {
+                        AttackCheck();
+                    }
+                    else if(!attackAnimIsPlaying)
+                    {
+                        Pursue();
+                        Attack();
+                        Searching();
+                    }
+                }
+                else if(!attackAnimIsPlaying)
+                {
+                    AttackCheck();
+                    Pursue();
+                    Attack();
+                    Searching();
+                }
+
             }
 
             MoveBYPlayerSkill1();
         }
 
         transform.position = currentPosition;
+    }
+    private void isBoomSet()
+    {
+        isBoom = true;
     }
     private void AttackCheck()
     {
