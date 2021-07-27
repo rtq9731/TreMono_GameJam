@@ -210,7 +210,7 @@ public class EnemyMove : EnemyStatus
     }
     private void Pursue()
     {
-        if (isPursue)
+        if (isPursue && !attackAnimIsPlaying)
         {
             anim.Play("Move");
             currentPosition = Vector2.MoveTowards(currentPosition, playerPosition, enemyStat.pursueSpeed * Time.fixedDeltaTime);
@@ -285,7 +285,7 @@ public class EnemyMove : EnemyStatus
         float distance;
         if (isSearching)
         {
-            if (searchMove)
+            if (searchMove && !attackAnimIsPlaying)
             {
                 anim.Play("Move");
                 currentPosition = Vector2.MoveTowards(currentPosition, searchTargetPosition, enemyStat.searchSpeed * Time.fixedDeltaTime);
