@@ -41,6 +41,7 @@ public class BossScene : MonoBehaviour, IHitable
     [SerializeField] GameObject leftTentacleFirst;
     [SerializeField] GameObject leftTentacleLast;
     [SerializeField] LayerMask whatIsPlayer;
+    [SerializeField] LayerMask whatIsAttackable;
 
     short wallHitCount = 0;
 
@@ -51,6 +52,7 @@ public class BossScene : MonoBehaviour, IHitable
 
     bool isWallAttack = false;
     bool isTentacleAttack = false;
+    bool isTentacleAttacking = false;
     bool isTentacleAttackHit = false;
     bool isSnortAttack = false;
     bool isSnortAttackHit = false;
@@ -74,7 +76,7 @@ public class BossScene : MonoBehaviour, IHitable
     {
         playerTr = FindObjectOfType<PlayerStat>().transform;
         myParticle = GetComponentInChildren<ParticleSystem>();
-        SnortAttack();
+        TentacleAttack();
     }
 
     private void Update()
@@ -83,6 +85,8 @@ public class BossScene : MonoBehaviour, IHitable
         {
             if(isTentacleAttack)
             {
+                isTentacleAttack = false;
+                isTentacleAttacking = true;
                 transform.DOMove(Vector2.zero, 2f).OnComplete(() =>
                 {
                     StartCoroutine(TentacleAttackPlayer());
@@ -90,6 +94,9 @@ public class BossScene : MonoBehaviour, IHitable
             }
             else
             {
+                if (isTentacleAttacking)
+                    return;
+
                 if (!isArrived)
                     transform.Translate(new Vector2(playerDirX, 0) * dashSpeed * Time.deltaTime);
 
@@ -123,15 +130,42 @@ public class BossScene : MonoBehaviour, IHitable
 
     public void TentacleAttack()
     {
-        DashToPlayer();
         isTentacleAttack = true;
     }
 
     IEnumerator TentacleAttackPlayer()
     {
         isTentacleAttack = false;
-        if (playerDirX > 0) { animator.SetTrigger("LookLeft"); mydir = Dir.right; } // 플레이어가 진행방향 반대에 있으니 반대쪽 쳐다보기
-        else { animator.SetTrigger("LookRight"); mydir = Dir.left; }
+        while (!isTentacleAttackHit)
+        {
+            playerDirX = GetPlayerDir();
+            if (playerDirX > 0) { animator.SetTrigger("LookRight");  mydir = Dir.right; }
+            else { animator.SetTrigger("LookLeft"); mydir = Dir.left; }
+
+            if(mydir == Dir.right)
+            {
+                rightArm.SetTrigger("Cto_");
+            }
+            else if (mydir == Dir.left)
+            {
+                leftArm.SetTrigger("Cto_");
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            if (mydir == Dir.right)
+            {
+                if (Physics2D.Raycast(rightTentacleLast.transform.position, -leftTentacleLast.transform.up, 1, whatIsAttackable))
+                    isTentacleAttackHit = true;
+            }
+            else if (mydir == Dir.left)
+            {
+                if (Physics2D.Raycast(leftTentacleLast.transform.position, leftTentacleLast.transform.up, 1, whatIsAttackable))
+                    isTentacleAttackHit = true;
+            }
+        }
+
+        StartCoroutine(Knockdown());
         yield return null;
     }
 
@@ -275,6 +309,8 @@ public class BossScene : MonoBehaviour, IHitable
         wallHitCount = 0;
         playerBlock.enabled = false;
         isSnortAttackHit = false;
+        isTentacleAttackHit = false;
+        isTentacleAttacking = false;
     }
 
     void makeDamagableObj()
@@ -308,7 +344,7 @@ public class BossScene : MonoBehaviour, IHitable
         rightArm.SetTrigger("Idle");
         leftArm.SetTrigger("Idle");
 
-        SnortAttack();
+        TentacleAttack();
     }
 
     public float GetPlayerDir()
