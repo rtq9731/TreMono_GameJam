@@ -114,7 +114,7 @@ MonoBehaviour:
     m_Bits: 64
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2056
   isTrueAngle: 0
 --- !u!114 &8196699332850681429
 MonoBehaviour:

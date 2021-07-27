@@ -250,6 +250,7 @@ public class PlayerMove : MonoBehaviour
             canAttack = false;
             attacking = true;
 
+            SetFlaseJumpAnimIsPlaying();
             anim.Play("Attack");
             Dash();
 
