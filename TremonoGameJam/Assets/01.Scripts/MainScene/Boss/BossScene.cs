@@ -20,6 +20,7 @@ public class BossScene : MonoBehaviour, IHitable
     [SerializeField] float knockdownTime;
 
     [Header("±âÅ¸")]
+    [SerializeField] Collider2D playerBlock;
     [SerializeField] short wallShakeAttackCount = 2;
     [SerializeField] float wallShakeAttackInterval = 2f;
     short wallHitCount = 0;
@@ -75,6 +76,7 @@ public class BossScene : MonoBehaviour, IHitable
 
     public IEnumerator HitWall()
     {
+        playerBlock.enabled = true;
         isDash = false;
         wallHitCount++;
         Animator temp = null;
@@ -102,6 +104,7 @@ public class BossScene : MonoBehaviour, IHitable
         {
             StartCoroutine(Knockdown());
             wallHitCount = 0;
+            playerBlock.enabled = false;
         }
 
         yield return null;
@@ -135,11 +138,15 @@ public class BossScene : MonoBehaviour, IHitable
 
     public float GetPlayerDir()
     {
-        return (playerTr.position - this.transform.position).normalized.x;
+        if((playerTr.position - this.transform.position).normalized.x > 0)
+            return (playerTr.position - this.transform.position).normalized.x / (playerTr.position - this.transform.position).normalized.x;
+        else
+            return (playerTr.position - this.transform.position).normalized.x / -(playerTr.position - this.transform.position).normalized.x;
+
     }
 
     public void Hit(int damage)
     {
-
+        
     }
 }
