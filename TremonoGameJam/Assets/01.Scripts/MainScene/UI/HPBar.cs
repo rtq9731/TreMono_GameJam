@@ -43,8 +43,8 @@ public class HPBar : MonoBehaviour
             {
                 case 0:
                     // 죽었을 때 취할 행동
-                    break;
-
+                    gameObject.SetActive(false);
+                    return;
                 case 1:
                     GetComponent<Animator>().SetTrigger(hp2to1Hash);
                     break;
