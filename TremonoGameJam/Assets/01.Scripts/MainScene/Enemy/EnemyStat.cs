@@ -135,7 +135,7 @@ public class EnemyStat : EnemyStatus, IHitable
         {
             if (isHurt && isHurtMove)
             {
-                transform.DOMoveX(targetPosition.x, 0.1f).SetEase(Ease.InQuad);
+                transform.DOMove(targetPosition, 0.1f).SetEase(Ease.InQuad);
             }
             else if (!isHurt)
             {

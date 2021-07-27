@@ -90,7 +90,7 @@ public class PlayerStat : MonoBehaviour, IHitable
 
         if (isHurt && isHurtMove)
         {
-            transform.DOMoveX(targetPosition.x, 0.1f).SetEase(Ease.InQuad);
+            transform.DOMove(targetPosition, 0.1f).SetEase(Ease.InQuad);
         }
         else if (!isHurt)
         {
@@ -102,7 +102,7 @@ public class PlayerStat : MonoBehaviour, IHitable
     {
         bool moveLeft = false;
         targetPosition = currentPosition;
-        
+
         Vector2 endPosition = currentPosition;
         targetPosition = currentPosition;
 
