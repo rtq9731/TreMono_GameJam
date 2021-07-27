@@ -67,6 +67,7 @@ public class PlayerMove : MonoBehaviour
     private bool isAttacked = false; // 이미 공격 했는지
 
     private bool jumpAnimIsPlaying = false;
+    private bool skill1AnimIsPlaying = false;
     private bool canAttack = true;
     private bool canSkill1 = true;
     private bool canAttackReStarted = false;
@@ -133,7 +134,7 @@ public class PlayerMove : MonoBehaviour
 
         XMove = playerInput.XMove;
 
-        if (!playerStat.isDead)
+        if (!playerStat.isDead && !skill1AnimIsPlaying)
         {
 
             LRCheck();
@@ -149,7 +150,7 @@ public class PlayerMove : MonoBehaviour
             SpawnAfterImage();
             DamagableCheck();
         }
-        else
+        else if(playerStat.isDead)
         {
             anim.Play("Dead");
         }
@@ -178,6 +179,14 @@ public class PlayerMove : MonoBehaviour
     {
         transform.parent.gameObject.SetActive(false);
     }
+    private void SetTrueSkill1AnimIsPlaying()
+    {
+        skill1AnimIsPlaying = true;
+    }
+    private void SetFalseSkill1AnimIsPlaying()
+    {
+        skill1AnimIsPlaying = false;
+    }
     private void SetTrueJumpAnimIsPlaying()
     {
         jumpAnimIsPlaying = true;
@@ -194,6 +203,7 @@ public class PlayerMove : MonoBehaviour
             canSkill1 = false;
             skill1Object.SetActive(true);
             skill1Object.GetComponent<Skill1Script>().SetSpawn(currentPosition);
+            anim.Play("ShorkWave");
             skill1 = false;
             Invoke("CanSkill1Set", skill1Delay);
         }
