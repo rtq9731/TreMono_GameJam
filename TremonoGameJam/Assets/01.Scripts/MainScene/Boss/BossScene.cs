@@ -22,6 +22,7 @@ public class BossScene : MonoBehaviour, IHitable
     [SerializeField] GameObject Point_LeftTop;
     [SerializeField] GameObject point_RightTop;
     [SerializeField] GameObject point_Center;
+    [SerializeField] GameObject point_Ground;
 
     [Header("각종 속도들")]
     [SerializeField] float dashSpeed;
@@ -87,7 +88,7 @@ public class BossScene : MonoBehaviour, IHitable
             {
                 isTentacleAttack = false;
                 isTentacleAttacking = true;
-                transform.DOMove(Vector2.zero, 2f).OnComplete(() =>
+                transform.DOMove(point_Center.transform.position, 2f).OnComplete(() =>
                 {
                     StartCoroutine(TentacleAttackPlayer());
                 });
@@ -145,26 +146,30 @@ public class BossScene : MonoBehaviour, IHitable
             if(mydir == Dir.right)
             {
                 rightArm.SetTrigger("Cto_");
+                Lookat(playerTr, rightArm.transform, 0);
             }
             else if (mydir == Dir.left)
             {
                 leftArm.SetTrigger("Cto_");
+                Lookat(playerTr, leftArm.transform, -180);
             }
 
             yield return new WaitForSeconds(0.5f);
 
             if (mydir == Dir.right)
             {
-                if (Physics2D.Raycast(rightTentacleLast.transform.position, -leftTentacleLast.transform.up, 1, whatIsAttackable))
+                if (point_Ground.transform.position.y >= rightTentacleLast.transform.position.y)
                     isTentacleAttackHit = true;
             }
             else if (mydir == Dir.left)
             {
-                if (Physics2D.Raycast(leftTentacleLast.transform.position, leftTentacleLast.transform.up, 1, whatIsAttackable))
+                if (point_Ground.transform.position.y >= leftTentacleLast.transform.position.y)
                     isTentacleAttackHit = true;
             }
         }
 
+        leftArm.transform.rotation = Quaternion.Euler(Vector3.zero);
+        rightArm.transform.rotation = Quaternion.Euler(Vector3.zero);
         StartCoroutine(Knockdown());
         yield return null;
     }
@@ -244,7 +249,7 @@ public class BossScene : MonoBehaviour, IHitable
             }
         }
 
-        transform.DOMove(Vector2.zero, 2);
+        transform.DOMove(point_Center.transform.position, 2);
         leftTentacleLast.transform.eulerAngles = Vector3.zero;
         rightTentacleLast.transform.eulerAngles = Vector3.zero;
         StartCoroutine(Knockdown());
@@ -365,6 +370,11 @@ public class BossScene : MonoBehaviour, IHitable
         {
             isSnortAttackHit = true;
         }
+
+        if(hp < 0)
+        {
+            Die();
+        }
     }
 
     private void Lookat(Transform target, Transform thisObj , float offset)
@@ -375,5 +385,11 @@ public class BossScene : MonoBehaviour, IHitable
         targetPos.y = targetPos.y - thisPos.y;
         float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
         thisObj.rotation = Quaternion.Euler(new Vector3(0, 0, angle + offset));
+    }
+
+    void Die()
+    {
+        Debug.Log("보스 뒤짐");
+        gameObject.SetActive(false);
     }
 }
