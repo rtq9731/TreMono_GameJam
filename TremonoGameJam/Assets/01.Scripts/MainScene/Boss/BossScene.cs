@@ -92,6 +92,10 @@ public class BossScene : MonoBehaviour, IHitable
     {
         playerTr = FindObjectOfType<PlayerStat>().transform;
         myParticle = GetComponentInChildren<ParticleSystem>();
+    }
+
+    public void StartAttack()
+    {
         PlayNextAttack();
     }
 
