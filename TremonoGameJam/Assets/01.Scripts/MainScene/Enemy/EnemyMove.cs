@@ -99,7 +99,14 @@ public class EnemyMove : EnemyStatus
                 isSearching = true;
             }
 
-            if (enemyStat.hp <= 0f)
+            
+        }
+        else if (isHurt && enemyStat.hp > 0f)
+        {
+            anim.Play("Hurt");
+        }
+
+        if (enemyStat.hp <= 0f)
             {
                 isAttack = false;
                 isPursue = false;
@@ -108,11 +115,6 @@ public class EnemyMove : EnemyStatus
 
                 Dead();
             }
-        }
-        else if (isHurt)
-        {
-            anim.Play("Hurt");
-        }
     }
 
     private void FixedUpdate()
@@ -134,7 +136,6 @@ public class EnemyMove : EnemyStatus
     {
         if (attacking)
         {
-            attacking = false;
             Vector2 dir = (playerPosition - (Vector2)transform.position).normalized;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, enemyStat.attackRange, whatIsAttackable);
             if (isUseProjectTile)
@@ -179,14 +180,14 @@ public class EnemyMove : EnemyStatus
     }
     private void FlipCheck(Vector2 targetPosition)
     {
-        if(isTrueAngle)
+        if (isTrueAngle)
             spriteRenderer.flipX = enemyStat.searchPlayer.CheckFlip(targetPosition);
         else
             spriteRenderer.flipX = !enemyStat.searchPlayer.CheckFlip(targetPosition);
     }
     private void Pursue()
     {
-        if (isPursue)
+        if (isPursue && !attacking)
         {
             anim.Play("Move");
             currentPosition = Vector2.MoveTowards(currentPosition, playerPosition, enemyStat.pursueSpeed * Time.fixedDeltaTime);
@@ -201,7 +202,7 @@ public class EnemyMove : EnemyStatus
             attackNum = 0;
         }
 
-        if(isAttack && attackNum >= enemyStat.attackNum)
+        if (isAttack && attackNum >= enemyStat.attackNum)
         {
             attackDone = true;
         }
@@ -223,6 +224,10 @@ public class EnemyMove : EnemyStatus
                 Invoke("AttackNumSet", enemyStat.attackTum);
             }
         }
+    }
+    private void AttackingReset()
+    {
+        attacking = false;
     }
     private void AttackRe()
     {
