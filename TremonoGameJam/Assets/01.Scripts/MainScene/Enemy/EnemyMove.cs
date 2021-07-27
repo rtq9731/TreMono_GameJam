@@ -132,15 +132,17 @@ public class EnemyMove : EnemyStatus
     }
     private void AttackCheck()
     {
-        Vector2 dir = (Vector2)transform.position - playerPosition;
-        Debug.Log(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+        Vector2 dir = (playerPosition - (Vector2)transform.position).normalized;
+        Debug.Log(dir);
+        Debug.DrawRay(transform.position, dir);
+
         if (attacking)
         {
             attacking = false;
             if (spriteRenderer.flipX)
             {
 
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left, enemyStat.attackRange, whatIsAttackable);
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, enemyStat.attackRange, whatIsAttackable);
 
                 if (isUseProjectTile)
                 {
