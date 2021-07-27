@@ -71,6 +71,7 @@ public class Skill1Script : MonoBehaviour
             if (!enemyMove.moveBYPlayerSkill)
             {
                 movePosition = item.position - transform.position;
+
                 movePosition *= 2f;
 
                 enemyMove.SetMoveByPlayerSkill(movePosition);

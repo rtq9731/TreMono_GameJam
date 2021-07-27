@@ -60,6 +60,9 @@ public class EnemyMove : EnemyStatus
 
     [SerializeField]
     private LayerMask whatIsAttackable;
+    [Header("DAMAGABLE포함")]
+    [SerializeField]
+    private LayerMask whatIsGround;
 
     [Header("뒤집을 때 보정값")]
     [SerializeField] // 오른쪽 바라보면 True 아니면 False
@@ -261,11 +264,29 @@ public class EnemyMove : EnemyStatus
 
             float distance = Vector2.Distance(currentPosition, moveByPlayerPosition);
 
+            RaycastHit2D hit = CheckRayHit(moveByPlayerPosition);
+
+            if (hit)
+            {
+                _moveByPlayerSkill = false;
+            }
+
+            Debug.DrawRay(transform.position, hit.point - currentPosition, new Color(0, 1, 0));
+
             if (distance <= 0.5f)
             {
                 _moveByPlayerSkill = false;
             }
         }
+    }
+    private RaycastHit2D CheckRayHit(Vector2 targetPosition)
+    {
+        Vector2 position = targetPosition - currentPosition;
+
+        Ray2D ray = new Ray2D(transform.position, position);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 1f, whatIsGround);
+
+        return hit;
     }
     private void AttackingReset()
     {

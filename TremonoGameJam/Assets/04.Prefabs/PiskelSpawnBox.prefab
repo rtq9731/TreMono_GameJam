@@ -279,6 +279,10 @@ MonoBehaviour:
   whatIsAttackable:
     serializedVersion: 2
     m_Bits: 64
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 2056
+  isTrueAngle: 1
 --- !u!114 &6366333273695130643
 MonoBehaviour:
   m_ObjectHideFlags: 0

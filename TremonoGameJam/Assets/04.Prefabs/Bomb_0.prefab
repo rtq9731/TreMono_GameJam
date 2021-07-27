@@ -112,6 +112,9 @@ MonoBehaviour:
   whatIsAttackable:
     serializedVersion: 2
     m_Bits: 64
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
   isTrueAngle: 0
 --- !u!114 &8196699332850681429
 MonoBehaviour:
@@ -127,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsHit:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 2120
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
@@ -207,7 +210,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &8196699332850681431
 BoxCollider2D:
   m_ObjectHideFlags: 0
