@@ -16,4 +16,10 @@ public class GameManager : MonoSingleton<GameManager>
     {
         stageTopScore = PlayerPrefs.GetInt("stageTopScore", stageTopScore);
     }
+
+    public void LoadScene(int stageNum)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene($"Stage {stageNum}", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+    }
 }

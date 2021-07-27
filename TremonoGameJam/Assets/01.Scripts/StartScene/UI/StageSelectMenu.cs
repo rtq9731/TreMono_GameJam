@@ -38,7 +38,7 @@ public class StageSelectMenu : MonoBehaviour
         inputPanel.msg.text = $"스테이지 {stageNum + 1}\n입장하시겠습니까?";
         inputPanel.GetComponent<RectTransform>().DOAnchorPosY(0, 0.25f).OnComplete(() =>
         {
-            inputPanel.btnOK.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene($"Stage {stageNum}"));
+            inputPanel.btnOK.onClick.AddListener(() => GameManager.Instance.LoadScene(stageNum));
             inputPanel.btnCancel.onClick.AddListener(() => inputPanel.GetComponent<RectTransform>().DOAnchorPosY(1000, 0.25f).SetEase(Ease.InBack).OnComplete(() =>
             {
                 inputPanel.gameObject.SetActive(false);
