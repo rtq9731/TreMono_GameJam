@@ -54,6 +54,10 @@ public class EnemyMove : EnemyStatus
     [SerializeField]
     private LayerMask whatIsAttackable;
 
+    [Header("뒤집을 때 보정값")]
+    [SerializeField] // 오른쪽 바라보면 True 아니면 False
+    private bool isTrueAngle = true;
+
     private Vector2 currentPosition = Vector2.zero;
     private Vector2 playerPosition = Vector2.zero;
     private Vector2 searchTargetPosition = Vector2.zero;
@@ -128,11 +132,14 @@ public class EnemyMove : EnemyStatus
     }
     private void AttackCheck()
     {
+        Vector2 dir = (Vector2)transform.position - playerPosition;
+        Debug.Log(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
         if (attacking)
         {
             attacking = false;
             if (spriteRenderer.flipX)
             {
+
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left, enemyStat.attackRange, whatIsAttackable);
 
                 if (isUseProjectTile)
@@ -213,7 +220,10 @@ public class EnemyMove : EnemyStatus
     }
     private void FlipCheck(Vector2 targetPosition)
     {
-        spriteRenderer.flipX = enemyStat.searchPlayer.CheckFlip(targetPosition);
+        if(isTrueAngle)
+            spriteRenderer.flipX = enemyStat.searchPlayer.CheckFlip(targetPosition);
+        else
+            spriteRenderer.flipX = !enemyStat.searchPlayer.CheckFlip(targetPosition);
     }
     private void Pursue()
     {
