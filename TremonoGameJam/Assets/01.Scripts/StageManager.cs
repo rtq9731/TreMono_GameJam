@@ -46,10 +46,6 @@ public class StageManager : MonoBehaviour
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
         shakeTimer = time;
     }
-    private void Start()
-    {
-        ShakeCamera(10f, 3f);
-    }
 
     private void Update()
     {
