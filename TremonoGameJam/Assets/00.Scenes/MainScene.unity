@@ -1585,7 +1585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8196699332850681423, guid: 782e326d021f7c7409458701325097aa, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8196699332850681425, guid: 782e326d021f7c7409458701325097aa, type: 3}
       propertyPath: m_RootOrder
@@ -1593,11 +1593,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8196699332850681425, guid: 782e326d021f7c7409458701325097aa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.439
+      value: 4.65
       objectReference: {fileID: 0}
     - target: {fileID: 8196699332850681425, guid: 782e326d021f7c7409458701325097aa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.419
+      value: 5.48
       objectReference: {fileID: 0}
     - target: {fileID: 8196699332850681425, guid: 782e326d021f7c7409458701325097aa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1983,6 +1983,9 @@ MonoBehaviour:
   whatIsAttackable:
     serializedVersion: 2
     m_Bits: 64
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
   isTrueAngle: 1
 --- !u!95 &2001389185
 Animator:
@@ -2176,6 +2179,10 @@ PrefabInstance:
     - target: {fileID: 5866348251377345058, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866348251377345058, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866348251377345061, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
       propertyPath: m_RootOrder

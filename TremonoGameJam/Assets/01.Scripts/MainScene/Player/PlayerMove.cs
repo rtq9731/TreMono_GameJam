@@ -388,6 +388,8 @@ public class PlayerMove : MonoBehaviour
             if (XMove == 0f && isGround)
             {
                 anim.Play("Idle");
+                SetFlaseJumpAnimIsPlaying();
+
             }
             else if (XMove == 0f && !isGround && !jumpAnimIsPlaying)
             {
@@ -396,6 +398,7 @@ public class PlayerMove : MonoBehaviour
             else if (!jumpAnimIsPlaying)
             {
                 anim.Play("Move");
+
             }
         }
     }

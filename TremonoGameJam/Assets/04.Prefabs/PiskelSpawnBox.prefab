@@ -217,9 +217,9 @@ MonoBehaviour:
   _isHurt: 0
   _hp: 3
   _ap: 1
-  _attackDelay: 0.25
-  _attackTum: 10
-  _attackNum: 6
+  _attackDelay: 2
+  _attackTum: 0
+  _attackNum: 1
   _searchSpeed: 1
   _pursueSpeed: 3
   _foundRange: 5

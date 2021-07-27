@@ -12,7 +12,6 @@ public class EnemyMove : EnemyStatus
 
     private bool canAttack = true;
     private bool canAttackStart = false;
-    private bool attackDone = false;
     private bool searchMove = true;
 
     [Header("발사체를 사용하는가")]
@@ -72,8 +71,6 @@ public class EnemyMove : EnemyStatus
     private Vector2 playerPosition = Vector2.zero;
     private Vector2 searchTargetPosition = Vector2.zero;
     private Vector2 moveByPlayerPosition = Vector2.zero;
-
-    private int attackNum = 0;
 
     void Start()
     {
@@ -225,18 +222,9 @@ public class EnemyMove : EnemyStatus
     }
     private void Attack()
     {
-        if (!isAttack)
-        {
-            attackDone = false;
-            attackNum = 0;
-        }
 
-        if (isAttack && attackNum >= enemyStat.attackNum)
-        {
-            attackDone = true;
-        }
 
-        if (canAttackStart && canAttack && !attackDone)
+        if (canAttackStart && canAttack)
         {
             attacking = true;
             canAttack = false;
@@ -245,12 +233,11 @@ public class EnemyMove : EnemyStatus
             FlipCheck(playerPosition);
             Invoke("AttackRe", enemyStat.attackDelay);
         }
-        else if (attackDone)
+        else 
         {
             if (isAttack && canAttackStart)
             {
                 canAttackStart = false;
-                Invoke("AttackNumSet", enemyStat.attackTum);
             }
         }
     }
@@ -297,12 +284,7 @@ public class EnemyMove : EnemyStatus
     }
     private void AttackRe()
     {
-        attackNum++;
         canAttack = true;
-    }
-    private void AttackNumSet()
-    {
-        attackNum = 0;
     }
     private void Searching()
     {
