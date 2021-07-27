@@ -5,6 +5,19 @@ using DG.Tweening;
 
 public class BossScene : MonoBehaviour, IHitable
 {
+    enum Pattern
+    {
+        WallAttack,
+        SnortAttack,
+        TentacleAttack,
+    };
+
+    [Header("공격 패턴 ( 순회 반복 )")]
+    [SerializeField] Pattern[] patterns = null;
+    Pattern currentPattern = Pattern.WallAttack;
+
+    int patternCount = 0;
+
     [Header("프리팹들")]
     [SerializeField] GameObject breakableObjForAttack;
     [SerializeField] GameObject brokenObjForAttack;
@@ -79,7 +92,7 @@ public class BossScene : MonoBehaviour, IHitable
     {
         playerTr = FindObjectOfType<PlayerStat>().transform;
         myParticle = GetComponentInChildren<ParticleSystem>();
-        SnortAttack();
+        PlayNextAttack();
     }
 
     private void Update()
@@ -191,7 +204,7 @@ public class BossScene : MonoBehaviour, IHitable
             transform.DOMove(point_LeftGrap.transform.position, 2).OnComplete(() =>
             {
                 isMoveOver = true;
-                rightArm.Play("Strech");
+                rightArm.Play("Snort");
             });
             while (!isMoveOver)
             {
@@ -234,7 +247,7 @@ public class BossScene : MonoBehaviour, IHitable
             transform.DOMove(point_RightGrap.transform.position, 2).OnComplete(() =>
             {
                 isMoveOver = true;
-                leftArm.Play("Strech");
+                leftArm.Play("Snort");
             });
             while (!isMoveOver)
             {
@@ -373,7 +386,7 @@ public class BossScene : MonoBehaviour, IHitable
         rightArm.SetTrigger("Idle");
         leftArm.SetTrigger("Idle");
 
-        TentacleAttack();
+        PlayNextAttack();
     }
 
     public float GetPlayerDir()
@@ -415,9 +428,32 @@ public class BossScene : MonoBehaviour, IHitable
         if (breakWallEffectInstance == null)
             breakWallEffectInstance = Instantiate(breakWallEffect);
 
-        Debug.LogError(transform.position);
         breakWallEffect.transform.position = target.position;
         breakWallEffect.GetComponentInChildren<ParticleSystem>().Play();
+    }
+
+    void PlayNextAttack()
+    {
+        switch (GetNextPattern())
+        {
+            case Pattern.WallAttack:
+                WallAttack();
+                break;
+            case Pattern.SnortAttack:
+                SnortAttack();
+                break;
+            case Pattern.TentacleAttack:
+                TentacleAttack();
+                break;
+            default:
+                break;
+        }
+    }
+
+    Pattern GetNextPattern()
+    {
+        patternCount++;
+        return patterns[( patternCount - 1 ) % patterns.Length];
     }
 
     void Die()
