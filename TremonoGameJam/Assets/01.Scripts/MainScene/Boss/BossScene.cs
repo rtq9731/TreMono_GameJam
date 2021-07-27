@@ -20,7 +20,8 @@ public class BossScene : MonoBehaviour, IHitable
     [SerializeField] GameObject point_RightGrap;
     [SerializeField] GameObject point_LeftGrap;
     [SerializeField] GameObject Point_LeftTop;
-    [SerializeField] GameObject Point_RightTop;
+    [SerializeField] GameObject point_RightTop;
+    [SerializeField] GameObject point_Center;
 
     [Header("각종 속도들")]
     [SerializeField] float dashSpeed;
@@ -36,7 +37,9 @@ public class BossScene : MonoBehaviour, IHitable
     [SerializeField] Collider2D playerBlock;
     [SerializeField] short wallShakeAttackCount = 2;
     [SerializeField] GameObject rightTentacleFirst;
+    [SerializeField] GameObject rightTentacleLast;
     [SerializeField] GameObject leftTentacleFirst;
+    [SerializeField] GameObject leftTentacleLast;
     [SerializeField] LayerMask whatIsPlayer;
 
     short wallHitCount = 0;
@@ -47,6 +50,8 @@ public class BossScene : MonoBehaviour, IHitable
     float playerDirX = 0;
 
     bool isWallAttack = false;
+    bool isTentacleAttack = false;
+    bool isTentacleAttackHit = false;
     bool isSnortAttack = false;
     bool isSnortAttackHit = false;
 
@@ -76,34 +81,58 @@ public class BossScene : MonoBehaviour, IHitable
     {
         if (!isKnockdown)
         {
-            if (!isArrived)
-                transform.Translate(new Vector2(playerDirX, 0) * dashSpeed * Time.deltaTime);
-
-            if (mydir == Dir.right)
+            if(isTentacleAttack)
             {
-                if (transform.position.x > point_RightDash.transform.position.x)
+                transform.DOMove(Vector2.zero, 2f).OnComplete(() =>
                 {
-                    isArrived = true;
-                }
+                    StartCoroutine(TentacleAttackPlayer());
+                });
             }
             else
             {
-                if (transform.position.x < point_LeftDash.transform.position.x)
+                if (!isArrived)
+                    transform.Translate(new Vector2(playerDirX, 0) * dashSpeed * Time.deltaTime);
+
+                if (mydir == Dir.right)
                 {
-                    isArrived = true;
+                    if (transform.position.x > point_RightDash.transform.position.x)
+                    {
+                        isArrived = true;
+                    }
+                }
+                else if (mydir == Dir.left)
+                {
+                    if (transform.position.x < point_LeftDash.transform.position.x)
+                    {
+                        isArrived = true;
+                    }
+                }
+
+                if (isWallAttack && isArrived)
+                {
+                    StartCoroutine(HitWall());
+                }
+
+                if (isSnortAttack && isArrived)
+                {
+                    StartCoroutine(SnortPlayer());
                 }
             }
-
-            if (isWallAttack && isArrived)
-            {
-                StartCoroutine(HitWall());
-            }
-
-            if (isSnortAttack && isArrived)
-            {
-                StartCoroutine(SnortPlayer());
-            }
         }
+    }
+
+    public void TentacleAttack()
+    {
+        DashToPlayer();
+        isTentacleAttack = true;
+    }
+
+    IEnumerator TentacleAttackPlayer()
+    {
+        isTentacleAttack = false;
+        if (playerDirX > 0) { animator.SetTrigger("LookLeft"); mydir = Dir.right; } // 플레이어가 진행방향 반대에 있으니 반대쪽 쳐다보기
+        else { animator.SetTrigger("LookRight"); mydir = Dir.left; }
+        yield return null;
     }
 
     public void SnortAttack() // 빨아들이기
@@ -118,61 +147,74 @@ public class BossScene : MonoBehaviour, IHitable
         bool isMoveOver = false;
         if (mydir == Dir.left)
         {
-            transform.DOMove(point_LeftGrap.transform.position, 2).OnComplete(() => isMoveOver = true);
+            transform.DOMove(point_LeftGrap.transform.position, 2).OnComplete(() =>
+            {
+                isMoveOver = true;
+                rightArm.Play("Strech");
+            });
             while (!isMoveOver)
             {
                 yield return null;
             }
-            rightArm.Play("Strech");
-            bool hitPlayer = false;
-            while (!hitPlayer)
+            leftArm.SetTrigger("Grab");
+            while (!isSnortAttackHit)
             {
-                Debug.DrawRay(rightTentacleFirst.transform.position, rightTentacleFirst.transform.right, Color.cyan, 100);
-                playerHit = Physics2D.Raycast(rightTentacleFirst.transform.position, rightTentacleFirst.transform.right, 100, whatIsPlayer);
-                playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal);
-                Debug.Log(playerHit.distance);
-                Lookat(playerTr, rightTentacleFirst.transform, 0);
-                if (playerHit.distance < 3)
+                Lookat(playerTr, rightTentacleLast.transform, 0);
+                playerHit = Physics2D.Raycast(rightTentacleLast.transform.position, rightTentacleLast.transform.right, 100, whatIsPlayer);
+                if(playerHit)
                 {
-                    StartCoroutine(Knockdown());
-                    transform.DOMove(Vector2.zero, 2).OnComplete(() => hitPlayer = true);
+                    if (playerHit.distance < 1)
+                    {
+                        playerTr.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        isSnortAttackHit = true;
+                    }
+                    else
+                    {
+                        playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal * (50 + playerHit.distance * 5));
+                        Debug.Log(50 + playerHit.distance * 5);
+                    }
                 }
                 yield return null;
             }
         }
         else if(mydir == Dir.right)
         {
-            transform.DOMove(point_RightGrap.transform.position, 2).OnComplete(() => isMoveOver = true);
+            transform.DOMove(point_RightGrap.transform.position, 2).OnComplete(() =>
+            {
+                isMoveOver = true;
+                leftArm.Play("Strech");
+            });
             while (!isMoveOver)
             {
                 yield return null;
             }
-            leftArm.Play("Strech");
-            leftArm.enabled = false;
-            bool hitPlayer = false;
-            while (!hitPlayer)
+            rightArm.SetTrigger("Grab");
+            while (!isSnortAttackHit)
             {
-                playerHit = Physics2D.Raycast(leftTentacleFirst.transform.position, leftTentacleFirst.transform.right, 100, whatIsPlayer);
-                playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal);
-                Debug.Log(playerHit.distance);
-                Lookat(playerTr, leftTentacleFirst.transform, 0);
-                if(playerHit.distance < 3)
+                Lookat(playerTr, leftTentacleLast.transform, 180);
+                playerHit = Physics2D.Raycast(leftTentacleLast.transform.position, -leftTentacleLast.transform.right, 100, whatIsPlayer);
+                if (playerHit)
                 {
-                    StartCoroutine(Knockdown());
-                    transform.DOMove(Vector2.zero, 2).OnComplete(() => hitPlayer = true);
+                    if (playerHit.distance < 1)
+                    {
+                        playerTr.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        isSnortAttackHit = true;
+                    }
+                    else
+                    {
+                        playerTr.GetComponent<Rigidbody2D>().AddForce(playerHit.normal * (50 + playerHit.distance * 5));
+                        Debug.Log(300 % playerHit.distance);
+                    }
                 }
                 yield return null;
             }
         }
 
-
+        transform.DOMove(Vector2.zero, 2);
+        leftTentacleLast.transform.eulerAngles = Vector3.zero;
+        rightTentacleLast.transform.eulerAngles = Vector3.zero;
+        StartCoroutine(Knockdown());
         yield return null;
-    }
-
-    void Snort(RaycastHit2D hit)
-    {
-        Debug.DrawRay(hit.transform.position, hit.normal);
-        hit.transform.GetComponent<Rigidbody2D>().AddForce(hit.normal * snortPower);
     }
 
     public void WallAttack()
@@ -208,10 +250,12 @@ public class BossScene : MonoBehaviour, IHitable
 
         if(wallHitCount < wallShakeAttackCount)
         {
+            StopAllCoroutines();
             StartCoroutine(HitWall());
         }
         else
         {
+            StopAllCoroutines();
             StartCoroutine(Knockdown());
         }
 
@@ -220,6 +264,12 @@ public class BossScene : MonoBehaviour, IHitable
 
     void InitBools()
     {
+        leftArm.enabled = true;
+        rightArm.enabled = true;
+
+        leftArm.SetTrigger("Idle");
+        rightArm.SetTrigger("Idle");
+
         mydir = Dir.none;
         isArrived = false;
         wallHitCount = 0;
@@ -230,7 +280,7 @@ public class BossScene : MonoBehaviour, IHitable
     void makeDamagableObj()
     {
         Vector2 makePos = new Vector2(0, Point_LeftTop.transform.position.y);
-        makePos.x = Random.Range(Point_LeftTop.transform.position.x, Point_RightTop.transform.position.x);
+        makePos.x = Random.Range(Point_LeftTop.transform.position.x, point_RightTop.transform.position.x);
         GameObject temp = Instantiate(breakableObjForAttack, makePos, Quaternion.identity).GetComponent<BreakObjForAttack>().brokenObj = brokenObjForAttack;
     }
 
@@ -252,13 +302,13 @@ public class BossScene : MonoBehaviour, IHitable
     {
         isKnockdown = true;
         InitBools();
+        animator.SetTrigger("Heat");
         yield return new WaitForSeconds(knockdownTime);
         isKnockdown = false;
         rightArm.SetTrigger("Idle");
         leftArm.SetTrigger("Idle");
 
-        // 임시 반복용 코드
-        WallAttack();
+        SnortAttack();
     }
 
     public float GetPlayerDir()
@@ -272,8 +322,10 @@ public class BossScene : MonoBehaviour, IHitable
     public void Hit(int damage)
     {
         hp--;
+        Debug.Log(hp);
+        animator.SetTrigger("Hit");
 
-        if(isSnortAttack)
+        if (isSnortAttack)
         {
             isSnortAttackHit = true;
         }
