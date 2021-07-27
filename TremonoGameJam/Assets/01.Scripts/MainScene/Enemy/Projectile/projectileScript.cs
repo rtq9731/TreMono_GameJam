@@ -101,9 +101,10 @@ public class ProjectileScript : MonoBehaviour
         {
             PlayerStat playerStat = playerPosition.GetComponent<PlayerStat>();
 
-            playerStat.Hit(ap);
-
             Destroye();
+
+            playerStat.Hit(ap);
+            
         }
     }
 }

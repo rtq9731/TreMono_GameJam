@@ -152,9 +152,12 @@ public class EnemyMove : EnemyStatus
     {
         if (attacking)
         {
+            float distance = Vector2.Distance(playerPosition, currentPosition);
+
             attacking = false;
             Vector2 dir = (playerPosition - (Vector2)transform.position).normalized;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, enemyStat.attackRange, whatIsAttackable);
+
             if (isUseProjectTile)
             {
                 if (hit)
@@ -183,7 +186,7 @@ public class EnemyMove : EnemyStatus
             }
             else
             {
-                if (hit)
+                if (hit && distance <= enemyStat.attackRange)
                 {
                     hit.transform.GetComponent<PlayerStat>().Hit(enemyStat.ap);
                 }

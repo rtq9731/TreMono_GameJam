@@ -95,9 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f386b2e8a8c7d8a4f9bcbb0305ceb399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 5
   hitDistance: 0.3
   hitWallDistance: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  firstPosition: {x: 0, y: 0}
