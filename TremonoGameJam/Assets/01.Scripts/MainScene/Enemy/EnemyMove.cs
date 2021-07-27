@@ -84,6 +84,7 @@ public class EnemyMove : EnemyStatus
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
+        currentPosition = transform.position;
         SearchPositionSet();
     }
     void Update()
