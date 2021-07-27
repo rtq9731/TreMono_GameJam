@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     private Transform groundChecker = null;
+     [SerializeField]
+    private LayerMask whatIsAttackable;
 
     [SerializeField]
     private LayerMask WhatIsGround;
@@ -57,8 +59,7 @@ public class PlayerMove : MonoBehaviour
     private Vector2 mousePosition = Vector2.zero;
     public Vector2 currentPosition { get; private set; }
 
-    [SerializeField]
-    private LayerMask whatIsAttackable;
+   
 
     void Start()
     {
@@ -115,6 +116,10 @@ public class PlayerMove : MonoBehaviour
         }
 
         transform.position = currentPosition;
+    }
+    private void Destroye()
+    {
+        transform.parent.gameObject.SetActive(false);
     }
     private void AttackCheck()
     {
