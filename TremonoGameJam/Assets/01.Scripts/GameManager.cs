@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    [SerializeField] AudioClip bgm_Start;
+    [SerializeField] AudioClip bgm_Main;
     public int stageTopScore = 0;
 
     public void SaveGame()

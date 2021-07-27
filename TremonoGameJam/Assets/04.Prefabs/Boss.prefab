@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!58 &1520759264
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2273047900822792230}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.3026924, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.8026924
 --- !u!210 &1250936025155431378
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -5137,6 +5153,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.119694, y: 6.855593}
   m_EdgeRadius: 0
+--- !u!58 &760440288
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9062198935858709923}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.3026924, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.8026924
 --- !u!210 &1678197472556251831
 SortingGroup:
   m_ObjectHideFlags: 0
