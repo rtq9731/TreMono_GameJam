@@ -1,52 +1,37 @@
 fileFormatVersion: 2
-guid: 9fcd5b68692a1c34b96bcf192a31decb
+guid: a2518ce75c184eb49886ba71963c8e22
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1366514372365797242
-    second: Mark_anim_strip__1_0
+      213: -1483665779731714255
+    second: Bomb_0
   - first:
-      213: 6106007757007074790
-    second: Mark_anim_strip__1_1
+      213: -1902917897002446259
+    second: Bomb_1
   - first:
-      213: 581045965817890321
-    second: Mark_anim_strip__1_2
+      213: -5839540051515997725
+    second: Bomb_2
   - first:
-      213: 950701538220897200
-    second: Mark_anim_strip__1_3
+      213: -5337159410277229379
+    second: Bomb_3
   - first:
-      213: -6438166694086661950
-    second: Mark_anim_strip__1_4
+      213: 4119226490080697988
+    second: Bomb_4
   - first:
-      213: -430412501779644440
-    second: Mark_anim_strip__1_5
+      213: -3851982506454002795
+    second: Bomb_5
   - first:
-      213: 2160424694695196459
-    second: Mark_anim_strip__1_6
+      213: 6209065506319696928
+    second: Bomb_6
   - first:
-      213: 6531880556083732204
-    second: Mark_anim_strip__1_7
+      213: -3399856696407936989
+    second: Bomb_7
   - first:
-      213: -591558585809950942
-    second: Mark_anim_strip__1_8
+      213: 1985883963534080937
+    second: Bomb_8
   - first:
-      213: -342933548190809204
-    second: Mark_anim_strip__1_9
-  - first:
-      213: -6238020794423612320
-    second: Mark_anim_strip__1_10
-  - first:
-      213: 6738212112298211598
-    second: Mark_anim_strip__1_11
-  - first:
-      213: 8924835717292382697
-    second: Mark_anim_strip__1_12
-  - first:
-      213: 6455167108734939868
-    second: Mark_anim_strip__1_13
-  - first:
-      213: -7076438534201910079
-    second: Mark_anim_strip__1_14
+      213: 4628270932175567455
+    second: Bomb_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -148,13 +133,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mark_anim_strip__1_0
+      name: Bomb_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
-        width: 16
-        height: 16
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,41 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a774451e495d6f210800000000000000
-      internalID: 1366514372365797242
+      spriteID: 13f20b985d5f86be0800000000000000
+      internalID: -1483665779731714255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mark_anim_strip__1_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6e5bf2834b5ecb450800000000000000
-      internalID: 6106007757007074790
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mark_anim_strip__1_2
+      name: Bomb_1
       rect:
         serializedVersion: 2
         x: 32
-        y: 48
-        width: 16
-        height: 16
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 116cfb63a3a401800800000000000000
-      internalID: 581045965817890321
+      spriteID: d429f68314a7795e0800000000000000
+      internalID: -1902917897002446259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mark_anim_strip__1_3
+      name: Bomb_2
       rect:
         serializedVersion: 2
-        x: 48
-        y: 48
-        width: 16
-        height: 16
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,20 +189,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b3f2111302913d00800000000000000
-      internalID: 950701538220897200
+      spriteID: 3e109b92349c5fea0800000000000000
+      internalID: -5839540051515997725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mark_anim_strip__1_4
+      name: Bomb_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbcdac83bc99ee5b0800000000000000
+      internalID: -5337159410277229379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48e93aa0bae6a2930800000000000000
+      internalID: 4119226490080697988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5935acda1520b8ac0800000000000000
+      internalID: -3851982506454002795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb_6
       rect:
         serializedVersion: 2
         x: 0
         y: 32
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,41 +273,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c8a63aa08907a6a0800000000000000
-      internalID: -6438166694086661950
+      spriteID: 02401535e280b2650800000000000000
+      internalID: 6209065506319696928
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mark_anim_strip__1_5
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ef798c2c1ed60af0800000000000000
-      internalID: -430412501779644440
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mark_anim_strip__1_6
+      name: Bomb_7
       rect:
         serializedVersion: 2
         x: 32
         y: 32
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -288,20 +294,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b27f94b30de5bfd10800000000000000
-      internalID: 2160424694695196459
+      spriteID: 3203f5b095841d0d0800000000000000
+      internalID: -3399856696407936989
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mark_anim_strip__1_7
+      name: Bomb_8
       rect:
         serializedVersion: 2
-        x: 48
+        x: 64
         y: 32
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -309,104 +315,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ceed6a422c6e5aa50800000000000000
-      internalID: 6531880556083732204
+      spriteID: 9abf79371f64f8b10800000000000000
+      internalID: 1985883963534080937
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mark_anim_strip__1_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 22727f4b99c5ac7f0800000000000000
-      internalID: -591558585809950942
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mark_anim_strip__1_9
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c83c58e31c7ad3bf0800000000000000
-      internalID: -342933548190809204
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mark_anim_strip__1_10
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 06c61ee43291e69a0800000000000000
-      internalID: -6238020794423612320
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mark_anim_strip__1_11
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e09f4ce2730f28d50800000000000000
-      internalID: 6738212112298211598
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mark_anim_strip__1_12
+      name: Bomb_9
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -414,50 +336,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e95eef8cc26bdb70800000000000000
-      internalID: 8924835717292382697
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mark_anim_strip__1_13
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd27ee1d84c559950800000000000000
-      internalID: 6455167108734939868
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mark_anim_strip__1_14
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1cc520e45a07bcd90800000000000000
-      internalID: -7076438534201910079
+      spriteID: f5a379424ebea3040800000000000000
+      internalID: 4628270932175567455
       vertices: []
       indices: 
       edges: []
