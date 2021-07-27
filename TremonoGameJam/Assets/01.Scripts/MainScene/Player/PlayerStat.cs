@@ -22,6 +22,7 @@ public class PlayerStat : MonoBehaviour, IHitable
             UIManager.Instance.HPChange(value);
         }
     }
+    public int firstHp { get; private set; }
     [SerializeField]
     private int _ap = 3;
     public int ap
@@ -73,6 +74,7 @@ public class PlayerStat : MonoBehaviour, IHitable
     private void Start()
     {
         playerMove = GetComponent<PlayerMove>();
+        firstHp = hp;
     }
 
     private void FixedUpdate()
@@ -160,6 +162,15 @@ public class PlayerStat : MonoBehaviour, IHitable
             hp -= damage;
             isHurt = true;
         }
+    }
+    public void HitByBarrel(int damage)
+    {
+        hp -= damage;
+        isHurt = true;
+    }
+    public void Heal(int heal)
+    {
+        hp += heal;
     }
 
     public void Dead()

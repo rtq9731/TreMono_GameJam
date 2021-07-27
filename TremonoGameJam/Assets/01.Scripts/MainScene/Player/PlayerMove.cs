@@ -256,6 +256,20 @@ public class PlayerMove : MonoBehaviour
                             {
                                 hit.transform.GetComponent<BossScene>().Hit(1);
                             }
+                            else
+                            {
+                                if(hit.transform.GetComponent<Barrel_Heal>() != null)
+                                {
+                                    hit.transform.GetComponent<Barrel_Heal>().Hit(0);
+                                }
+                                else
+                                {
+                                    if(hit.transform.GetComponent<Barrel_Boom>() != null)
+                                    {
+                                        hit.transform.GetComponent<Barrel_Boom>().Hit(0);
+                                    }
+                                }
+                            }
                         }
                     }
                     isAttacked = true;
@@ -288,6 +302,20 @@ public class PlayerMove : MonoBehaviour
                             if (hit.transform.GetComponent<BossScene>() != null)
                             {
                                 hit.transform.GetComponent<BossScene>().Hit(1);
+                            }
+                            else
+                            {
+                                if(hit.transform.GetComponent<Barrel_Heal>() != null)
+                                {
+                                    hit.transform.GetComponent<Barrel_Heal>().Hit(0);
+                                }
+                                else
+                                {
+                                    if(hit.transform.GetComponent<Barrel_Boom>() != null)
+                                    {
+                                        hit.transform.GetComponent<Barrel_Boom>().Hit(0);
+                                    }
+                                }
                             }
                         }
                     }
