@@ -1568,7 +1568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dba00694eb08ab4d94acb79875bf052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStat: {fileID: 0}
+  playerStat: {fileID: 7998851174644515254}
   hpIcons:
   - {fileID: 363834395}
   - {fileID: 1304077675}
@@ -2154,3 +2154,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5866348251688976713, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
   m_PrefabInstance: {fileID: 4497077754650476547}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7998851174644515254 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5866348251688976821, guid: 962695c9e274d5d44ac221c8195e78ce, type: 3}
+  m_PrefabInstance: {fileID: 4497077754650476547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ad36ec99941264db342bc2f765d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

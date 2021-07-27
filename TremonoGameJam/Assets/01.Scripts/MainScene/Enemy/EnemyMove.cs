@@ -46,6 +46,8 @@ public class EnemyMove : EnemyStatus
         get { return _moveByPlayerSkill; }
     }
 
+    private bool attackAnimIsPlaying = false;
+
     [SerializeField]
     private float searchRangeX = 1f;
     [Header("이 유닛이 공중유닛일 경우에만 적용되는 값")]
@@ -107,7 +109,7 @@ public class EnemyMove : EnemyStatus
 
 
         }
-        else if (isHurt && enemyStat.hp > 0f)
+        else if (isHurt && enemyStat.hp > 0f && !attackAnimIsPlaying)
         {
             anim.Play("Hurt");
         }
@@ -185,6 +187,15 @@ public class EnemyMove : EnemyStatus
             }
         }
     }
+    //각각 Attack.anim의 양 끝부분에 넣을것
+    private void SetTrueAttackAnimIsPlaying()
+    {
+        attackAnimIsPlaying = true;
+    }
+    private void SetFlaseAttackAnimIsPlaying()
+    {
+        attackAnimIsPlaying = false;
+    }
 
     private void IsHurtReset()
     {
@@ -199,7 +210,7 @@ public class EnemyMove : EnemyStatus
     }
     private void Pursue()
     {
-        if (isPursue && !attacking)
+        if (isPursue)
         {
             anim.Play("Move");
             currentPosition = Vector2.MoveTowards(currentPosition, playerPosition, enemyStat.pursueSpeed * Time.fixedDeltaTime);
