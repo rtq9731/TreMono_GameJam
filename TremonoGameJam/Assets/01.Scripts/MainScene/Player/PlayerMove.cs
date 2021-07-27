@@ -275,6 +275,7 @@ public class PlayerMove : MonoBehaviour
         if (a)
         {
             inAirDashCount = firstInAirDashCount;
+            canDoubleJump = false;
             SetFlaseJumpAnimIsPlaying();
             WhenDashStopMoveSet();
         }
@@ -305,6 +306,7 @@ public class PlayerMove : MonoBehaviour
     {
         canAttack = true;
         isAttacked = false;
+        attacking = false;
     }
     public void ReAttacking()
     {
