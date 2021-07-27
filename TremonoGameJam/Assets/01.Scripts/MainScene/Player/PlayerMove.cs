@@ -195,9 +195,27 @@ public class PlayerMove : MonoBehaviour
             if (spriteRenderer.flipX)
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left, 1, whatIsAttackable);
+
                 if (hit)
                 {
-                    hit.transform.GetComponent<EnemyStat>().Hit(1);
+                    if (hit.transform.GetComponent<EnemyStat>() != null)
+                    {
+                        hit.transform.GetComponent<EnemyStat>().Hit(1);
+                    }
+                    else
+                    {
+                        if (hit.transform.GetComponent<BrokeObj>() != null)
+                        {
+                            hit.transform.GetComponent<BrokeObj>().Hit(1);
+                        }
+                        else
+                        {
+                            if (hit.transform.GetComponent<BossScene>() != null)
+                            {
+                                hit.transform.GetComponent<BossScene>().Hit(1);
+                            }
+                        }
+                    }
                     isAttacked = true;
                 }
             }
@@ -206,8 +224,26 @@ public class PlayerMove : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1, whatIsAttackable);
                 if (hit)
                 {
+                    if (hit.transform.GetComponent<EnemyStat>() != null)
+                    {
+                        hit.transform.GetComponent<EnemyStat>().Hit(1);
+                    }
+                    else
+                    {
+                        if (hit.transform.GetComponent<BrokeObj>() != null)
+                        {
+                            hit.transform.GetComponent<BrokeObj>().Hit(1);
+                        }
+                        else
+                        {
+                            if (hit.transform.GetComponent<BossScene>() != null)
+                            {
+                                hit.transform.GetComponent<BossScene>().Hit(1);
+                            }
+                        }
+                    }
+
                     isAttacked = true;
-                    hit.transform.GetComponent<EnemyStat>().Hit(1);
                 }
             }
         }

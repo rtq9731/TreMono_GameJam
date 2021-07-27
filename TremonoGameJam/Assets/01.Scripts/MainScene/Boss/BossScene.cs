@@ -25,13 +25,15 @@ public class BossScene : MonoBehaviour, IHitable
     [Header("각종 속도들")]
     [SerializeField] float dashSpeed;
 
+    [Header("여러 쿨타임")]
+    [SerializeField] float wallShakeAttackInterval = 2f;
+
     [Header("녹다운 회복에 걸리는 시간")]
     [SerializeField] float knockdownTime;
 
     [Header("기타")]
     [SerializeField] Collider2D playerBlock;
     [SerializeField] short wallShakeAttackCount = 2;
-    [SerializeField] float wallShakeAttackInterval = 2f;
     short wallHitCount = 0;
 
     Transform playerTr = null;
