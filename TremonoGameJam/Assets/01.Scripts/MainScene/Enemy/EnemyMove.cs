@@ -109,8 +109,6 @@ public class EnemyMove : EnemyStatus
                 isPursue = false;
                 isSearching = true;
             }
-
-
         }
         else if (isHurt && enemyStat.hp > 0f && !attackAnimIsPlaying)
         {
@@ -201,6 +199,7 @@ public class EnemyMove : EnemyStatus
     private void SetFlaseAttackAnimIsPlaying()
     {
         attackAnimIsPlaying = false;
+        IsHurtReset();
     }
 
     private void IsHurtReset()
@@ -236,7 +235,7 @@ public class EnemyMove : EnemyStatus
             FlipCheck(playerPosition);
             Invoke("AttackRe", enemyStat.attackDelay);
         }
-        else 
+        else
         {
             if (isAttack && canAttackStart)
             {
