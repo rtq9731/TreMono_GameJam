@@ -27,6 +27,7 @@ public class ExitPanel : MonoBehaviour
             Time.timeScale = 1;
             transform.DOScale(0, 0.3f);
             GameManager.Instance.isPause = false;
+            isON = false;
         });
         btnOk.onClick.AddListener(() => Application.Quit());
     }

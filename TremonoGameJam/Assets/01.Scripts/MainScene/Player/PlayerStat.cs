@@ -181,8 +181,9 @@ public class PlayerStat : MonoBehaviour, IHitable
     {
         if (hp <= 0)
         {
+            if (!_isDead)
+                UIManager.Instance.GameOver();
             _isDead = true;
-            UIManager.Instance.GameOver();
             // 죽음애니메이션
         }
     }
