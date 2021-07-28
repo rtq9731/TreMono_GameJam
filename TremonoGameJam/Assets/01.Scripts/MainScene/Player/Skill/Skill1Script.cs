@@ -40,6 +40,7 @@ public class Skill1Script : MonoBehaviour
         currentScale.x = 0f;
         currentScale.y = 0f;
         playerStat.Hit(1);
+        SkillSound();
 
         transform.localScale = currentScale;
     }
