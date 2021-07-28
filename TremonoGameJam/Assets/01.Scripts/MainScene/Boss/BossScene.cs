@@ -412,6 +412,8 @@ public class BossScene : MonoBehaviour, IHitable
 
     public void Hit(int damage)
     {
+        if (isDead) return;
+
         hp--;
         animator.SetTrigger("Hit");
 

@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject backGroundDown;
 
     [SerializeField] GameObject ClearPanel;
+    [SerializeField] GameObject GameOverPanel;
+    [SerializeField] Button gameOverExitBtn;
+    [SerializeField] Button gameOverRetryBtn;
 
     private void Awake()
     {
@@ -83,7 +86,18 @@ public class UIManager : MonoBehaviour
 
     public void Clear()
     {
+        ClearPanel.SetActive(true);
         ClearPanel.GetComponent<RectTransform>().DOAnchorPosY(0, 1f);
         ClearPanel.GetComponentInChildren<Button>().onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene"));
+    }
+
+    public void GameOver()
+    {
+        GameOverPanel.SetActive(true);
+        GameOverPanel.GetComponent<RectTransform>().DOAnchorPosY(0, 1f);
+        gameOverExitBtn.onClick.AddListener(() => Application.Quit());
+        string name = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        int num = (int)name[name.Length - 1] - (int)'0';
+        gameOverRetryBtn.onClick.AddListener(() => GameManager.Instance.LoadScene(num));
     }
 }
