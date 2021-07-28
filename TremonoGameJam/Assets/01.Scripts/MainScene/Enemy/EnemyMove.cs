@@ -22,6 +22,9 @@ public class EnemyMove : EnemyStatus
     [SerializeField]
     private bool isBoomer = false;
 
+    [SerializeField]
+    private GameObject attackSound = null;
+
     [Header("발사체")]
     [SerializeField]
     private GameObject projectTile = null;
@@ -175,6 +178,10 @@ public class EnemyMove : EnemyStatus
         }
 
         transform.position = currentPosition;
+    }
+    private void PlayAttackSound()
+    {
+        Instantiate(attackSound, transform);
     }
     private void isBoomSet()
     {

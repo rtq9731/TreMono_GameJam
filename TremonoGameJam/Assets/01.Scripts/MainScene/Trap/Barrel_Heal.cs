@@ -13,6 +13,8 @@ public class Barrel_Heal : MonoBehaviour, IHitable
     private PlayerStat playerStat = null;
     [SerializeField]
     private int healNum = 1;
+    [SerializeField]
+    private GameObject boomSound = null;
     void Start()
     {
         stagemanager = FindObjectOfType<StageManager>();
@@ -27,6 +29,9 @@ public class Barrel_Heal : MonoBehaviour, IHitable
         }
         
         particleSpawn.CallParticle(boomParticle, particleSpawnTrm.position);
+
+        Instantiate(boomSound, Vector3.zero, Quaternion.identity);
+
         gameObject.SetActive(false);
     }
 

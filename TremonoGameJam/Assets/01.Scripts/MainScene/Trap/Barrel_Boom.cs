@@ -14,6 +14,8 @@ public class Barrel_Boom : MonoBehaviour, IHitable
     private StageManager stagemanager = null;
     private PlayerStat playerStat = null;
     [SerializeField]
+    private GameObject boomSound = null;
+    [SerializeField]
     private int dm = 1;
     void Start()
     {
@@ -27,6 +29,9 @@ public class Barrel_Boom : MonoBehaviour, IHitable
         playerStat.SetTargetPosition(transform.position);
 
         particleSpawn.CallParticle(boomParticle, particleSpawnTrm.position);
+
+        Instantiate(boomSound, Vector3.zero, Quaternion.identity);
+
         gameObject.SetActive(false);
     }
 }

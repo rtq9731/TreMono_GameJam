@@ -104,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUseProjectTile: 0
   isBoomer: 1
+  attackSound: {fileID: 2232244325742842451, guid: 010ad788c59ac524d951c2e2c660550f, type: 3}
   projectTile: {fileID: 0}
   _onhitParticle: {fileID: 2364552943875127684, guid: 60e17b99fdf5c4b4a96d6619d8924108, type: 3}
   projectSpawnPosition: {fileID: 0}

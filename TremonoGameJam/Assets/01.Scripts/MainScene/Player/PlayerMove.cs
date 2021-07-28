@@ -30,6 +30,16 @@ public class PlayerMove : MonoBehaviour
     private GameObject wallDestroyParticle;
 
     [SerializeField]
+    private GameObject attackSound = null;
+    [SerializeField]
+    private GameObject hurtSound = null;
+    [SerializeField]
+    private GameObject deadSound = null;
+    [SerializeField]
+    private GameObject skill1Sound = null;
+
+
+    [SerializeField]
     private LayerMask WhatIsGround;
 
     [Header("플레이어가 닿으면 데미지받는 오브젝트")]
@@ -106,64 +116,83 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (playerInput.isJump)
+        if (!stageManager.stopPlayer)
         {
-            isJump = true;
-        }
-
-        if (playerInput.isAttack && canAttack)
-        {
-            canAttackReStarted = false;
-            isAttack = true;
-        }
-
-        if (playerInput.isSkill1)
-        {
-            if (canSkill1)
+            if (playerInput.isJump)
             {
-                skill1 = true;
+                isJump = true;
             }
-        }
 
-        GroundCheck();
+            if (playerInput.isAttack && canAttack)
+            {
+                canAttackReStarted = false;
+                isAttack = true;
+            }
+
+            if (playerInput.isSkill1)
+            {
+                if (canSkill1)
+                {
+                    skill1 = true;
+                }
+            }
+
+            GroundCheck();
+        }
 
     }
     void FixedUpdate()
     {
-        currentPosition = transform.position;
-
-        XMove = playerInput.XMove;
-
-        if (!playerStat.isHurt)
+        if (!stageManager.stopPlayer)
         {
-            if (!playerStat.isDead && !skill1AnimIsPlaying)
+            currentPosition = transform.position;
+
+            XMove = playerInput.XMove;
+
+            if (!playerStat.isHurt)
             {
+                if (!playerStat.isDead && !skill1AnimIsPlaying)
+                {
 
-                LRCheck();
+                    LRCheck();
 
-                Move();
-                Attack();
-                Jump();
-                Skill1();
+                    Move();
+                    Attack();
+                    Jump();
+                    Skill1();
 
-                AttackCheck();
-                DashMove();
-                WhenDashStopMove();
-                SpawnAfterImage();
-                DamagableCheck();
+                    AttackCheck();
+                    DashMove();
+                    WhenDashStopMove();
+                    SpawnAfterImage();
+                    DamagableCheck();
+                }
+                else if (playerStat.isDead)
+                {
+                    anim.Play("Dead");
+                }
             }
-            else if (playerStat.isDead)
+            else
             {
-                anim.Play("Dead");
-            }
-        }
-        else
-        {
-            anim.Play("Hurt");
-            skill1AnimIsPlaying = false;
-        }
+                anim.Play("Hurt");
 
-        transform.position = currentPosition;
+                skill1AnimIsPlaying = false;
+            }
+
+            transform.position = currentPosition;
+        }
+    }
+    private void HurtSoundPlay()
+    {
+        Instantiate(hurtSound, transform);
+    }
+    private void DeadSoundPlay()
+    {
+        Instantiate(deadSound, transform);
+    }
+    private void Skill1SoundPlay()
+    {
+        Instantiate(skill1Sound, transform);
     }
     private void IsHurtReset()
     {
@@ -174,7 +203,7 @@ public class PlayerMove : MonoBehaviour
         if (canHurtByDamagable)
         {
             Collider2D a = Physics2D.OverlapCircle(currentPosition, damagableRange, WhatIsDamagable);
-            
+
             if (a)
             {
                 canHurtByDamagable = false;
@@ -217,6 +246,7 @@ public class PlayerMove : MonoBehaviour
             skill1Object.SetActive(true);
             skill1Object.GetComponent<Skill1Script>().SetSpawn(currentPosition);
             anim.Play("ShorkWave");
+
             skill1 = false;
             Invoke("CanSkill1Set", skill1Delay);
         }
@@ -258,13 +288,13 @@ public class PlayerMove : MonoBehaviour
                             }
                             else
                             {
-                                if(hit.transform.GetComponent<Barrel_Heal>() != null)
+                                if (hit.transform.GetComponent<Barrel_Heal>() != null)
                                 {
                                     hit.transform.GetComponent<Barrel_Heal>().Hit(0);
                                 }
                                 else
                                 {
-                                    if(hit.transform.GetComponent<Barrel_Boom>() != null)
+                                    if (hit.transform.GetComponent<Barrel_Boom>() != null)
                                     {
                                         hit.transform.GetComponent<Barrel_Boom>().Hit(0);
                                     }
@@ -305,13 +335,13 @@ public class PlayerMove : MonoBehaviour
                             }
                             else
                             {
-                                if(hit.transform.GetComponent<Barrel_Heal>() != null)
+                                if (hit.transform.GetComponent<Barrel_Heal>() != null)
                                 {
                                     hit.transform.GetComponent<Barrel_Heal>().Hit(0);
                                 }
                                 else
                                 {
-                                    if(hit.transform.GetComponent<Barrel_Boom>() != null)
+                                    if (hit.transform.GetComponent<Barrel_Boom>() != null)
                                     {
                                         hit.transform.GetComponent<Barrel_Boom>().Hit(0);
                                     }
@@ -386,6 +416,8 @@ public class PlayerMove : MonoBehaviour
 
             SetFlaseJumpAnimIsPlaying();
             anim.Play("Attack");
+            Instantiate(attackSound, transform);
+
             Dash();
 
             if (!canAttackReStarted)

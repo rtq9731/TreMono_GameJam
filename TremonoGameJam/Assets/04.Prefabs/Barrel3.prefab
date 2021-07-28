@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boomParticle: {fileID: 2006249898477547959, guid: c2c9e459035ffdd4ba431bbfae27dd23, type: 3}
   particleSpawnTrm: {fileID: 6110702650563279725}
+  boomSound: {fileID: 7110188759946671970, guid: 4f80ef3ba2cde3a45a0b14342e46e80e, type: 3}
   dm: 1
 --- !u!61 &2010661425907683901
 BoxCollider2D:
