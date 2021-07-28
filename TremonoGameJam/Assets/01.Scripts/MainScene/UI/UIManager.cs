@@ -83,6 +83,7 @@ public class UIManager : MonoBehaviour
 
     public void Clear()
     {
-
+        ClearPanel.GetComponent<RectTransform>().DOAnchorPosY(0, 1f);
+        ClearPanel.GetComponentInChildren<Button>().onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene"));
     }
 }
