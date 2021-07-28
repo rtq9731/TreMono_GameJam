@@ -34,13 +34,13 @@ public class GameManager : MonoSingleton<GameManager>
                 GameObject temp = Instantiate(Resources.Load<GameObject>("ExitPanel"), FindObjectOfType<Canvas>().transform);
                 temp.GetComponent<ExitPanel>().OnPauseMenu();
             }
-            Time.timeScale = 0;
             isPause = true;
         }
     }
 
     public void LoadScene(int stageNum)
     {
+        DOTween.CompleteAll();
         UnityEngine.SceneManagement.SceneManager.LoadScene($"Stage {stageNum}");
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }

@@ -18,6 +18,7 @@ public class ExitPanel : MonoBehaviour
     {
         btnCancel.onClick.RemoveAllListeners();
         btnOk.onClick.RemoveAllListeners();
+        Time.timeScale = 0;
 
         transform.localScale = Vector3.one;
         isON = true;

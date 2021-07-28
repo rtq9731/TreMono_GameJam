@@ -170,6 +170,22 @@ PrefabInstance:
       propertyPath: point_RightGrap
       value: 
       objectReference: {fileID: 1208884296}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: patterns.Array.data[2]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: patterns.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: patterns.Array.data[5]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: patterns.Array.data[7]
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1385391772108840286, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -16775,7 +16791,7 @@ GameObject:
   - component: {fileID: 1055320163}
   - component: {fileID: 1055320164}
   - component: {fileID: 1055320165}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

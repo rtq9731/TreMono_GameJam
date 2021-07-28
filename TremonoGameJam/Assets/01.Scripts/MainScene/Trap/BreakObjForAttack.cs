@@ -8,12 +8,12 @@ public class BreakObjForAttack : MonoBehaviour
 
     private void OnEnable()
     {
-        Invoke("Break()", 3);
+        Invoke("Break()", 5);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("DAMAGABLE"))
+        if (collision.gameObject.layer != LayerMask.NameToLayer("DMAGABLE") && collision.gameObject.layer != LayerMask.NameToLayer("BreakAble"))
         {
             Break();
         }
