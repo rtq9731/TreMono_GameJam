@@ -24,25 +24,13 @@ public class HPBar : MonoBehaviour
         hpIcons[0].sprite = null;
     }
 
-    private void Update()
-    {
-        if(gameObject.activeSelf && !playerStat.isDead)
-        {
-            Vector3 playerPos = Camera.main.WorldToScreenPoint(new Vector2(FindObjectOfType<PlayerStat>().transform.position.x, FindObjectOfType<PlayerStat>().transform.position.y + 0.75f));
-            playerPos.z = 0;
-            this.transform.position = playerPos;
-        }
-    }
-
     public void ChangeHP(int currentHP)
     {
-        if (currentHP < hp) // hp�� �������� ��
+        if (currentHP < hp)
         {
-            Debug.Log("HP ����");
             switch (currentHP)
             {
                 case 0:
-                    // �׾��� �� ���� �ൿ
                     gameObject.SetActive(false);
                     return;
                 case 1:
@@ -82,13 +70,6 @@ public class HPBar : MonoBehaviour
             }
         }
 
-        CancelInvoke();
-        Invoke("ActiveFalse", 1);
         hp = currentHP;
-    }
-
-    private void ActiveFalse()
-    {
-        gameObject.SetActive(false);
     }
 }

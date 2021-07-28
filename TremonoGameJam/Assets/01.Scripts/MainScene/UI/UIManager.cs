@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject backGroundUp;
     [SerializeField] GameObject backGroundDown;
 
+    [SerializeField] GameObject ClearPanel;
+
     private void Awake()
     {
         Instance = this;
@@ -44,10 +46,6 @@ public class UIManager : MonoBehaviour
 
     public void HPChange(int currentHP)
     {
-        hpBar.gameObject.SetActive(true);
-        Vector3 playerPos = Camera.main.WorldToScreenPoint(new Vector2(FindObjectOfType<PlayerStat>().transform.position.x, FindObjectOfType<PlayerStat>().transform.position.y + 0.75f));
-        playerPos.z = 0;
-        hpBar.gameObject.transform.position = playerPos;
         hpBar.ChangeHP(currentHP);
     }
 

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField] AudioClip bgm_Start;
-    [SerializeField] AudioClip bgm_Main;
     public int stageTopScore = 0;
 
     public void SaveGame()
@@ -17,6 +16,14 @@ public class GameManager : MonoSingleton<GameManager>
     public void LoadGame()
     {
         stageTopScore = PlayerPrefs.GetInt("stageTopScore", stageTopScore);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            FindObjectOfType<ExitPanel>();
+        }
     }
 
     public void LoadScene(int stageNum)
