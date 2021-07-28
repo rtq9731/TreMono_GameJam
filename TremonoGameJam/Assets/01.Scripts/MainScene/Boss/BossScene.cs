@@ -75,6 +75,7 @@ public class BossScene : MonoBehaviour, IHitable
     bool isSnortAttackHit = false;
 
     bool isArrived = false;
+    bool isDead = false;
 
     bool isKnockdown = false;
 
@@ -99,6 +100,9 @@ public class BossScene : MonoBehaviour, IHitable
 
     private void Update()
     {
+        if (isDead)
+            return;
+
         if (!isKnockdown)
         {
             if(isTentacleAttack)
@@ -467,6 +471,7 @@ public class BossScene : MonoBehaviour, IHitable
 
     void Die()
     {
+        isDead = true;
         animator.SetTrigger("Die");
         Destroy(this.gameObject, 2);
     }

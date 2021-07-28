@@ -10,13 +10,15 @@ public class ClearStage : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             string name = SceneManager.GetActiveScene().name;
-            int num = name[name.Length - 1] - '0';
+            int num = (int)name[name.Length - 1] - (int)'0';
+            Debug.Log(num);
 
-            Debug.Log(GameManager.Instance.stageTopScore);
-            Debug.Log(num + 1);
-
-            GameManager.Instance.stageTopScore = num + 1;
-            SceneManager.LoadScene("StartScene");
+            if(num == 0)
+            {
+                GameManager.Instance.LoadScene(5);
+                return;
+            }
+            GameManager.Instance.LoadScene(num + 1);
         }
     }
 }

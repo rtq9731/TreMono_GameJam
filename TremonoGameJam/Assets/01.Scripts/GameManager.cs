@@ -6,6 +6,7 @@ using DG.Tweening;
 public class GameManager : MonoSingleton<GameManager>
 {
     public int stageTopScore = 0;
+    public bool isPause = false;
 
     public void SaveGame()
     {
@@ -20,9 +21,21 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && !isPause)
         {
-            FindObjectOfType<ExitPanel>();
+            DOTween.CompleteAll();
+            ExitPanel panel = FindObjectOfType<ExitPanel>();
+            if (panel != null)
+            {
+                panel.OnPauseMenu();
+            }
+            else
+            {
+                GameObject temp = Instantiate(Resources.Load<GameObject>("ExitPanel"), FindObjectOfType<Canvas>().transform);
+                temp.GetComponent<ExitPanel>().OnPauseMenu();
+            }
+            Time.timeScale = 0;
+            isPause = true;
         }
     }
 
