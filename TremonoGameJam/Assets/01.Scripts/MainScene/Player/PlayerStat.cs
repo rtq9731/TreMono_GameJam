@@ -71,6 +71,9 @@ public class PlayerStat : MonoBehaviour, IHitable
     private Vector2 currentPosition = Vector2.zero;
     private Vector2 targetPosition = Vector2.zero;
 
+    [SerializeField]
+    private GameObject HurtSound;
+
     private void Start()
     {
         playerMove = GetComponent<PlayerMove>();
@@ -160,6 +163,7 @@ public class PlayerStat : MonoBehaviour, IHitable
         if (!playerMove.dashMoving)
         {
             hp -= damage;
+            Instantiate(HurtSound, transform);
             isHurt = true;
         }
     }
