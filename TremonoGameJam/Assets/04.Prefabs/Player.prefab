@@ -417,6 +417,7 @@ MonoBehaviour:
   dashDoTime: 0.05
   dashStopRange: 0.5
   inAirDashCount: 3
+  timeCountDelay: 20
 --- !u!114 &5866348251688976821
 MonoBehaviour:
   m_ObjectHideFlags: 0

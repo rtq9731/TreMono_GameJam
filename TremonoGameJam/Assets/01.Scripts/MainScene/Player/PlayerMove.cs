@@ -98,6 +98,9 @@ public class PlayerMove : MonoBehaviour
     private Vector2 mousePosition = Vector2.zero;
     public Vector2 currentPosition { get; private set; }
 
+    private int currentTimeCount = 0;
+    public int timeCountDelay = 100;
+
     void Start()
     {
         stageManager = FindObjectOfType<StageManager>();
@@ -116,6 +119,17 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0f)
+        {
+            currentTimeCount++;
+
+            if (currentTimeCount == timeCountDelay)
+            {
+                Time.timeScale = 1f;
+                currentTimeCount = 0;
+            }
+        }
+
         if (!stageManager.stopPlayer)
         {
             if (playerInput.isJump)
@@ -267,6 +281,8 @@ public class PlayerMove : MonoBehaviour
                 {
                     if (hit.transform.GetComponent<EnemyStat>() != null)
                     {
+                        Time.timeScale = 0f;
+
                         EnemyStat enemyStat = hit.transform.GetComponent<EnemyStat>();
                         enemyStat.Hit(1);
                         enemyStat.SetTargetPosition(currentPosition);
@@ -277,6 +293,8 @@ public class PlayerMove : MonoBehaviour
                     {
                         if (hit.transform.GetComponent<BrokeObj>() != null)
                         {
+                            Time.timeScale = 0f;
+
                             hit.transform.GetComponent<BrokeObj>().Hit(1);
                             particleSpawn.CallParticle(wallDestroyParticle, hit.point);
                         }
@@ -290,12 +308,16 @@ public class PlayerMove : MonoBehaviour
                             {
                                 if (hit.transform.GetComponent<Barrel_Heal>() != null)
                                 {
+                                    Time.timeScale = 0f;
+
                                     hit.transform.GetComponent<Barrel_Heal>().Hit(0);
                                 }
                                 else
                                 {
                                     if (hit.transform.GetComponent<Barrel_Boom>() != null)
                                     {
+                                        Time.timeScale = 0f;
+
                                         hit.transform.GetComponent<Barrel_Boom>().Hit(0);
                                     }
                                 }
@@ -312,6 +334,8 @@ public class PlayerMove : MonoBehaviour
                 {
                     if (hit.transform.GetComponent<EnemyStat>() != null)
                     {
+                        Time.timeScale = 0f;
+
                         EnemyStat enemyStat = hit.transform.GetComponent<EnemyStat>();
                         enemyStat.Hit(1);
                         enemyStat.SetTargetPosition(currentPosition);
@@ -323,6 +347,8 @@ public class PlayerMove : MonoBehaviour
                     {
                         if (hit.transform.GetComponent<BrokeObj>() != null)
                         {
+                            Time.timeScale = 0f;
+
                             hit.transform.GetComponent<BrokeObj>().Hit(1);
                             particleSpawn.CallParticle(wallDestroyParticle, hit.point);
 
@@ -337,12 +363,16 @@ public class PlayerMove : MonoBehaviour
                             {
                                 if (hit.transform.GetComponent<Barrel_Heal>() != null)
                                 {
+                                    Time.timeScale = 0f;
+
                                     hit.transform.GetComponent<Barrel_Heal>().Hit(0);
                                 }
                                 else
                                 {
                                     if (hit.transform.GetComponent<Barrel_Boom>() != null)
                                     {
+                                        Time.timeScale = 0f;
+
                                         hit.transform.GetComponent<Barrel_Boom>().Hit(0);
                                     }
                                 }
