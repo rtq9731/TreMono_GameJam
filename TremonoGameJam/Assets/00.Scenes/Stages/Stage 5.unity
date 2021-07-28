@@ -172,11 +172,15 @@ PrefabInstance:
       objectReference: {fileID: 1208884296}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: patterns.Array.data[2]
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: patterns.Array.data[3]
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: patterns.Array.data[4]
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: patterns.Array.data[5]
@@ -184,6 +188,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: patterns.Array.data[7]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 566141902951569325, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1385391772108840286, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
@@ -434,7 +442,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 566141902951569325, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
 --- !u!1 &84377153
 GameObject:

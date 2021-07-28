@@ -96,8 +96,8 @@ public class UIManager : MonoBehaviour
         GameOverPanel.SetActive(true);
         GameOverPanel.GetComponent<RectTransform>().DOAnchorPosY(0, 1f);
         gameOverExitBtn.onClick.AddListener(() => Application.Quit());
+
         string name = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        int num = (int)name[name.Length - 1] - (int)'0';
-        gameOverRetryBtn.onClick.AddListener(() => GameManager.Instance.LoadScene(num));
+        gameOverRetryBtn.onClick.AddListener(() => GameManager.Instance.LoadScene(name));
     }
 }

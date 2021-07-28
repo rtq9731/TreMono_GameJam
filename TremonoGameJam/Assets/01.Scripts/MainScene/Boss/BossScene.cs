@@ -50,7 +50,6 @@ public class BossScene : MonoBehaviour, IHitable
     [SerializeField] float knockdownTime;
 
     [Header("±‚≈∏")]
-    [SerializeField] Collider2D playerBlock;
     [SerializeField] short wallShakeAttackCount = 2;
     [SerializeField] GameObject rightTentacleFirst;
     [SerializeField] GameObject rightTentacleLast;
@@ -310,7 +309,6 @@ public class BossScene : MonoBehaviour, IHitable
 
     public IEnumerator HitWall()
     {
-        playerBlock.enabled = true;
         isWallAttack = false;
         wallHitCount++;
 
@@ -359,7 +357,6 @@ public class BossScene : MonoBehaviour, IHitable
         mydir = Dir.none;
         isArrived = false;
         wallHitCount = 0;
-        playerBlock.enabled = false;
         isSnortAttackHit = false;
         isTentacleAttackHit = false;
         isTentacleAttacking = false;

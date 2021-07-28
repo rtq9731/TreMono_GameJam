@@ -44,4 +44,11 @@ public class GameManager : MonoSingleton<GameManager>
         UnityEngine.SceneManagement.SceneManager.LoadScene($"Stage {stageNum}");
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
+    public void LoadScene(string name)
+    {
+        DOTween.CompleteAll();
+        Debug.Log(name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+    }
 }
