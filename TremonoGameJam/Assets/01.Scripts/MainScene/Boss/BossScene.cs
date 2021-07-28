@@ -331,9 +331,6 @@ public class BossScene : MonoBehaviour, IHitable
         makeDamagableObj();
         makeDamagableObj();
         makeDamagableObj();
-        makeDamagableObj();
-        makeDamagableObj();
-        makeDamagableObj();
 
         yield return new WaitForSeconds(wallShakeAttackInterval);
 
