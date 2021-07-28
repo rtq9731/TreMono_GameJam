@@ -146,6 +146,7 @@ MonoBehaviour:
   whatIsAttackable:
     serializedVersion: 2
     m_Bits: 128
+  playerStat: {fileID: 5866348251688976821}
   moveBackRange: 5
 --- !u!1 &5866348250620553492
 GameObject:
