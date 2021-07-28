@@ -171,24 +171,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1208884296}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
-      propertyPath: patterns.Array.data[2]
+      propertyPath: patterns.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
-      propertyPath: patterns.Array.data[3]
+      propertyPath: patterns.Array.data[2]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
-      propertyPath: patterns.Array.data[4]
+      propertyPath: patterns.Array.data[3]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
-      propertyPath: patterns.Array.data[5]
+      propertyPath: patterns.Array.data[4]
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: patterns.Array.data[5]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
+      propertyPath: patterns.Array.data[6]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025881659, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: patterns.Array.data[7]
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 566141902951569325, guid: 90a02c72aa76a974b9ed53149aee7d54, type: 3}
       propertyPath: m_Enabled
@@ -17522,7 +17530,7 @@ GameObject:
   - component: {fileID: 1601508048}
   - component: {fileID: 1601508047}
   - component: {fileID: 1601508049}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DoorObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17607,7 +17615,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0045546293, y: 0.14334315}
+  m_Offset: {x: -0.0045546293, y: 2.2884665}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -17618,7 +17626,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.8827012, y: 0.6185112}
+  m_Size: {x: 2.8827012, y: 4.908758}
   m_EdgeRadius: 0
 --- !u!1 &1634342557
 GameObject:

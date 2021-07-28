@@ -71,8 +71,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4497077755657672794}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.35888892, y: 0.7529492, z: 0.12512971}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5866348251377345061}
@@ -145,9 +145,8 @@ MonoBehaviour:
   scaleSetSpeed: 5
   whatIsAttackable:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8320
   playerStat: {fileID: 5866348251688976821}
-  skillSound: {fileID: 6574095045656150469, guid: 0bd9bbe8080380f4fa7f4dfe6c0193da, type: 3}
   moveBackRange: 5
 --- !u!1 &5866348250620553492
 GameObject:
@@ -251,7 +250,7 @@ GameObject:
   - component: {fileID: 6280220439160035603}
   m_Layer: 6
   m_Name: Player_Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -263,8 +262,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5866348251688976818}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.35888892, y: 0.7529492, z: 0.12512971}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5866348250620553495}
@@ -339,7 +338,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 2.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -399,7 +398,7 @@ MonoBehaviour:
   groundChecker: {fileID: 5866348250620553495}
   whatIsAttackable:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 8576
   onHitParticle: {fileID: 2364552943875127684, guid: 60e17b99fdf5c4b4a96d6619d8924108, type: 3}
   wallDestroyParticle: {fileID: 4861268050361574253, guid: 863d2f289572b4042b085dcf2a53c096, type: 3}
   attackSound: {fileID: 1745473045351473973, guid: fd89e3394cba5de4aa63e43a930b1c42, type: 3}
@@ -419,7 +418,7 @@ MonoBehaviour:
   dashDoTime: 0.05
   dashStopRange: 0.5
   inAirDashCount: 3
-  timeCountDelay: 20
+  timeCountDelay: 2
 --- !u!114 &5866348251688976821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,8 +555,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5866348251992552930}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.35888892, y: 0.7529492, z: 0.12512971}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5866348251377345061}
