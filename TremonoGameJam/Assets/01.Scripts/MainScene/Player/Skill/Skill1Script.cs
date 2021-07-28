@@ -12,8 +12,6 @@ public class Skill1Script : MonoBehaviour
     private LayerMask whatIsAttackable;
     [SerializeField]
     private PlayerStat playerStat = null;
-    [SerializeField]
-    private GameObject skillSound = null;
 
     private Vector2 currentScale = Vector2.zero;
     [SerializeField]
@@ -40,13 +38,8 @@ public class Skill1Script : MonoBehaviour
         currentScale.x = 0f;
         currentScale.y = 0f;
         playerStat.Hit(1);
-        SkillSound();
 
         transform.localScale = currentScale;
-    }
-    private void SkillSound()
-    {
-        Instantiate(skillSound, transform);
     }
     private void AttackCheck()
     {
