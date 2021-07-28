@@ -441,6 +441,7 @@ MonoBehaviour:
   _isDead: 0
   _isHurt: 0
   hitMoveRange: 3
+  HurtSound: {fileID: 1326401701593036796, guid: 6457bf96e83d05145be5aa9c00c8afa9, type: 3}
 --- !u!114 &5866348251688976714
 MonoBehaviour:
   m_ObjectHideFlags: 0

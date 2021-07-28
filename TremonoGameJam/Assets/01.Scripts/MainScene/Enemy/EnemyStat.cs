@@ -106,6 +106,8 @@ public class EnemyStat : EnemyStatus, IHitable
     private bool isHurtMove = false;
     private Vector2 currentPosition = Vector2.zero;
     private Vector2 targetPosition = Vector2.zero;
+    [SerializeField]
+    private GameObject hurtSound = null;
 
     private void Start()
     {
@@ -207,6 +209,7 @@ public class EnemyStat : EnemyStatus, IHitable
     public void Hit(int damage)
     {
         _hp -= damage;
+        Instantiate(hurtSound, transform);
 
         _isHurt = true;
     }
