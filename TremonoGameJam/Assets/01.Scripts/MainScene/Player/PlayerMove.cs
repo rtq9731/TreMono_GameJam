@@ -21,6 +21,10 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     private Transform groundChecker = null;
+    [SerializeField]
+    private Transform leftWallChecker = null;
+    [SerializeField]
+    private Transform rightWallChecker = null;
 
     [SerializeField]
     private LayerMask whatIsAttackable;
@@ -70,6 +74,8 @@ public class PlayerMove : MonoBehaviour
     private float XMove = 0f;
 
     private bool isGround = false;
+    private bool isLeftWall = false;
+    private bool isRightWall = false;
 
     private bool isJump = false;
     private bool isAttack = false;
@@ -131,7 +137,7 @@ public class PlayerMove : MonoBehaviour
 
         if (!stageManager.stopPlayer)
         {
-            if (playerInput.isJump)
+            if (playerInput.isJump && isGround)
             {
                 isJump = true;
             }
@@ -151,6 +157,8 @@ public class PlayerMove : MonoBehaviour
             }
 
             GroundCheck();
+            LeftWallCheck();
+            RightWallCheck();
         }
 
     }
@@ -421,17 +429,35 @@ public class PlayerMove : MonoBehaviour
     }
     private void GroundCheck()
     {
-        bool a = Physics2D.OverlapCircle(groundChecker.position, groundCheckDistance, WhatIsGround);
-        isGround = a;
+        isGround = Physics2D.OverlapCircle(groundChecker.position, groundCheckDistance, WhatIsGround);
 
-        if (a)
+        if (isGround)
         {
             inAirDashCount = firstInAirDashCount;
             canDoubleJump = false;
             SetFlaseJumpAnimIsPlaying();
             WhenDashStopMoveSet();
         }
+    }
+    private void LeftWallCheck()
+    {
+        isLeftWall = Physics2D.OverlapCircle(leftWallChecker.position, groundCheckDistance, WhatIsGround);
 
+        if (isLeftWall)
+        {
+            SetFlaseJumpAnimIsPlaying();
+            WhenDashStopMoveSet();
+        }
+    }
+    private void RightWallCheck()
+    {
+        isRightWall = Physics2D.OverlapCircle(rightWallChecker.position, groundCheckDistance, WhatIsGround);
+
+        if (isRightWall)
+        {
+            SetFlaseJumpAnimIsPlaying();
+            WhenDashStopMoveSet();
+        }
     }
     private void Attack()
     {
@@ -582,7 +608,18 @@ public class PlayerMove : MonoBehaviour
             }
             else if (!jumpAnimIsPlaying)
             {
-                anim.Play("Move");
+                if (isGround)
+                {
+                    anim.Play("Move");
+                }
+                else
+                {
+                    if (isLeftWall || isRightWall)
+                    {
+                        anim.Play("InAir");
+                        rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y - 2f);
+                    }
+                }
 
             }
         }

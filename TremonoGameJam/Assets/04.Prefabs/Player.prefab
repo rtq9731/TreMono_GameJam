@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2683632100979520807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.42, y: 0.02, z: 0}
+  m_LocalPosition: {x: -0.445, y: 0.416, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5866348251688976713}
@@ -396,6 +396,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill1Object: {fileID: 4497077755657672794}
   groundChecker: {fileID: 5866348250620553495}
+  leftWallChecker: {fileID: 902706086016280354}
+  rightWallChecker: {fileID: 5073307803936050889}
   whatIsAttackable:
     serializedVersion: 2
     m_Bits: 8576
@@ -617,7 +619,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8798162169378658009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.38, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0.351, y: 0.429, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5866348251688976713}
