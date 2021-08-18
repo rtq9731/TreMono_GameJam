@@ -13,11 +13,12 @@ public class ClearStage : MonoBehaviour
             int num = (int)name[name.Length - 1] - (int)'0';
             Debug.Log(num);
 
-            if(num == 0)
-            {
-                GameManager.Instance.LoadScene(5);
-                return;
-            }
+            //if(num == 0)
+            //{
+            //    GameManager.Instance.LoadScene(5);
+            //    return;
+            //} 스테이지 1에서 바로 마지막으로 넘기는 코드
+
             GameManager.Instance.LoadScene(num + 1);
         }
     }

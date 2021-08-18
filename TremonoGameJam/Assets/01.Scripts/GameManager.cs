@@ -5,18 +5,28 @@ using DG.Tweening;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public int stageTopScore = 0;
+    public int stageTopScore;
+
     public bool isPause = false;
 
     public void SaveGame()
     {
         PlayerPrefs.SetInt("stageTopScore", stageTopScore);
+
+#if UNITY_EDITOR
+        Debug.Log(stageTopScore);
+#endif
+
         PlayerPrefs.Save();
     }
 
     public void LoadGame()
     {
-        stageTopScore = PlayerPrefs.GetInt("stageTopScore", stageTopScore);
+        stageTopScore = PlayerPrefs.GetInt("stageTopScore", 0);
+
+#if UNITY_EDITOR
+        Debug.Log(stageTopScore);
+#endif
     }
 
     private void Update()
@@ -40,6 +50,13 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void LoadScene(int stageNum)
     {
+
+        if (stageTopScore < stageNum && stageNum <= 5)
+        {
+            stageTopScore = stageNum;
+            SaveGame();
+        }
+
         DOTween.CompleteAll();
         UnityEngine.SceneManagement.SceneManager.LoadScene($"Stage {stageNum}");
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);

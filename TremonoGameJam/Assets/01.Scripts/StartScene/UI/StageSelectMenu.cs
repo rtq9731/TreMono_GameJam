@@ -35,6 +35,7 @@ public class StageSelectMenu : MonoBehaviour
         bCanCallInputPanel = false;
         inputPanel.gameObject.SetActive(true);
         inputPanel.msg.text = $"스테이지 {stageNum + 1}\n입장하시겠습니까?";
+
         inputPanel.GetComponent<RectTransform>().DOAnchorPosY(0, 0.25f).OnComplete(() =>
         {
             inputPanel.btnOK.onClick.AddListener(() => GameManager.Instance.LoadScene(stageNum));
