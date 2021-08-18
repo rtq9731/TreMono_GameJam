@@ -137,9 +137,16 @@ public class PlayerMove : MonoBehaviour
 
         if (!stageManager.stopPlayer)
         {
-            if (playerInput.isJump && isGround)
+            if (playerInput.isJump)
             {
-                isJump = true;
+                if (isGround)
+                {
+                    isJump = true;
+                }
+                else if (canDoubleJump)
+                {
+                    isJump = true;
+                }
             }
 
             if (playerInput.isAttack && canAttack)
