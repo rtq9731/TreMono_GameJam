@@ -95,7 +95,6 @@ public class PlayerMove : MonoBehaviour
     private bool whenDashStopMoveSetStarted = false;
 
     private Vector2 dashPosition = Vector2.zero;
-    private Vector2 mousePosition = Vector2.zero;
     public Vector2 currentPosition { get; private set; }
 
     private int currentTimeCount = 0;
@@ -438,8 +437,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (isAttack && canAttack)
         {
-            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
             isAttack = false;
             canAttack = false;
             attacking = true;
@@ -469,15 +466,6 @@ public class PlayerMove : MonoBehaviour
     }
     private void Dash()
     {
-        if (mousePosition.x >= currentPosition.x)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else
-        {
-            spriteRenderer.flipX = true;
-        }
-
         if (inAirDashCount > 0)
         {
             if (!isGround)
