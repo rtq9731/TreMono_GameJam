@@ -10,7 +10,6 @@ public class CameraShake : MonoBehaviour
       [SerializeField]
     private CinemachineVirtualCamera cinemachineVirtualCamera = null;
 
-    // Update is called once per frame
     void Update()
     {
         TimerCheck();

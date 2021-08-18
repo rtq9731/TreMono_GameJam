@@ -437,7 +437,7 @@ MonoBehaviour:
   _hp: 4
   _ap: 3
   _speed: 13.5
-  _jumpSpeed: 15
+  _jumpSpeed: 17
   _dashRange: 5
   _isDead: 0
   _isHurt: 0

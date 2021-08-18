@@ -604,6 +604,7 @@ public class PlayerMove : MonoBehaviour
         if ((isJump && isGround) || (isJump && canDoubleJump))
         {
             isJump = false;
+            rigid.velocity = new Vector2(rigid.velocity.x, 0f);
             rigid.AddForce(Vector2.up * playerStat.jumpSpeed, ForceMode2D.Impulse);
 
             if (canDoubleJump)
